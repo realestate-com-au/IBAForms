@@ -111,6 +111,14 @@
 
 }
 
+- (void)updateActiveStyle {
+    if ([self isActive]) {
+		// We need to reapply the active style because the tableview has a nasty habbit of resetting the cell background 
+		// when the cell is reattached to the view hierarchy.
+		[self applyActiveStyle]; 
+	}
+}
+
 - (void)drawRect:(CGRect)rect {
 	if (!self.styleApplied) {
 		[self applyFormFieldStyle];
