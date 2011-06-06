@@ -67,6 +67,7 @@
 		14E516851275295100396121 /* IBABooleanSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14E516831275295100396121 /* IBABooleanSwitchCell.m */; };
 		83089AF3134DA2E6004B24CF /* IBAReadOnlyTextFormField.h in Headers */ = {isa = PBXBuildFile; fileRef = 83089AF1134DA2E2004B24CF /* IBAReadOnlyTextFormField.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		83089AF4134DA2E6004B24CF /* IBAReadOnlyTextFormField.m in Sources */ = {isa = PBXBuildFile; fileRef = 83089AF2134DA2E4004B24CF /* IBAReadOnlyTextFormField.m */; };
+		A37CF9F9139C59D200656F39 /* IBAInputProviderCoordinator.h in Headers */ = {isa = PBXBuildFile; fileRef = A37CF9F8139C59D200656F39 /* IBAInputProviderCoordinator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AA747D9F0F9514B9006C5449 /* IBAForms_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* IBAForms_Prefix.pch */; settings = {ATTRIBUTES = (Public, ); }; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 /* End PBXBuildFile section */
@@ -132,6 +133,7 @@
 		14E516831275295100396121 /* IBABooleanSwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IBABooleanSwitchCell.m; sourceTree = "<group>"; };
 		83089AF1134DA2E2004B24CF /* IBAReadOnlyTextFormField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBAReadOnlyTextFormField.h; sourceTree = "<group>"; };
 		83089AF2134DA2E4004B24CF /* IBAReadOnlyTextFormField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IBAReadOnlyTextFormField.m; sourceTree = "<group>"; };
+		A37CF9F8139C59D200656F39 /* IBAInputProviderCoordinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBAInputProviderCoordinator.h; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* IBAForms_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBAForms_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2AAC07E0554694100DB518D /* libIBAForms.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIBAForms.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -302,6 +304,7 @@
 				14D2573F12DA874F00E228F5 /* IBASinglePickListInputProvider.m */,
 				148E93E812656FF60065EDD1 /* IBATextInputProvider.h */,
 				148E93E912656FF60065EDD1 /* IBATextInputProvider.m */,
+				A37CF9F8139C59D200656F39 /* IBAInputProviderCoordinator.h */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -366,6 +369,7 @@
 				14E516841275295100396121 /* IBABooleanSwitchCell.h in Headers */,
 				141A929412802272002C3C19 /* IBAForms.h in Headers */,
 				14D2574012DA874F00E228F5 /* IBASinglePickListInputProvider.h in Headers */,
+				A37CF9F9139C59D200656F39 /* IBAInputProviderCoordinator.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
