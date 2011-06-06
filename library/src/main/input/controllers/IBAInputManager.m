@@ -42,6 +42,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(IBAInputManager);
 
 @synthesize inputRequestorDataSource = inputRequestorDataSource_;
 @synthesize inputNavigationToolbar = inputNavigationToolbar_;
+@synthesize inputProviderCoordinator = inputProviderCoordinator_;
 
 #pragma mark -
 #pragma mark Memory management
@@ -51,6 +52,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(IBAInputManager);
 	IBA_RELEASE_SAFELY(inputRequestorDataSource_);
 	IBA_RELEASE_SAFELY(activeInputRequestor_);
 	IBA_RELEASE_SAFELY(inputNavigationToolbar_);
+    
+    IBA_RELEASE_SAFELY(inputProviderCoordinator_);
 	
 	[super dealloc];
 }
@@ -216,7 +219,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(IBAInputManager);
 #pragma mark Presenting the input provider
 
 - (void)displayInputProvider:(id<IBAInputProvider>)inputProvider forInputRequestor:(id<IBAInputRequestor>)requestor {
-	if (inputProvider.view != nil) {
+    
+    if (nil != inputProviderCoordinator_)
+    {
+        return [inputProviderCoordinator_ setInputView:inputProvider.view];
+    }
+	
+    if (inputProvider.view != nil) {
 		[[requestor responder] setInputView:inputProvider.view];
 	}
 	
