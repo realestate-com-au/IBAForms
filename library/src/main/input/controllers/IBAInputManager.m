@@ -33,6 +33,8 @@
 - (void)nextPreviousButtonSelected;
 - (void)displayInputProvider:(id<IBAInputProvider>)inputProvider forInputRequestor:(id<IBAInputRequestor>)requestor;
 - (BOOL)activateInputRequestor:(id<IBAInputRequestor>)inputRequestor;
+- (UIView *)accessoryView;
+- (void)updateInputNavigationToolbarVisibility;
 @end
 
 
@@ -136,6 +138,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(IBAInputManager);
 	return activeInputRequestor_;
 }
 
+- (UIView *)accessoryView
+{
+    return [self isInputNavigationToolbarEnabled] ? self.inputNavigationToolbar : nil;
+}
+
 
 #pragma mark -
 #pragma mark Input Provider Registration/Deregistration
@@ -229,21 +236,23 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(IBAInputManager);
 		[[requestor responder] setInputView:inputProvider.view];
 	}
 	
-	[[requestor responder] setInputAccessoryView:self.inputNavigationToolbar];
+//    [self updateInputNavigationToolbarVisibility];
 }
 
 
 #pragma mark -
 #pragma mark Enablement of the input navigation toolbar
-- (BOOL)inputNavigationToolbarEnabled {
-	return self.inputNavigationToolbarEnabled;
-}
 
 - (void)setInputNavigationToolbarEnabled:(BOOL)enabled {
 	self.inputNavigationToolbarEnabled = enabled;
+    
+    [self updateInputNavigationToolbarVisibility];
 }
 
-
+- (void)updateInputNavigationToolbarVisibility
+{
+    [[[self activeInputRequestor] responder] setInputAccessoryView:[self accessoryView]];
+}
 
 
 @end
