@@ -27,6 +27,7 @@
 	id<IBAInputRequestor> activeInputRequestor_;
 	IBAInputNavigationToolbar *inputNavigationToolbar_;
     id<IBAInputProviderCoordinator> inputProviderCoordinator_;
+    BOOL inputNavigationToolbarEnabled_;
 }
 
 
