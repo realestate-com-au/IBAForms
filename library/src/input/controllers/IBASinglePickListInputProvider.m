@@ -143,7 +143,9 @@
 
 
 - (void)setSelectedOption:(id<IBAPickListOption>)selectedOption {
-	self.inputRequestor.inputRequestorValue = [NSSet setWithObject:selectedOption]; 
+    if (nil == selectedOption) return;
+    
+    self.inputRequestor.inputRequestorValue = [NSSet setWithObject:selectedOption];
 }
 
 - (void)updateSelectedOption {
