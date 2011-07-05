@@ -54,4 +54,10 @@
 	self.textField.textAlignment = self.formFieldStyle.valueTextAlignment;
 }
 
+-(void)applyActiveStyle;
+{
+    [super applyActiveStyle];
+    self.textField.backgroundColor = self.formFieldStyle.activeColor;
+}
+
 @end
