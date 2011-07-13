@@ -17,7 +17,6 @@
 #import "IBAInputRequestorDataSource.h"
 #import "IBAInputRequestor.h"
 #import "IBAInputNavigationToolbar.h"
-
 #import "IBAInputProviderCoordinator.h"
 
 
