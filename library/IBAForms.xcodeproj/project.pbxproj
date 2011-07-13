@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6CB8913813CD7A9C000D403B /* IBAInputProviderCoordinator.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CB8913713CD7A9C000D403B /* IBAInputProviderCoordinator.h */; };
+		6CB8913A13CD7B57000D403B /* IBAInputProviderCoordinator.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CB8913913CD7B57000D403B /* IBAInputProviderCoordinator.h */; };
 		7512409F13A8F6BE007BF2B5 /* IBABooleanFormField.m in Sources */ = {isa = PBXBuildFile; fileRef = 7512408213A8F6BE007BF2B5 /* IBABooleanFormField.m */; };
 		751240A013A8F6BE007BF2B5 /* IBAButtonFormField.m in Sources */ = {isa = PBXBuildFile; fileRef = 7512408313A8F6BE007BF2B5 /* IBAButtonFormField.m */; };
 		751240A113A8F6BE007BF2B5 /* IBADateFormField.m in Sources */ = {isa = PBXBuildFile; fileRef = 7512408413A8F6BE007BF2B5 /* IBADateFormField.m */; };
@@ -75,7 +75,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6CB8913713CD7A9C000D403B /* IBAInputProviderCoordinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBAInputProviderCoordinator.h; sourceTree = "<group>"; };
+		6CB8913913CD7B57000D403B /* IBAInputProviderCoordinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBAInputProviderCoordinator.h; sourceTree = "<group>"; };
 		7512408213A8F6BE007BF2B5 /* IBABooleanFormField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IBABooleanFormField.m; sourceTree = "<group>"; };
 		7512408313A8F6BE007BF2B5 /* IBAButtonFormField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IBAButtonFormField.m; sourceTree = "<group>"; };
 		7512408413A8F6BE007BF2B5 /* IBADateFormField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IBADateFormField.m; sourceTree = "<group>"; };
@@ -255,7 +255,6 @@
 		7512409713A8F6BE007BF2B5 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
-				6CB8913713CD7A9C000D403B /* IBAInputProviderCoordinator.h */,
 				7512409813A8F6BE007BF2B5 /* IBADateInputProvider.m */,
 				7512409913A8F6BE007BF2B5 /* IBAInputManager.m */,
 				7512409A13A8F6BE007BF2B5 /* IBAMultiplePickListInputProvider.m */,
@@ -284,6 +283,7 @@
 		751240B913A8F6CF007BF2B5 /* IBAForms */ = {
 			isa = PBXGroup;
 			children = (
+				6CB8913913CD7B57000D403B /* IBAInputProviderCoordinator.h */,
 				751240BA13A8F6CF007BF2B5 /* IBABooleanFormField.h */,
 				751240BB13A8F6CF007BF2B5 /* IBABooleanSwitchCell.h */,
 				751240BC13A8F6CF007BF2B5 /* IBAButtonFormField.h */,
@@ -302,10 +302,10 @@
 				751240C913A8F6CF007BF2B5 /* IBAFormViewController.h */,
 				751240CA13A8F6CF007BF2B5 /* IBAInputCommon.h */,
 				751240CB13A8F6CF007BF2B5 /* IBAInputManager.h */,
+				751240CF13A8F6CF007BF2B5 /* IBAInputRequestorDataSource.h */,
 				751240CC13A8F6CF007BF2B5 /* IBAInputNavigationToolbar.h */,
 				751240CD13A8F6CF007BF2B5 /* IBAInputProvider.h */,
 				751240CE13A8F6CF007BF2B5 /* IBAInputRequestor.h */,
-				751240CF13A8F6CF007BF2B5 /* IBAInputRequestorDataSource.h */,
 				751240D013A8F6CF007BF2B5 /* IBAInputRequestorFormField.h */,
 				751240D113A8F6CF007BF2B5 /* IBALabelFormCell.h */,
 				751240D213A8F6CF007BF2B5 /* IBALabelFormField.h */,
@@ -368,7 +368,7 @@
 				751240FE13A8F6CF007BF2B5 /* IBATextInputProvider.h in Headers */,
 				751240FF13A8F6CF007BF2B5 /* SynthesizeSingleton.h in Headers */,
 				753A7EFC13B36BCF003931DA /* IBATitleFormField.h in Headers */,
-				6CB8913813CD7A9C000D403B /* IBAInputProviderCoordinator.h in Headers */,
+				6CB8913A13CD7B57000D403B /* IBAInputProviderCoordinator.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
