@@ -44,5 +44,5 @@
 - (BOOL)isActive;
 - (void)applyFormFieldStyle;
 - (void)updateActiveStyle;
-
+- (void)applyActiveStyle;
 @end
