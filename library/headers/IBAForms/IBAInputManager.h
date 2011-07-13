@@ -18,19 +18,23 @@
 #import "IBAInputRequestor.h"
 #import "IBAInputNavigationToolbar.h"
 
+#import "IBAInputProviderCoordinator.h"
+
 
 @interface IBAInputManager : NSObject {
 	NSMutableDictionary *inputProviders_;
 	id<IBAInputRequestorDataSource> inputRequestorDataSource_;
 	id<IBAInputRequestor> activeInputRequestor_;
 	IBAInputNavigationToolbar *inputNavigationToolbar_;
-    BOOL inputNavigationToolbarEnabled_;
+  BOOL inputNavigationToolbarEnabled_;
+  id<IBAInputProviderCoordinator> inputProviderCoordinator_;
 }
 
 
 @property (nonatomic, retain) id<IBAInputRequestorDataSource> inputRequestorDataSource;
 @property (nonatomic, retain) IBAInputNavigationToolbar *inputNavigationToolbar;
 @property (nonatomic, assign, getter = isInputNavigationToolbarEnabled) BOOL inputNavigationToolbarEnabled;
+@property (nonatomic, retain) id<IBAInputProviderCoordinator> inputProviderCoordinator;
 
 + (IBAInputManager *)sharedIBAInputManager;
 
