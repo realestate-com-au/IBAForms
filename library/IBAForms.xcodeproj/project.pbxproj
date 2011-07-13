@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6CF9998E13CD6EC50064CD14 /* IBAInputProviderCoordinator.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CF9998D13CD6EC50064CD14 /* IBAInputProviderCoordinator.h */; };
 		7512409F13A8F6BE007BF2B5 /* IBABooleanFormField.m in Sources */ = {isa = PBXBuildFile; fileRef = 7512408213A8F6BE007BF2B5 /* IBABooleanFormField.m */; };
 		751240A013A8F6BE007BF2B5 /* IBAButtonFormField.m in Sources */ = {isa = PBXBuildFile; fileRef = 7512408313A8F6BE007BF2B5 /* IBAButtonFormField.m */; };
 		751240A113A8F6BE007BF2B5 /* IBADateFormField.m in Sources */ = {isa = PBXBuildFile; fileRef = 7512408413A8F6BE007BF2B5 /* IBADateFormField.m */; };
@@ -74,6 +75,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6CF9998D13CD6EC50064CD14 /* IBAInputProviderCoordinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IBAInputProviderCoordinator.h; path = src/main/input/controllers/IBAInputProviderCoordinator.h; sourceTree = SOURCE_ROOT; };
 		7512408213A8F6BE007BF2B5 /* IBABooleanFormField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IBABooleanFormField.m; sourceTree = "<group>"; };
 		7512408313A8F6BE007BF2B5 /* IBAButtonFormField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IBAButtonFormField.m; sourceTree = "<group>"; };
 		7512408413A8F6BE007BF2B5 /* IBADateFormField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IBADateFormField.m; sourceTree = "<group>"; };
@@ -253,6 +255,7 @@
 		7512409713A8F6BE007BF2B5 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				6CF9998D13CD6EC50064CD14 /* IBAInputProviderCoordinator.h */,
 				7512409813A8F6BE007BF2B5 /* IBADateInputProvider.m */,
 				7512409913A8F6BE007BF2B5 /* IBAInputManager.m */,
 				7512409A13A8F6BE007BF2B5 /* IBAMultiplePickListInputProvider.m */,
@@ -365,6 +368,7 @@
 				751240FE13A8F6CF007BF2B5 /* IBATextInputProvider.h in Headers */,
 				751240FF13A8F6CF007BF2B5 /* SynthesizeSingleton.h in Headers */,
 				753A7EFC13B36BCF003931DA /* IBATitleFormField.h in Headers */,
+				6CF9998E13CD6EC50064CD14 /* IBAInputProviderCoordinator.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
