@@ -43,6 +43,7 @@
 - (void)deactivate;
 - (BOOL)isActive;
 - (void)applyFormFieldStyle;
+- (void)applyActiveStyle;
 - (void)updateActiveStyle;
 
 @end
