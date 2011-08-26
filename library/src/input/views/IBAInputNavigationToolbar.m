@@ -15,8 +15,8 @@
 #import "IBAInputNavigationToolbar.h"
 #import "IBACommon.h"
 
-#define IBAInputNavigationToolbarNextTitle @"Next"
-#define IBAInputNavigationToolbarPreviousTitle @"Previous"
+#define IBAInputNavigationToolbarNextTitle NSLocalizedString(@"Next", @"IBAInputNavigationToolbarNextTitle")
+#define IBAInputNavigationToolbarPreviousTitle NSLocalizedString(@"Previous", @"IBAInputNavigationToolbarPreviousTitle")
 
 @interface IBAInputNavigationToolbar ()
 @property (nonatomic, retain) UIBarButtonItem *nextPreviousBarButtonItem;
