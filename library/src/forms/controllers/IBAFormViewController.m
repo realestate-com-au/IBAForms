@@ -188,12 +188,12 @@
 	}
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-	return [self.formDataSource viewForFooterInSection:section];
-}
-
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
 	return [self.formDataSource viewForHeaderInSection:section];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+  return MAX(CGRectGetHeight([[self.formDataSource viewForHeaderInSection:section] frame]), 0.);
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(IBAFormFieldCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
