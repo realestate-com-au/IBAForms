@@ -463,7 +463,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = (
 					armv6,
-					armv7,
+					"$(ARCHS_STANDARD_32_BIT)",
 				);
 				COPY_PHASE_STRIP = NO;
 				DSTROOT = /tmp/IBAForms.dst;
@@ -484,8 +484,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = (
-					armv7,
 					armv6,
+					"$(ARCHS_STANDARD_32_BIT)",
 				);
 				DSTROOT = /tmp/IBAForms.dst;
 				GCC_MODEL_TUNING = G5;
