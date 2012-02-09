@@ -19,8 +19,6 @@
 #import "IBAInputCommon.h"
 
 @implementation IBACurrencyFormField
-{
-}
 
 @synthesize currencyFormFieldCell = currencyFormFieldCell_, 
             currencyNumberFormatter = currencyNumberFormatter_;
