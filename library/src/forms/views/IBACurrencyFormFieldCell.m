@@ -21,49 +21,50 @@
 
 - (void)dealloc
 {
-    IBA_RELEASE_SAFELY(valueTextField_);
-    IBA_RELEASE_SAFELY(valueLabel_);
-    
-    [super dealloc];
+  IBA_RELEASE_SAFELY(valueTextField_);
+  IBA_RELEASE_SAFELY(valueLabel_);
+  
+  [super dealloc];
 }
 
 - (id)initWithFormFieldStyle:(IBAFormFieldStyle *)style reuseIdentifier:(NSString *)reuseIdentifier {
-    if ((self = [super initWithFormFieldStyle:style reuseIdentifier:reuseIdentifier])) {
-
+  if ((self = [super initWithFormFieldStyle:style reuseIdentifier:reuseIdentifier])) {
+    
 		// Create the text field for data entry (hidden by default)
 		valueTextField_ = [[UITextField alloc] initWithFrame:style.valueFrame];
 		valueTextField_.autoresizingMask = style.valueAutoresizingMask;
 		valueTextField_.returnKeyType = UIReturnKeyNext;
-        valueTextField_.hidden = YES;
-        
-        // Create the lable for data display (shown by default)
-        valueLabel_ = [[UILabel alloc] initWithFrame:style.valueFrame];
-        valueLabel_.autoresizingMask = style.valueAutoresizingMask;
-        valueLabel_.hidden = NO;
-        
+    valueTextField_.hidden = YES;
+    valueTextField_.keyboardType = UIKeyboardTypeDecimalPad;
+    
+    // Create the lable for data display (shown by default)
+    valueLabel_ = [[UILabel alloc] initWithFrame:style.valueFrame];
+    valueLabel_.autoresizingMask = style.valueAutoresizingMask;
+    valueLabel_.hidden = NO;
+    
 		[self.cellView addSubview:valueTextField_];
-        [self.cellView addSubview:valueLabel_];
+    [self.cellView addSubview:valueLabel_];
 	}
 	
-    return self;
+  return self;
 }
 
 - (void)activate {
 	[super activate];
 	
-    valueTextField_.backgroundColor = self.formFieldStyle.activeColor;
-    valueLabel_.backgroundColor = self.formFieldStyle.activeColor;
-    
-    valueTextField_.hidden = NO;
-    valueLabel_.hidden = YES;
+  valueTextField_.backgroundColor = self.formFieldStyle.activeColor;
+  valueLabel_.backgroundColor = self.formFieldStyle.activeColor;
+  
+  valueTextField_.hidden = NO;
+  valueLabel_.hidden = YES;
 }
 
 - (void)deactivate
 {
-    [super deactivate];
-    
-    valueTextField_.hidden = YES;
-    valueLabel_.hidden = NO;
+  [super deactivate];
+  
+  valueTextField_.hidden = YES;
+  valueLabel_.hidden = NO;
 }
 
 
@@ -71,22 +72,22 @@
 	[super applyFormFieldStyle];
 	
 	valueTextField_.font = self.formFieldStyle.valueFont;
-    valueTextField_.textColor = self.formFieldStyle.valueTextColor;
-    valueTextField_.backgroundColor = self.formFieldStyle.valueBackgroundColor;
-    valueTextField_.textAlignment = self.formFieldStyle.valueTextAlignment;
-    
-    valueLabel_.font = self.formFieldStyle.valueFont;
-    valueLabel_.textColor = self.formFieldStyle.valueTextColor;
-    valueLabel_.backgroundColor = self.formFieldStyle.valueBackgroundColor;
-    valueLabel_.textAlignment = self.formFieldStyle.valueTextAlignment;
+  valueTextField_.textColor = self.formFieldStyle.valueTextColor;
+  valueTextField_.backgroundColor = self.formFieldStyle.valueBackgroundColor;
+  valueTextField_.textAlignment = self.formFieldStyle.valueTextAlignment;
+  
+  valueLabel_.font = self.formFieldStyle.valueFont;
+  valueLabel_.textColor = self.formFieldStyle.valueTextColor;
+  valueLabel_.backgroundColor = self.formFieldStyle.valueBackgroundColor;
+  valueLabel_.textAlignment = self.formFieldStyle.valueTextAlignment;
 }
 
 - (void)applyActiveStyle;
 {
-    [super applyActiveStyle];
-    
-    valueTextField_.backgroundColor = self.formFieldStyle.activeColor;
-    valueLabel_.backgroundColor = self.formFieldStyle.activeColor;
+  [super applyActiveStyle];
+  
+  valueTextField_.backgroundColor = self.formFieldStyle.activeColor;
+  valueLabel_.backgroundColor = self.formFieldStyle.activeColor;
 }
 
 @end

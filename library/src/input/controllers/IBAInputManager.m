@@ -77,6 +77,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(IBAInputManager);
 		// Text
 		[self registerInputProvider:[[[IBATextInputProvider alloc] init] autorelease]
 						forDataType:IBAInputDataTypeText];
+    
+    // Numbers
+    [self registerInputProvider:[[[IBATextInputProvider alloc] init] autorelease]
+                    forDataType:IBAInputDataTypeNumber];
+    
 		// Date
 		[self registerInputProvider:[[[IBADateInputProvider alloc] init] autorelease]
 						forDataType:IBAInputDataTypeDate];

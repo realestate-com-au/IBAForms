@@ -61,8 +61,8 @@
 
 - (void)updateCellContents {
 	currencyFormFieldCell_.label.text = self.title;
-	currencyFormFieldCell_.valueTextField.text = [self formFieldStringValue];
-    currencyFormFieldCell_.valueLabel.text = [[self currencyNumberFormatter] stringFromNumber:[self formFieldValue]];
+	currencyFormFieldCell_.valueTextField.text = [[self formFieldValue] stringValue];
+  currencyFormFieldCell_.valueLabel.text = [[self currencyNumberFormatter] stringFromNumber:[self formFieldValue]];
 }
 
 #pragma mark -
