@@ -70,10 +70,10 @@
 		753A7EFC13B36BCF003931DA /* IBATitleFormField.h in Headers */ = {isa = PBXBuildFile; fileRef = 753A7EFA13B36BCF003931DA /* IBATitleFormField.h */; };
 		753A7EFD13B36BCF003931DA /* IBATitleFormField.m in Sources */ = {isa = PBXBuildFile; fileRef = 753A7EFB13B36BCF003931DA /* IBATitleFormField.m */; };
 		A37CF9F9139C59D200656F39 /* IBAInputProviderCoordinator.h in Headers */ = {isa = PBXBuildFile; fileRef = A37CF9F8139C59D200656F39 /* IBAInputProviderCoordinator.h */; settings = {ATTRIBUTES = (); }; };
-		A766215F14E3618700D1B810 /* IBACurrencyFormField.h in Headers */ = {isa = PBXBuildFile; fileRef = A766215D14E3618700D1B810 /* IBACurrencyFormField.h */; };
-		A766216014E3618700D1B810 /* IBACurrencyFormField.m in Sources */ = {isa = PBXBuildFile; fileRef = A766215E14E3618700D1B810 /* IBACurrencyFormField.m */; };
-		A766216414E3633A00D1B810 /* IBACurrencyFormFieldCell.h in Headers */ = {isa = PBXBuildFile; fileRef = A766216214E3633A00D1B810 /* IBACurrencyFormFieldCell.h */; };
-		A766216514E3633A00D1B810 /* IBACurrencyFormFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A766216314E3633A00D1B810 /* IBACurrencyFormFieldCell.m */; };
+		A766215F14E3618700D1B810 /* IBADecimalFormField.h in Headers */ = {isa = PBXBuildFile; fileRef = A766215D14E3618700D1B810 /* IBADecimalFormField.h */; };
+		A766216014E3618700D1B810 /* IBADecimalFormField.m in Sources */ = {isa = PBXBuildFile; fileRef = A766215E14E3618700D1B810 /* IBADecimalFormField.m */; };
+		A766216414E3633A00D1B810 /* IBADecimalFormFieldCell.h in Headers */ = {isa = PBXBuildFile; fileRef = A766216214E3633A00D1B810 /* IBADecimalFormFieldCell.h */; };
+		A766216514E3633A00D1B810 /* IBADecimalFormFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A766216314E3633A00D1B810 /* IBADecimalFormFieldCell.m */; };
 		AA747D9F0F9514B9006C5449 /* IBAForms_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* IBAForms_Prefix.pch */; settings = {ATTRIBUTES = (); }; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 /* End PBXBuildFile section */
@@ -142,10 +142,10 @@
 		753A7EFA13B36BCF003931DA /* IBATitleFormField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBATitleFormField.h; sourceTree = "<group>"; };
 		753A7EFB13B36BCF003931DA /* IBATitleFormField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IBATitleFormField.m; sourceTree = "<group>"; };
 		A37CF9F8139C59D200656F39 /* IBAInputProviderCoordinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBAInputProviderCoordinator.h; sourceTree = "<group>"; };
-		A766215D14E3618700D1B810 /* IBACurrencyFormField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBACurrencyFormField.h; sourceTree = "<group>"; };
-		A766215E14E3618700D1B810 /* IBACurrencyFormField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IBACurrencyFormField.m; sourceTree = "<group>"; };
-		A766216214E3633A00D1B810 /* IBACurrencyFormFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBACurrencyFormFieldCell.h; sourceTree = "<group>"; };
-		A766216314E3633A00D1B810 /* IBACurrencyFormFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IBACurrencyFormFieldCell.m; sourceTree = "<group>"; };
+		A766215D14E3618700D1B810 /* IBADecimalFormField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = IBADecimalFormField.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		A766215E14E3618700D1B810 /* IBADecimalFormField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = IBADecimalFormField.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		A766216214E3633A00D1B810 /* IBADecimalFormFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBADecimalFormFieldCell.h; sourceTree = "<group>"; };
+		A766216314E3633A00D1B810 /* IBADecimalFormFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IBADecimalFormFieldCell.m; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* IBAForms_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBAForms_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2AAC07E0554694100DB518D /* libIBAForms.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIBAForms.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -222,7 +222,7 @@
 			children = (
 				7512408213A8F6BE007BF2B5 /* IBABooleanFormField.m */,
 				7512408313A8F6BE007BF2B5 /* IBAButtonFormField.m */,
-				A766215E14E3618700D1B810 /* IBACurrencyFormField.m */,
+				A766215E14E3618700D1B810 /* IBADecimalFormField.m */,
 				7512408413A8F6BE007BF2B5 /* IBADateFormField.m */,
 				7512408513A8F6BE007BF2B5 /* IBAFormDataSource.m */,
 				7512408613A8F6BE007BF2B5 /* IBAFormField.m */,
@@ -244,7 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				7512409113A8F6BE007BF2B5 /* IBABooleanSwitchCell.m */,
-				A766216314E3633A00D1B810 /* IBACurrencyFormFieldCell.m */,
+				A766216314E3633A00D1B810 /* IBADecimalFormFieldCell.m */,
 				7512409213A8F6BE007BF2B5 /* IBADateFormFieldCell.m */,
 				7512409313A8F6BE007BF2B5 /* IBAFormFieldCell.m */,
 				7512409413A8F6BE007BF2B5 /* IBALabelFormCell.m */,
@@ -297,8 +297,8 @@
 				751240BB13A8F6CF007BF2B5 /* IBABooleanSwitchCell.h */,
 				751240BC13A8F6CF007BF2B5 /* IBAButtonFormField.h */,
 				751240BD13A8F6CF007BF2B5 /* IBACommon.h */,
-				A766215D14E3618700D1B810 /* IBACurrencyFormField.h */,
-				A766216214E3633A00D1B810 /* IBACurrencyFormFieldCell.h */,
+				A766215D14E3618700D1B810 /* IBADecimalFormField.h */,
+				A766216214E3633A00D1B810 /* IBADecimalFormFieldCell.h */,
 				751240BE13A8F6CF007BF2B5 /* IBADateFormField.h */,
 				751240BF13A8F6CF007BF2B5 /* IBADateFormFieldCell.h */,
 				751240C013A8F6CF007BF2B5 /* IBADateInputProvider.h */,
@@ -381,8 +381,8 @@
 				A37CF9F9139C59D200656F39 /* IBAInputProviderCoordinator.h in Headers */,
 				751240FF13A8F6CF007BF2B5 /* SynthesizeSingleton.h in Headers */,
 				753A7EFC13B36BCF003931DA /* IBATitleFormField.h in Headers */,
-				A766215F14E3618700D1B810 /* IBACurrencyFormField.h in Headers */,
-				A766216414E3633A00D1B810 /* IBACurrencyFormFieldCell.h in Headers */,
+				A766215F14E3618700D1B810 /* IBADecimalFormField.h in Headers */,
+				A766216414E3633A00D1B810 /* IBADecimalFormFieldCell.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -465,8 +465,8 @@
 				751240B613A8F6BE007BF2B5 /* IBATextInputProvider.m in Sources */,
 				751240B713A8F6BE007BF2B5 /* IBAInputNavigationToolbar.m in Sources */,
 				753A7EFD13B36BCF003931DA /* IBATitleFormField.m in Sources */,
-				A766216014E3618700D1B810 /* IBACurrencyFormField.m in Sources */,
-				A766216514E3633A00D1B810 /* IBACurrencyFormFieldCell.m in Sources */,
+				A766216014E3618700D1B810 /* IBADecimalFormField.m in Sources */,
+				A766216514E3633A00D1B810 /* IBADecimalFormFieldCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

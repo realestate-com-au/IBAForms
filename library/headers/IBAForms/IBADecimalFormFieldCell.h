@@ -14,7 +14,7 @@
 
 #import "IBAFormFieldCell.h"
 
-@interface IBACurrencyFormFieldCell : IBAFormFieldCell
+@interface IBADecimalFormFieldCell : IBAFormFieldCell
 
 @property (nonatomic, retain) UITextField *valueTextField;
 @property (nonatomic, retain) UILabel *valueLabel;

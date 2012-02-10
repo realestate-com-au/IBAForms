@@ -12,15 +12,14 @@
 // permissions and limitations under the License.
 //
 
-#import "IBACurrencyFormFieldCell.h"
+#import "IBADecimalFormFieldCell.h"
 #import "IBAFormConstants.h"
 
-@implementation IBACurrencyFormFieldCell
+@implementation IBADecimalFormFieldCell
 
 @synthesize valueTextField = valueTextField_, valueLabel = valueLabel_;
 
-- (void)dealloc
-{
+- (void)dealloc {
   IBA_RELEASE_SAFELY(valueTextField_);
   IBA_RELEASE_SAFELY(valueLabel_);
   

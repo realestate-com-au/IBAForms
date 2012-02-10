@@ -13,11 +13,18 @@
 //
 
 #import "IBAInputRequestorFormField.h"
-#import "IBACurrencyFormFieldCell.h"
+#import "IBADecimalFormFieldCell.h"
 
-@interface IBACurrencyFormField : IBAInputRequestorFormField <UITextFieldDelegate>
+@interface IBADecimalFormField : IBAInputRequestorFormField <UITextFieldDelegate>
 
-@property (nonatomic, retain) IBACurrencyFormFieldCell *currencyFormFieldCell;
-@property (nonatomic, readonly) NSNumberFormatter *currencyNumberFormatter;
+@property (nonatomic, retain) IBADecimalFormFieldCell *formFieldCell;
+@property (nonatomic, readonly) NSNumberFormatter *numberFormatter;
+
+- (id)initWithKeyPath:(NSString *)keyPath 
+                title:(NSString *)title
+     valueTransformer:(NSValueTransformer *)valueTransformer 
+   displayTransformer:(NSValueTransformer *)displayTransformer;
+
+- (void)setNumberOfDecimals:(NSUInteger)numberOfDecimals;
 
 @end
