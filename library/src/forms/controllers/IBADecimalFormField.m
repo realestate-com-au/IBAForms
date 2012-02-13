@@ -26,6 +26,14 @@
 @synthesize formFieldCell = formFieldCell_, 
             numberFormatter = numberFormatter_;
 
++ (id)formFieldWithKeyPath:(NSString *)keyPath 
+                     title:(NSString *)title
+          valueTransformer:(NSValueTransformer *)valueTransformer 
+        displayTransformer:(NSValueTransformer *)displayTransformer
+{
+    return [[[self alloc] initWithKeyPath:keyPath title:title valueTransformer:valueTransformer displayTransformer:displayTransformer] autorelease];
+}
+
 - (id)initWithKeyPath:(NSString *)keyPath 
                 title:(NSString *)title
      valueTransformer:(NSValueTransformer *)valueTransformer 
@@ -39,11 +47,10 @@
   return self;
 }
 
-
 - (void)dealloc {
 	IBA_RELEASE_SAFELY(formFieldCell_);
 	IBA_RELEASE_SAFELY(numberFormatter_);
-  IBA_RELEASE_SAFELY(displayTransformer_);
+    IBA_RELEASE_SAFELY(displayTransformer_);
     
 	[super dealloc];
 }
@@ -77,11 +84,11 @@
 }
 
 - (void)updateCellContents {
-  NSNumber *labelValue = (displayTransformer_ ? [displayTransformer_ transformedValue:[self formFieldValue]] : [self formFieldValue]);
+    NSNumber *labelValue = (displayTransformer_ ? [displayTransformer_ transformedValue:[self formFieldValue]] : [self formFieldValue]);
   
 	formFieldCell_.label.text = self.title;
-	formFieldCell_.valueTextField.text = [[self formFieldValue] stringValue];
-  formFieldCell_.valueLabel.text = [[self numberFormatter] stringFromNumber:labelValue];
+	formFieldCell_.valueTextField.text = [self formFieldStringValue];
+    formFieldCell_.valueLabel.text = [[self numberFormatter] stringFromNumber:labelValue];
 }
 
 #pragma mark -
@@ -121,6 +128,29 @@
 - (void)setNumberOfDecimals:(NSUInteger)numberOfDecimals {
   [[self numberFormatter] setMaximumFractionDigits:numberOfDecimals];
   [[self.formFieldCell valueTextField] setKeyboardType:(numberOfDecimals > 0 ? UIKeyboardTypeDecimalPad : UIKeyboardTypeNumberPad)];
+}
+
+@end
+
+@implementation IBAFormSection (IBADecimalFormField)
+
+- (IBADecimalFormField *)decimalFormFieldWithKeyPath:(NSString *)keyPath 
+                                               title:(NSString *)title
+                                    valueTransformer:(NSValueTransformer *)valueTransformer 
+                                  displayTransformer:(NSValueTransformer *)displayTransformer
+{
+    IBADecimalFormField *field = [IBADecimalFormField formFieldWithKeyPath:keyPath title:title valueTransformer:valueTransformer displayTransformer:displayTransformer];
+    [self addFormField:field];
+    return field;
+}
+
+- (IBADecimalFormField *)decimalFormFieldWithKeyPath:(NSString *)keyPath 
+                                              title:(NSString *)title
+                                   valueTransformer:(NSValueTransformer *)valueTransformer
+{
+    IBADecimalFormField *field = [IBADecimalFormField formFieldWithKeyPath:keyPath title:title valueTransformer:valueTransformer];
+    [self addFormField:field];
+    return field;
 }
 
 @end

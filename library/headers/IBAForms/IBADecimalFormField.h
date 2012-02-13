@@ -14,11 +14,17 @@
 
 #import "IBAInputRequestorFormField.h"
 #import "IBADecimalFormFieldCell.h"
+#import "IBAFormSection.h"
 
 @interface IBADecimalFormField : IBAInputRequestorFormField <UITextFieldDelegate>
 
 @property (nonatomic, retain) IBADecimalFormFieldCell *formFieldCell;
 @property (nonatomic, readonly) NSNumberFormatter *numberFormatter;
+
++ (id)formFieldWithKeyPath:(NSString *)keyPath 
+                         title:(NSString *)title
+              valueTransformer:(NSValueTransformer *)valueTransformer 
+            displayTransformer:(NSValueTransformer *)displayTransformer;
 
 - (id)initWithKeyPath:(NSString *)keyPath 
                 title:(NSString *)title
@@ -26,5 +32,19 @@
    displayTransformer:(NSValueTransformer *)displayTransformer;
 
 - (void)setNumberOfDecimals:(NSUInteger)numberOfDecimals;
+
+@end
+
+@interface IBAFormSection (IBADecimalFormField)
+
+- (IBADecimalFormField *)decimalFormFieldWithKeyPath:(NSString *)keyPath 
+                                               title:(NSString *)title
+                                    valueTransformer:(NSValueTransformer *)valueTransformer 
+                                  displayTransformer:(NSValueTransformer *)displayTransformer;
+
+- (IBADecimalFormField*)decimalFormFieldWithKeyPath:(NSString *)keyPath 
+                                              title:(NSString *)title
+                                   valueTransformer:(NSValueTransformer *)valueTransformer;
+
 
 @end
