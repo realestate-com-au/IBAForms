@@ -88,3 +88,28 @@
 }
 
 @end
+
+@implementation IBAFormSection (IBATextFormField)
+
+- (IBATextFormField *)textFormFieldWithKeyPath:(NSString *)keyPath title:(NSString *)title valueTransformer:(NSValueTransformer *)valueTransformer
+{
+    IBATextFormField *field = [IBATextFormField formFieldWithKeyPath:keyPath title:title valueTransformer:valueTransformer];
+    [self addFormField:field];
+    return field;
+}
+                               
+- (IBATextFormField *)textFormFieldWithKeyPath:(NSString *)keyPath title:(NSString *)title
+{
+    IBATextFormField *field = [IBATextFormField formFieldWithKeyPath:keyPath title:title];
+    [self addFormField:field];
+    return field;
+}
+
+- (IBATextFormField *)textFormFieldWithKeyPath:(NSString *)keyPath
+{
+    IBATextFormField *field = [IBATextFormField formFieldWithKeyPath:keyPath];
+    [self addFormField:field];
+    return field;
+}
+
+@end

@@ -14,6 +14,7 @@
 
 #import "IBAInputRequestorFormField.h"
 #import "IBATextFormFieldCell.h"
+#import "IBAFormSection.h"
 
 @interface IBATextFormField : IBAInputRequestorFormField <UITextFieldDelegate> {
 	IBATextFormFieldCell *textFormFieldCell_;
@@ -21,4 +22,10 @@
 
 @property (nonatomic, retain) IBATextFormFieldCell *textFormFieldCell;
 
+@end
+
+@interface IBAFormSection (IBATextFormField)
+- (IBATextFormField *)textFormFieldWithKeyPath:(NSString *)keyPath title:(NSString *)title valueTransformer:(NSValueTransformer *)valueTransformer;
+- (IBATextFormField *)textFormFieldWithKeyPath:(NSString *)keyPath title:(NSString *)title;
+- (IBATextFormField *)textFormFieldWithKeyPath:(NSString *)keyPath;
 @end
