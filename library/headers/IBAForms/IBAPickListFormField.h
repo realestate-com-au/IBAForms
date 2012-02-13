@@ -15,6 +15,7 @@
 #import "IBAInputRequestorFormField.h"
 #import "IBATextFormFieldCell.h"
 #import "IBAPickListOptionsProvider.h"
+#import "IBAFormSection.h"
 
 
 @interface IBAPickListFormField : IBAInputRequestorFormField <IBAPickListOptionsProvider> {
@@ -27,11 +28,13 @@
 @property (nonatomic, assign) IBAPickListSelectionMode selectionMode;
 @property (nonatomic, copy) NSArray *pickListOptions;
 
++ (id)formFieldWithKeyPath:(NSString *)keyPath title:(NSString *)title valueTransformer:(NSValueTransformer *)valueTransformer
+             selectionMode:(IBAPickListSelectionMode)selectionMode options:(NSArray *)pickListOptions;
+
 - (id)initWithKeyPath:(NSString *)keyPath title:(NSString *)title valueTransformer:(NSValueTransformer *)valueTransformer
-	selectionMode:(IBAPickListSelectionMode)selectionMode options:(NSArray *)pickListOptions;
+        selectionMode:(IBAPickListSelectionMode)selectionMode options:(NSArray *)pickListOptions;
 
 @end
-
 
 @interface IBAPickListFormOption : NSObject <IBAPickListOption> {
 	UIFont *font_;
@@ -45,21 +48,20 @@
 
 @end
 
-
-@interface IBAPickListFormOptionsStringTransformer : NSValueTransformer {
-	NSArray *pickListOptions_;
-}
-
+@interface IBAAbstractPickListFormOptionsTransformer : NSValueTransformer
 - (id)initWithPickListOptions:(NSArray *)pickListOptions;
 @property (nonatomic, copy) NSArray *pickListOptions;
++ (id)pickListFormOptionsTransformerWithOptions:(NSArray *)options;
 @end
 
-
-@interface IBASingleIndexTransformer : NSValueTransformer {
-	NSArray *pickListOptions_;
-}
-
-- (id)initWithPickListOptions:(NSArray *)pickListOptions;
-@property (nonatomic, copy) NSArray *pickListOptions;
+@interface IBAPickListFormOptionsStringTransformer : IBAAbstractPickListFormOptionsTransformer
 @end
 
+@interface IBASingleIndexTransformer : IBAAbstractPickListFormOptionsTransformer
+@end
+
+@interface IBAFormSection (IBAPickListFormField)
+
+- (id)pickListFormFieldWithKeyPath:(NSString *)keyPath title:(NSString *)title valueTransformer:(NSValueTransformer *)valueTransformer
+                     selectionMode:(IBAPickListSelectionMode)selectionMode options:(NSArray *)pickListOptions;
+@end

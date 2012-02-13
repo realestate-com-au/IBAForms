@@ -24,11 +24,11 @@
 @synthesize selectionMode = selectionMode_;
 @synthesize pickListOptions = pickListOptions_;
 
-- (void)dealloc {
-	IBA_RELEASE_SAFELY(pickListCell_);
-	IBA_RELEASE_SAFELY(pickListOptions_);
 
-	[super dealloc];
++ (id)formFieldWithKeyPath:(NSString *)keyPath title:(NSString *)title valueTransformer:(NSValueTransformer *)valueTransformer
+             selectionMode:(IBAPickListSelectionMode)selectionMode options:(NSArray *)pickListOptions
+{
+    return [[[self alloc] initWithKeyPath:keyPath title:title valueTransformer:valueTransformer selectionMode:selectionMode options:pickListOptions] autorelease];
 }
 
 - (id)initWithKeyPath:(NSString *)keyPath title:(NSString *)title valueTransformer:(NSValueTransformer *)valueTransformer
@@ -41,6 +41,12 @@
 	return self;
 }
 
+- (void)dealloc {
+	IBA_RELEASE_SAFELY(pickListCell_);
+	IBA_RELEASE_SAFELY(pickListOptions_);
+    
+	[super dealloc];
+}
 
 - (NSString *)formFieldStringValue {
 	NSString *value = nil;
@@ -147,6 +153,40 @@
 @end
 
 
+#pragma mark -
+#pragma mark IBAAbstractPickListFormOptionsTransformer
+
+@implementation IBAAbstractPickListFormOptionsTransformer
+{
+    NSArray *pickListOptions_;
+}
+
+@synthesize pickListOptions = pickListOptions_;
+
++ (id)pickListFormOptionsTransformerWithOptions:(NSArray *)options
+{
+    return [[[self alloc] initWithPickListOptions:options] autorelease];
+}
+
+- (id)initWithPickListOptions:(NSArray *)pickListOptions {
+	if ((self = [super init])) {
+		self.pickListOptions = pickListOptions;
+	}
+    
+	return self;
+}
+
+- (void)dealloc {
+	IBA_RELEASE_SAFELY(pickListOptions_);
+    
+	[super dealloc];
+}
+
++ (BOOL)allowsReverseTransformation {
+	return YES;
+}
+
+@end
 
 #pragma mark -
 #pragma mark IBAPickListFormOptionsStringTransformer
@@ -157,28 +197,8 @@
 
 @implementation IBAPickListFormOptionsStringTransformer
 
-@synthesize pickListOptions = pickListOptions_;
-
-- (void)dealloc {
-	IBA_RELEASE_SAFELY(pickListOptions_);
-
-	[super dealloc];
-}
-
-- (id)initWithPickListOptions:(NSArray *)pickListOptions {
-	if ((self = [super init])) {
-		self.pickListOptions = pickListOptions;
-	}
-
-	return self;
-}
-
 + (Class)transformedValueClass {
 	return [NSSet class];
-}
-
-+ (BOOL)allowsReverseTransformation {
-	return YES;
 }
 
 - (id)transformedValue:(id)value {
@@ -204,7 +224,6 @@
 	return options;
 }
 
-
 - (IBAPickListFormOption *)optionWithName:(NSString *)optionName {
 	NSArray *filteredOptions = [self.pickListOptions filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"name == %@", optionName]];
 	return (filteredOptions.count > 0) ? [filteredOptions lastObject] : nil;
@@ -212,34 +231,13 @@
 
 @end
 
-
 #pragma mark -
 #pragma mark IBASingleIndexTransformer
 
 @implementation IBASingleIndexTransformer
 
-@synthesize pickListOptions = pickListOptions_;
-
-- (void)dealloc {
-	IBA_RELEASE_SAFELY(pickListOptions_);
-	
-	[super dealloc];
-}
-
-- (id)initWithPickListOptions:(NSArray *)pickListOptions {
-	if ((self = [super init])) {
-		self.pickListOptions = pickListOptions;
-	}
-	
-	return self;
-}
-
 + (Class)transformedValueClass {
 	return [NSNumber class];
-}
-
-+ (BOOL)allowsReverseTransformation {
-	return YES;
 }
 
 - (id)transformedValue:(id)value {
@@ -264,6 +262,21 @@
 	}
 	
 	return options;
+}
+
+@end
+
+#pragma mark -
+#pragma mark IBAFormSection Support for IBAPickListFormField
+
+@implementation IBAFormSection (IBAPickListFormField)
+
+- (id)pickListFormFieldWithKeyPath:(NSString *)keyPath title:(NSString *)title valueTransformer:(NSValueTransformer *)valueTransformer
+                     selectionMode:(IBAPickListSelectionMode)selectionMode options:(NSArray *)pickListOptions
+{
+    IBAPickListFormField *field = [IBAPickListFormField formFieldWithKeyPath:keyPath title:title valueTransformer:valueTransformer selectionMode:selectionMode options:pickListOptions];
+    [self addFormField:field];
+    return field;
 }
 
 @end
