@@ -38,6 +38,9 @@
 @property (nonatomic, assign, getter=isNullable) BOOL nullable;
 @property (nonatomic, retain) NSValueTransformer *valueTransformer;
 
++ (id)formFieldWithKeyPath:(NSString *)keyPath title:(NSString *)title valueTransformer:(NSValueTransformer *)valueTransformer;
++ (id)formFieldWithKeyPath:(NSString *)keyPath title:(NSString *)title;
++ (id)formFieldWithKeyPath:(NSString *)keyPath;
 
 - (id)initWithKeyPath:(NSString *)keyPath title:(NSString *)title valueTransformer:(NSValueTransformer *)valueTransformer;
 - (id)initWithKeyPath:(NSString *)keyPath title:(NSString *)title;

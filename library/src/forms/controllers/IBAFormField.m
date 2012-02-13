@@ -28,6 +28,25 @@
 #pragma mark -
 #pragma mark Initialisation and memory management
 
++ (id)formFieldWithKeyPath:(NSString *)keyPath 
+                     title:(NSString *)title
+          valueTransformer:(NSValueTransformer *)valueTransformer
+{
+    return [[[self alloc] initWithKeyPath:keyPath title:title valueTransformer:valueTransformer] autorelease];
+}
+
++ (id)formFieldWithKeyPath:(NSString *)keyPath 
+                     title:(NSString *)title
+{
+    return [[[self alloc] initWithKeyPath:keyPath title:title] autorelease];
+}
+
+
++ (id)formFieldWithKeyPath:(NSString *)keyPath
+{
+    return [[[self alloc] initWithKeyPath:keyPath] autorelease];
+}
+
 - (void)dealloc {
 	IBA_RELEASE_SAFELY(keyPath_);
 	IBA_RELEASE_SAFELY(title_);
