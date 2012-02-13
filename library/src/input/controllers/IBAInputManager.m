@@ -68,7 +68,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(IBAInputManager);
 		inputNavigationToolbar_.doneButton.target = self;
 		inputNavigationToolbar_.doneButton.action = @selector(deactivateActiveInputRequestor);
 		[inputNavigationToolbar_.nextPreviousButton addTarget:self action:@selector(nextPreviousButtonSelected) 
-			forControlEvents:UIControlEventValueChanged];
+                                             forControlEvents:UIControlEventValueChanged];
         
         inputNavigationToolbarEnabled_ = YES;
 		
@@ -77,11 +77,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(IBAInputManager);
 		// Text
 		[self registerInputProvider:[[[IBATextInputProvider alloc] init] autorelease]
 						forDataType:IBAInputDataTypeText];
-    
-    // Numbers
-    [self registerInputProvider:[[[IBATextInputProvider alloc] init] autorelease]
-                    forDataType:IBAInputDataTypeNumber];
-    
+        
+        // Numbers
+        [self registerInputProvider:[[[IBATextInputProvider alloc] init] autorelease]
+                        forDataType:IBAInputDataTypeNumber];
+        
 		// Date
 		[self registerInputProvider:[[[IBADateInputProvider alloc] init] autorelease]
 						forDataType:IBAInputDataTypeDate];
@@ -100,7 +100,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(IBAInputManager);
 		// Multiple Picklist
 		[self registerInputProvider:[[[IBAMultiplePickListInputProvider alloc] init] autorelease]
 						forDataType:IBAInputDataTypePickListMultiple];
-    
+        
 	}
 	
 	return self;
