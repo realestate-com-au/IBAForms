@@ -9,5 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @protocol IBACycleListOptionsProvider <NSObject>
+- (NSArray *)cycleListOptions;
+@end
 
+@protocol IBACycleListOption <NSObject>
+@property (nonatomic, readonly, copy) NSString *name;
 @end

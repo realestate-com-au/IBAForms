@@ -74,6 +74,9 @@
 		A766216014E3618700D1B810 /* IBADecimalFormField.m in Sources */ = {isa = PBXBuildFile; fileRef = A766215E14E3618700D1B810 /* IBADecimalFormField.m */; };
 		A766216414E3633A00D1B810 /* IBADecimalFormFieldCell.h in Headers */ = {isa = PBXBuildFile; fileRef = A766216214E3633A00D1B810 /* IBADecimalFormFieldCell.h */; };
 		A766216514E3633A00D1B810 /* IBADecimalFormFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A766216314E3633A00D1B810 /* IBADecimalFormFieldCell.m */; };
+		A7B14F6114E8BF9B0035119B /* IBACycleListFormField.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B14F6014E8BF9B0035119B /* IBACycleListFormField.m */; };
+		A7B14F6414E8BFD70035119B /* IBACycleListFormField.h in Headers */ = {isa = PBXBuildFile; fileRef = A7B14F6314E8BFD70035119B /* IBACycleListFormField.h */; };
+		A7B14F6614E8C53A0035119B /* IBACycleListOptionsProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = A7B14F6514E8C53A0035119B /* IBACycleListOptionsProvider.h */; };
 		AA747D9F0F9514B9006C5449 /* IBAForms_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* IBAForms_Prefix.pch */; settings = {ATTRIBUTES = (); }; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 /* End PBXBuildFile section */
@@ -146,6 +149,9 @@
 		A766215E14E3618700D1B810 /* IBADecimalFormField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = IBADecimalFormField.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		A766216214E3633A00D1B810 /* IBADecimalFormFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBADecimalFormFieldCell.h; sourceTree = "<group>"; };
 		A766216314E3633A00D1B810 /* IBADecimalFormFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IBADecimalFormFieldCell.m; sourceTree = "<group>"; };
+		A7B14F6014E8BF9B0035119B /* IBACycleListFormField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IBACycleListFormField.m; sourceTree = "<group>"; };
+		A7B14F6314E8BFD70035119B /* IBACycleListFormField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBACycleListFormField.h; sourceTree = "<group>"; };
+		A7B14F6514E8C53A0035119B /* IBACycleListOptionsProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBACycleListOptionsProvider.h; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* IBAForms_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBAForms_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2AAC07E0554694100DB518D /* libIBAForms.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIBAForms.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -222,6 +228,7 @@
 			children = (
 				7512408213A8F6BE007BF2B5 /* IBABooleanFormField.m */,
 				7512408313A8F6BE007BF2B5 /* IBAButtonFormField.m */,
+				A7B14F6014E8BF9B0035119B /* IBACycleListFormField.m */,
 				A766215E14E3618700D1B810 /* IBADecimalFormField.m */,
 				7512408413A8F6BE007BF2B5 /* IBADateFormField.m */,
 				7512408513A8F6BE007BF2B5 /* IBAFormDataSource.m */,
@@ -297,6 +304,8 @@
 				751240BB13A8F6CF007BF2B5 /* IBABooleanSwitchCell.h */,
 				751240BC13A8F6CF007BF2B5 /* IBAButtonFormField.h */,
 				751240BD13A8F6CF007BF2B5 /* IBACommon.h */,
+				A7B14F6314E8BFD70035119B /* IBACycleListFormField.h */,
+				A7B14F6514E8C53A0035119B /* IBACycleListOptionsProvider.h */,
 				A766215D14E3618700D1B810 /* IBADecimalFormField.h */,
 				A766216214E3633A00D1B810 /* IBADecimalFormFieldCell.h */,
 				751240BE13A8F6CF007BF2B5 /* IBADateFormField.h */,
@@ -383,6 +392,8 @@
 				753A7EFC13B36BCF003931DA /* IBATitleFormField.h in Headers */,
 				A766215F14E3618700D1B810 /* IBADecimalFormField.h in Headers */,
 				A766216414E3633A00D1B810 /* IBADecimalFormFieldCell.h in Headers */,
+				A7B14F6414E8BFD70035119B /* IBACycleListFormField.h in Headers */,
+				A7B14F6614E8C53A0035119B /* IBACycleListOptionsProvider.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,6 +478,7 @@
 				753A7EFD13B36BCF003931DA /* IBATitleFormField.m in Sources */,
 				A766216014E3618700D1B810 /* IBADecimalFormField.m in Sources */,
 				A766216514E3633A00D1B810 /* IBADecimalFormFieldCell.m in Sources */,
+				A7B14F6114E8BF9B0035119B /* IBACycleListFormField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

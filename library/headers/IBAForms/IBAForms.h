@@ -16,6 +16,8 @@
 #import <IBAForms/IBABooleanSwitchCell.h>
 #import <IBAForms/IBAButtonFormField.h>
 #import <IBAForms/IBACommon.h>
+#import <IBAForms/IBACycleListFormField.h>
+#import <IBAForms/IBACycleListOptionsProvider.h>
 #import <IBAForms/IBADateFormField.h>
 #import <IBAForms/IBADateFormFieldCell.h>
 #import <IBAForms/IBADateInputProvider.h>
