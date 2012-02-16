@@ -101,15 +101,14 @@
 	self.label.textColor = self.formFieldStyle.labelTextColor;
 	self.label.textAlignment = self.formFieldStyle.labelTextAlignment;
 	self.label.backgroundColor = self.formFieldStyle.labelBackgroundColor;
-	self.backgroundColor = self.formFieldStyle.labelBackgroundColor;
   self.label.contentMode = self.formFieldStyle.labelContentMode;
+	self.backgroundColor = self.formFieldStyle.backgroundColor;
 
 	self.styleApplied = YES;
 }
 
 - (void)applyActiveStyle {
-	self.backgroundColor = self.formFieldStyle.activeColor;
-
+	self.backgroundColor = self.formFieldStyle.activeBackgroundColor;
 }
 
 - (void)updateActiveStyle {

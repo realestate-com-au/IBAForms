@@ -31,7 +31,8 @@
 @synthesize valueFrame = valueFrame_;
 @synthesize valueTextAlignment = valueTextAlignment_;
 @synthesize valueAutoresizingMask = valueAutoresizingMask_;
-@synthesize activeColor = activeColor_;
+@synthesize backgroundColor = backgroundColor_;
+@synthesize activeBackgroundColor = activeBackgroundColor_;
 @synthesize valueVerticalAlignment = valueVerticalAlignment_;
 @synthesize valueContentMode = valueContentMode_;
 
@@ -44,7 +45,8 @@
 	IBA_RELEASE_SAFELY(valueBackgroundColor_);
 	IBA_RELEASE_SAFELY(valueFont_);
 	
-	IBA_RELEASE_SAFELY(activeColor_);
+  IBA_RELEASE_SAFELY(backgroundColor_);
+	IBA_RELEASE_SAFELY(activeBackgroundColor_);
 
 	[super dealloc];
 }
@@ -66,11 +68,11 @@
 		self.valueFrame = CGRectMake(IBAFormFieldValueX, IBAFormFieldValueY, IBAFormFieldValueWidth, IBAFormFieldValueHeight);
 		self.valueTextAlignment = IBAFormFieldValueTextAlignment;
 		self.valueAutoresizingMask = UIViewAutoresizingFlexibleWidth;
-
-		self.activeColor = IBAFormFieldActiveColor;
     self.valueVerticalAlignment = UIControlContentVerticalAlignmentTop;
     self.valueContentMode = UIViewContentModeTopLeft;
     
+		self.activeBackgroundColor = IBAFormFieldActiveBackgroundColor;
+    self.backgroundColor = IBAFormFieldLabelBackgroundColor;
 	}
 	
 	return self;

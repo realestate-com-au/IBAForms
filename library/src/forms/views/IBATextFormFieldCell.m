@@ -43,8 +43,6 @@
 
 - (void)activate {
 	[super activate];
-	
-	self.textField.backgroundColor = self.formFieldStyle.activeColor;
 }
 
 
@@ -63,7 +61,6 @@
 -(void)applyActiveStyle;
 {
     [super applyActiveStyle];
-    self.textField.backgroundColor = self.formFieldStyle.activeColor;
 }
 
 @end

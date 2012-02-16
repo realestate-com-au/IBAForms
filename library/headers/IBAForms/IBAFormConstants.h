@@ -16,7 +16,8 @@
 
 #define IBAFormFieldCellTextColor [UIColor colorWithRed:0.464 green:0.750 blue:0.775 alpha:1.000]
 #define IBAFormFieldCellBackgoundColor [UIColor whiteColor]
-#define IBAFormFieldActiveColor [UIColor colorWithRed:0.893 green:0.976 blue:0.976 alpha:1.000]
+#define IBAFormFieldActiveBackgroundColor [UIColor colorWithRed:0.893 green:0.976 blue:0.976 alpha:1.000]
+#define IBAFormFieldBackgroundColor [UIColor whiteColor]
 
 // Notifications
 #define IBAPushViewController @"IBAPushViewController"
