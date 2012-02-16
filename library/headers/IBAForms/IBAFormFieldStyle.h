@@ -21,6 +21,7 @@
 	CGRect labelFrame_;
 	UITextAlignment labelTextAlignment_;
 	UIViewAutoresizing labelAutoresizingMask_;
+  UIViewContentMode labelContentMode_;
 	
 	UIColor *valueTextColor_;
 	UIColor *valueBackgroundColor_;
@@ -30,6 +31,8 @@
 	UIViewAutoresizing valueAutoresizingMask_;
 
 	UIColor *activeColor_;
+  UIControlContentVerticalAlignment valueVerticalAlignment_;
+  UIViewContentMode valueContentMode_;
 }
 
 @property (nonatomic, retain) UIColor *labelTextColor;
@@ -38,6 +41,7 @@
 @property (nonatomic, assign) CGRect labelFrame;
 @property (nonatomic, assign) UITextAlignment labelTextAlignment;
 @property (nonatomic, assign) UIViewAutoresizing labelAutoresizingMask;
+@property (nonatomic, assign) UIViewContentMode labelContentMode;
 
 @property (nonatomic, retain) UIColor *valueTextColor;
 @property (nonatomic, retain) UIColor *valueBackgroundColor;
@@ -45,6 +49,8 @@
 @property (nonatomic, assign) CGRect valueFrame;
 @property (nonatomic, assign) UITextAlignment valueTextAlignment;
 @property (nonatomic, assign) UIViewAutoresizing valueAutoresizingMask;
+@property (nonatomic, assign) UIControlContentVerticalAlignment valueVerticalAlignment;
+@property (nonatomic, assign) UIViewContentMode valueContentMode;
 
 @property (nonatomic, retain) UIColor *activeColor;
 

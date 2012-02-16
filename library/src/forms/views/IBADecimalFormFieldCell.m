@@ -43,6 +43,7 @@
     
 		[self.cellView addSubview:valueTextField_];
     [self.cellView addSubview:valueLabel_];
+    [self applyFormFieldStyle];
 	}
 	
   return self;
@@ -50,10 +51,7 @@
 
 - (void)activate {
 	[super activate];
-	
-  valueTextField_.backgroundColor = self.formFieldStyle.activeColor;
-  valueLabel_.backgroundColor = self.formFieldStyle.activeColor;
-  
+	 
   valueTextField_.hidden = NO;
   valueLabel_.hidden = YES;
 }
@@ -74,19 +72,14 @@
   valueTextField_.textColor = self.formFieldStyle.valueTextColor;
   valueTextField_.backgroundColor = self.formFieldStyle.valueBackgroundColor;
   valueTextField_.textAlignment = self.formFieldStyle.valueTextAlignment;
+  valueTextField_.contentVerticalAlignment = self.formFieldStyle.valueVerticalAlignment;
+  valueTextField_.contentMode = self.formFieldStyle.valueContentMode;
   
   valueLabel_.font = self.formFieldStyle.valueFont;
   valueLabel_.textColor = self.formFieldStyle.valueTextColor;
   valueLabel_.backgroundColor = self.formFieldStyle.valueBackgroundColor;
   valueLabel_.textAlignment = self.formFieldStyle.valueTextAlignment;
-}
-
-- (void)applyActiveStyle;
-{
-  [super applyActiveStyle];
-  
-  valueTextField_.backgroundColor = self.formFieldStyle.activeColor;
-  valueLabel_.backgroundColor = self.formFieldStyle.activeColor;
+  valueLabel_.contentMode = self.formFieldStyle.valueContentMode;
 }
 
 @end

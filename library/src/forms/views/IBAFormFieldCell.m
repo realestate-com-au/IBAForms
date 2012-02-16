@@ -43,26 +43,26 @@
 }
 
 - (id)initWithFormFieldStyle:(IBAFormFieldStyle *)style reuseIdentifier:(NSString *)reuseIdentifier {
-    if ((self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier])) {
+  if ((self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier])) {
 		self.selectionStyle = UITableViewCellSelectionStyleNone;
-
+    
 		self.cellView = [[[UIView alloc] initWithFrame:self.contentView.bounds] autorelease];
 		self.cellView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
 		self.cellView.userInteractionEnabled = YES;
 		[self.contentView addSubview:self.cellView];
-
+    
 		// Create a label
 		self.label = [[[UILabel alloc] initWithFrame:style.labelFrame] autorelease];
 		self.label.autoresizingMask = style.labelAutoresizingMask;
 		self.label.adjustsFontSizeToFitWidth = YES;
 		self.label.minimumFontSize = 10;
 		[self.cellView addSubview:self.label];
-
+    
 		// set the style after the views have been created
 		self.formFieldStyle = style;
 	}
-
-    return self;
+  
+  return self;
 }
 
 - (void)setBackgroundColor:(UIColor *)backgroundColor {
@@ -102,6 +102,7 @@
 	self.label.textAlignment = self.formFieldStyle.labelTextAlignment;
 	self.label.backgroundColor = self.formFieldStyle.labelBackgroundColor;
 	self.backgroundColor = self.formFieldStyle.labelBackgroundColor;
+  self.label.contentMode = self.formFieldStyle.labelContentMode;
 
 	self.styleApplied = YES;
 }

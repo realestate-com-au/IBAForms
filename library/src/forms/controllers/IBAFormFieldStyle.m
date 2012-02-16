@@ -23,6 +23,8 @@
 @synthesize labelFont = labelFont_;
 @synthesize labelFrame = labelFrame_;
 @synthesize labelAutoresizingMask = labelAutoresizingMask_;
+@synthesize labelContentMode = labelContentMode_;
+
 @synthesize valueTextColor = valueTextColor_;
 @synthesize valueBackgroundColor = valueBackgroundColor_;
 @synthesize valueFont = valueFont_;
@@ -30,6 +32,8 @@
 @synthesize valueTextAlignment = valueTextAlignment_;
 @synthesize valueAutoresizingMask = valueAutoresizingMask_;
 @synthesize activeColor = activeColor_;
+@synthesize valueVerticalAlignment = valueVerticalAlignment_;
+@synthesize valueContentMode = valueContentMode_;
 
 - (void)dealloc {
 	IBA_RELEASE_SAFELY(labelTextColor_);
@@ -54,7 +58,8 @@
 		self.labelFrame = CGRectMake(IBAFormFieldLabelX, IBAFormFieldLabelY, IBAFormFieldLabelWidth, IBAFormFieldLabelHeight);
 		self.labelTextAlignment = IBAFormFieldLabelTextAlignment;
 		self.labelAutoresizingMask = UIViewAutoresizingFlexibleRightMargin;
-
+    self.labelContentMode = UIViewContentModeTopLeft;
+    
 		self.valueTextColor = IBAFormFieldValueTextColor;
 		self.valueBackgroundColor = IBAFormFieldValueBackgroundColor;
 		self.valueFont = IBAFormFieldValueFont;
@@ -63,6 +68,9 @@
 		self.valueAutoresizingMask = UIViewAutoresizingFlexibleWidth;
 
 		self.activeColor = IBAFormFieldActiveColor;
+    self.valueVerticalAlignment = UIControlContentVerticalAlignmentTop;
+    self.valueContentMode = UIViewContentModeTopLeft;
+    
 	}
 	
 	return self;
