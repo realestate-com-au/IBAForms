@@ -18,20 +18,23 @@
 #import "IBAFormConstants.h"
 #import "IBAInputCommon.h"
 
+#import <AudioToolbox/AudioToolbox.h>
+
 @implementation IBADecimalFormField
 {
   NSValueTransformer *displayTransformer_;
 }
 
 @synthesize formFieldCell = formFieldCell_, 
-            numberFormatter = numberFormatter_;
+            numberFormatter = numberFormatter_,
+            maximumDigits = maximumDigits_;
 
 + (id)formFieldWithKeyPath:(NSString *)keyPath 
                      title:(NSString *)title
           valueTransformer:(NSValueTransformer *)valueTransformer 
         displayTransformer:(NSValueTransformer *)displayTransformer
 {
-    return [[[self alloc] initWithKeyPath:keyPath title:title valueTransformer:valueTransformer displayTransformer:displayTransformer] autorelease];
+  return [[[self alloc] initWithKeyPath:keyPath title:title valueTransformer:valueTransformer displayTransformer:displayTransformer] autorelease];
 }
 
 - (id)initWithKeyPath:(NSString *)keyPath 
@@ -42,6 +45,7 @@
   if ((self = [super initWithKeyPath:keyPath title:title valueTransformer:valueTransformer]))
   {
     displayTransformer_ = [displayTransformer retain];
+    maximumDigits_ = NSUIntegerMax;
   }
   
   return self;
@@ -50,8 +54,8 @@
 - (void)dealloc {
 	IBA_RELEASE_SAFELY(formFieldCell_);
 	IBA_RELEASE_SAFELY(numberFormatter_);
-    IBA_RELEASE_SAFELY(displayTransformer_);
-    
+  IBA_RELEASE_SAFELY(displayTransformer_);
+  
 	[super dealloc];
 }
 
@@ -74,28 +78,42 @@
 
 - (NSNumberFormatter *)numberFormatter
 {
-    if (numberFormatter_ == nil) {
-        numberFormatter_ = [[NSNumberFormatter alloc] init];
-        [numberFormatter_ setLocale:[NSLocale currentLocale]];
-        [numberFormatter_ setNumberStyle:NSNumberFormatterDecimalStyle];
-    }
-    
-    return numberFormatter_;
+  if (numberFormatter_ == nil) {
+    numberFormatter_ = [[NSNumberFormatter alloc] init];
+    [numberFormatter_ setLocale:[NSLocale currentLocale]];
+    [numberFormatter_ setNumberStyle:NSNumberFormatterDecimalStyle];
+  }
+  
+  return numberFormatter_;
 }
 
 - (void)updateCellContents {
-    NSNumber *labelValue = (displayTransformer_ ? [displayTransformer_ transformedValue:[self formFieldValue]] : [self formFieldValue]);
+  NSNumber *labelValue = (displayTransformer_ ? [displayTransformer_ transformedValue:[self formFieldValue]] : [self formFieldValue]);
   
 	formFieldCell_.label.text = self.title;
 	formFieldCell_.valueTextField.text = [self formFieldStringValue];
-    formFieldCell_.valueLabel.text = [[self numberFormatter] stringFromNumber:labelValue];
+  formFieldCell_.valueLabel.text = [[self numberFormatter] stringFromNumber:labelValue];
 }
 
 #pragma mark -
 #pragma mark UITextFieldDelegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-	return [[IBAInputManager sharedIBAInputManager] activateNextInputRequestor];;
+	return [[IBAInputManager sharedIBAInputManager] activateNextInputRequestor];
+}
+
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+  if (textField == formFieldCell_.valueTextField) {
+    BOOL ok = ([formFieldCell_.valueTextField.text length] + [string length] - range.length) <= self.maximumDigits;
+    if (ok == NO)
+    {
+      AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
+      return NO;
+    }
+  }
+  
+  return YES;
 }
 
 
@@ -139,18 +157,18 @@
                                     valueTransformer:(NSValueTransformer *)valueTransformer 
                                   displayTransformer:(NSValueTransformer *)displayTransformer
 {
-    IBADecimalFormField *field = [IBADecimalFormField formFieldWithKeyPath:keyPath title:title valueTransformer:valueTransformer displayTransformer:displayTransformer];
-    [self addFormField:field];
-    return field;
+  IBADecimalFormField *field = [IBADecimalFormField formFieldWithKeyPath:keyPath title:title valueTransformer:valueTransformer displayTransformer:displayTransformer];
+  [self addFormField:field];
+  return field;
 }
 
 - (IBADecimalFormField *)decimalFormFieldWithKeyPath:(NSString *)keyPath 
-                                              title:(NSString *)title
-                                   valueTransformer:(NSValueTransformer *)valueTransformer
+                                               title:(NSString *)title
+                                    valueTransformer:(NSValueTransformer *)valueTransformer
 {
-    IBADecimalFormField *field = [IBADecimalFormField formFieldWithKeyPath:keyPath title:title valueTransformer:valueTransformer];
-    [self addFormField:field];
-    return field;
+  IBADecimalFormField *field = [IBADecimalFormField formFieldWithKeyPath:keyPath title:title valueTransformer:valueTransformer];
+  [self addFormField:field];
+  return field;
 }
 
 @end

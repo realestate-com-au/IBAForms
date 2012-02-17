@@ -20,6 +20,7 @@
 
 @property (nonatomic, retain) IBADecimalFormFieldCell *formFieldCell;
 @property (nonatomic, readonly) NSNumberFormatter *numberFormatter;
+@property (nonatomic, assign) NSUInteger maximumDigits;
 
 + (id)formFieldWithKeyPath:(NSString *)keyPath 
                          title:(NSString *)title
@@ -32,6 +33,8 @@
    displayTransformer:(NSValueTransformer *)displayTransformer;
 
 - (void)setNumberOfDecimals:(NSUInteger)numberOfDecimals;
+
+
 
 @end
 
