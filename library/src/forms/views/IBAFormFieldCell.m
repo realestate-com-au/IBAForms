@@ -136,6 +136,17 @@
 	return YES;
 }
 
+- (void)flashWithColor:(UIColor *)color
+{
+  UIColor *oldBackgroundColor = self.contentView.backgroundColor;
+  [UIView animateWithDuration:0.15 animations:^{
+    self.contentView.backgroundColor = color;
+  } completion:^(BOOL finished) {
+    [UIView animateWithDuration:0.15 animations:^{
+      self.contentView.backgroundColor = oldBackgroundColor;
+    }];
+  }];
+}
 
 #pragma mark - 
 #pragma mark Dirty laundry

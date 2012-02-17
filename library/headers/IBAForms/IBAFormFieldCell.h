@@ -45,5 +45,6 @@
 - (void)applyFormFieldStyle;
 - (void)applyActiveStyle;
 - (void)updateActiveStyle;
+- (void)flashWithColor:(UIColor *)color;
 
 @end
