@@ -253,8 +253,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(IBAInputManager);
 
 - (void)updateInputNavigationToolbarVisibility
 {
-    UIResponder *responder = [[self activeInputRequestor] responder];
-    responder.inputAccessoryView = ([self isInputNavigationToolbarEnabled] ? self.inputNavigationToolbar : nil);
+  UIResponder *responder = [[self activeInputRequestor] responder];
+  responder.inputAccessoryView = ([self isInputNavigationToolbarEnabled] ? self.inputNavigationToolbar : nil);
+  
+  BOOL hasNextInputRequestor = [self.inputRequestorDataSource nextInputRequestor:self.activeInputRequestor] != nil;
+  BOOL hasPrevInputRequestor = [self.inputRequestorDataSource previousInputRequestor:self.activeInputRequestor] != nil;
+
+  [self.inputNavigationToolbar.nextPreviousButton setEnabled:hasPrevInputRequestor forSegmentAtIndex:0];
+  [self.inputNavigationToolbar.nextPreviousButton setEnabled:hasNextInputRequestor forSegmentAtIndex:1];
 }
 
 
