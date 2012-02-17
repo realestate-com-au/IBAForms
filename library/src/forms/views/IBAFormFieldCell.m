@@ -71,8 +71,6 @@
   if (self.backgroundView) {
     self.backgroundView.backgroundColor = backgroundColor;
   }
-
-  self.label.backgroundColor = backgroundColor;
 }
 
 - (void)activate {
@@ -102,6 +100,8 @@
 	self.label.textAlignment = self.formFieldStyle.labelTextAlignment;
 	self.label.backgroundColor = self.formFieldStyle.labelBackgroundColor;
   self.label.contentMode = self.formFieldStyle.labelContentMode;
+  self.label.opaque = self.formFieldStyle.labelOpaque;
+  
 	self.backgroundColor = self.formFieldStyle.backgroundColor;
 
 	self.styleApplied = YES;

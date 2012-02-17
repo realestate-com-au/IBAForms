@@ -74,12 +74,14 @@
   valueTextField_.textAlignment = self.formFieldStyle.valueTextAlignment;
   valueTextField_.contentVerticalAlignment = self.formFieldStyle.valueVerticalAlignment;
   valueTextField_.contentMode = self.formFieldStyle.valueContentMode;
+  valueTextField_.opaque = self.formFieldStyle.valueOpaque;
   
   valueLabel_.font = self.formFieldStyle.valueFont;
   valueLabel_.textColor = self.formFieldStyle.valueTextColor;
   valueLabel_.backgroundColor = self.formFieldStyle.valueBackgroundColor;
   valueLabel_.textAlignment = self.formFieldStyle.valueTextAlignment;
   valueLabel_.contentMode = self.formFieldStyle.valueContentMode;
+  valueLabel_.opaque = self.formFieldStyle.valueOpaque;
 }
 
 @end

@@ -24,6 +24,7 @@
 @synthesize labelFrame = labelFrame_;
 @synthesize labelAutoresizingMask = labelAutoresizingMask_;
 @synthesize labelContentMode = labelContentMode_;
+@synthesize labelOpaque = labelOpaque_;
 
 @synthesize valueTextColor = valueTextColor_;
 @synthesize valueBackgroundColor = valueBackgroundColor_;
@@ -35,6 +36,7 @@
 @synthesize activeBackgroundColor = activeBackgroundColor_;
 @synthesize valueVerticalAlignment = valueVerticalAlignment_;
 @synthesize valueContentMode = valueContentMode_;
+@synthesize valueOpaque = valueOpaque_;
 
 - (void)dealloc {
 	IBA_RELEASE_SAFELY(labelTextColor_);
@@ -61,6 +63,7 @@
 		self.labelTextAlignment = IBAFormFieldLabelTextAlignment;
 		self.labelAutoresizingMask = UIViewAutoresizingFlexibleRightMargin;
     self.labelContentMode = UIViewContentModeTopLeft;
+    self.labelOpaque = YES;
     
 		self.valueTextColor = IBAFormFieldValueTextColor;
 		self.valueBackgroundColor = IBAFormFieldValueBackgroundColor;
@@ -70,6 +73,7 @@
 		self.valueAutoresizingMask = UIViewAutoresizingFlexibleWidth;
     self.valueVerticalAlignment = UIControlContentVerticalAlignmentTop;
     self.valueContentMode = UIViewContentModeTopLeft;
+    self.valueOpaque = YES;
     
 		self.activeBackgroundColor = IBAFormFieldActiveBackgroundColor;
     self.backgroundColor = IBAFormFieldLabelBackgroundColor;

@@ -56,6 +56,7 @@
 	self.textField.textAlignment = self.formFieldStyle.valueTextAlignment;
   self.textField.contentVerticalAlignment = self.formFieldStyle.valueVerticalAlignment;
   self.textField.contentMode = self.formFieldStyle.valueContentMode;
+  self.textField.opaque = self.formFieldStyle.valueOpaque;
 }
 
 -(void)applyActiveStyle;
