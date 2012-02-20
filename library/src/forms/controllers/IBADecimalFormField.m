@@ -102,6 +102,14 @@
 	return [[IBAInputManager sharedIBAInputManager] activateNextInputRequestor];
 }
 
+-(void)textFieldDidBeginEditing:(UITextField *)textField
+{
+  if ([textField.text isEqualToString:@"0"])
+  {
+    textField.text = @"";
+  }
+}
+
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
   if (textField == formFieldCell_.valueTextField) {
