@@ -49,7 +49,6 @@
 - (void)applyFormFieldStyle {
 	[super applyFormFieldStyle];
 	
-  self.textField.frame = self.formFieldStyle.valueFrame;
 	self.textField.font = self.formFieldStyle.valueFont;
 	self.textField.textColor = self.formFieldStyle.valueTextColor;
 	self.textField.backgroundColor = self.formFieldStyle.valueBackgroundColor;
