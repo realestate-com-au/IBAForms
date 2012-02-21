@@ -25,7 +25,8 @@
 
 @synthesize formFieldCell = formFieldCell_, 
             numberFormatter = numberFormatter_,
-            maximumDigits = maximumDigits_;
+            maximumIntegralDigits = maximumIntegralDigits_,
+            maximumFractionalDigits = maximumFractionalDigits_;
 
 + (id)formFieldWithKeyPath:(NSString *)keyPath 
                      title:(NSString *)title
@@ -43,7 +44,8 @@
   if ((self = [super initWithKeyPath:keyPath title:title valueTransformer:valueTransformer]))
   {
     displayTransformer_ = [displayTransformer retain];
-    maximumDigits_ = NSUIntegerMax;
+    maximumIntegralDigits_ = NSUIntegerMax;
+    maximumFractionalDigits_ = NSUIntegerMax;
   }
   
   return self;
@@ -111,8 +113,27 @@
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
   if (textField == formFieldCell_.valueTextField) {
-    BOOL ok = ([formFieldCell_.valueTextField.text length] + [string length] - range.length) <= self.maximumDigits;
-    if (ok == NO)
+    NSString *resultText = [formFieldCell_.valueTextField.text stringByReplacingCharactersInRange:range withString:string];
+    NSArray *numberParts = [resultText componentsSeparatedByString:@"."];
+    //no decimal point
+    if ([numberParts count] == 1)
+    {
+      if ([(NSString *)[numberParts objectAtIndex:0] length] > maximumIntegralDigits_) {
+        return NO;
+      }
+    }
+    //1 decimal point
+    if ([numberParts count] == 2)
+    {
+      if ([(NSString *)[numberParts objectAtIndex:0] length] > maximumIntegralDigits_) {
+        return NO;
+      }
+      if ([(NSString *)[numberParts objectAtIndex:1] length] > maximumFractionalDigits_) {
+        return NO;
+      }
+    }
+    //more than 1 decimal points
+    if ([numberParts count] > 2)
     {
       return NO;
     }

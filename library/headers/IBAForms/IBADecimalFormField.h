@@ -20,7 +20,8 @@
 
 @property (nonatomic, retain) IBADecimalFormFieldCell *formFieldCell;
 @property (nonatomic, readonly) NSNumberFormatter *numberFormatter;
-@property (nonatomic, assign) NSUInteger maximumDigits;
+@property (nonatomic, assign) NSUInteger maximumIntegralDigits;
+@property (nonatomic, assign) NSUInteger maximumFractionalDigits;
 
 + (id)formFieldWithKeyPath:(NSString *)keyPath 
                          title:(NSString *)title
