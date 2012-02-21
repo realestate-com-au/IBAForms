@@ -34,6 +34,7 @@
 - (void)displayInputProvider:(id<IBAInputProvider>)inputProvider forInputRequestor:(id<IBAInputRequestor>)requestor;
 - (BOOL)activateInputRequestor:(id<IBAInputRequestor>)inputRequestor;
 - (void)updateInputNavigationToolbarVisibility;
+- (BOOL)setActiveInputRequestor:(id<IBAInputRequestor>)inputRequestor forced:(BOOL)forced;
 @end
 
 
@@ -109,18 +110,24 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(IBAInputManager);
 
 #pragma mark -
 #pragma mark Accessors
-
 - (BOOL)setActiveInputRequestor:(id<IBAInputRequestor>)inputRequestor {
+    return [self setActiveInputRequestor:inputRequestor forced:NO];
+}
+
+- (BOOL)setActiveInputRequestor:(id<IBAInputRequestor>)inputRequestor forced:(BOOL)forced {
 	id<IBAInputProvider>oldInputProvider = nil;
 	if (activeInputRequestor_ != nil) {
 		oldInputProvider = [self inputProviderForRequestor:activeInputRequestor_];
 		
-		if (![activeInputRequestor_ deactivate]) {
+		if (![activeInputRequestor_ deactivateForced:forced]) {
 			return NO;
 		}
 		
+        [[activeInputRequestor_ responder] resignFirstResponder];
+        
 		oldInputProvider.inputRequestor = nil;
 		[activeInputRequestor_ release];
+        activeInputRequestor_ = nil;
 	}
 	
 	if (inputRequestor != nil)  {
@@ -131,10 +138,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(IBAInputManager);
 		
 		[activeInputRequestor_ activate];
 		newInputProvider.inputRequestor = activeInputRequestor_;
-	} else {
-		// The new input requestor is nil, so hide the input manager's view
-		[[activeInputRequestor_ responder] resignFirstResponder];
-		activeInputRequestor_ = nil;
 	}
 	
 	return YES;
@@ -177,6 +180,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(IBAInputManager);
 	}
 }
 
+- (BOOL)forceDeactivateActiveInputRequestor {
+    return [self setActiveInputRequestor:nil forced:YES];
+}
+    
 - (BOOL)deactivateActiveInputRequestor {
 	return [self setActiveInputRequestor:nil];
 }

@@ -24,5 +24,6 @@
 
 - (void)activate;
 - (BOOL)deactivate;
+- (BOOL)deactivateForced:(BOOL)forced;
 
 @end
