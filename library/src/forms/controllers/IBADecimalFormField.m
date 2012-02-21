@@ -18,8 +18,6 @@
 #import "IBAFormConstants.h"
 #import "IBAInputCommon.h"
 
-#import <AudioToolbox/AudioToolbox.h>
-
 @implementation IBADecimalFormField
 {
   NSValueTransformer *displayTransformer_;
@@ -116,7 +114,6 @@
     BOOL ok = ([formFieldCell_.valueTextField.text length] + [string length] - range.length) <= self.maximumDigits;
     if (ok == NO)
     {
-      AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
       return NO;
     }
   }
