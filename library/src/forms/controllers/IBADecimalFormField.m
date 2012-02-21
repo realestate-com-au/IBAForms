@@ -100,7 +100,7 @@
 	return [[IBAInputManager sharedIBAInputManager] activateNextInputRequestor];
 }
 
--(void)textFieldDidBeginEditing:(UITextField *)textField
+- (void)textFieldDidBeginEditing:(UITextField *)textField
 {
   if ([textField.text isEqualToString:@"0"])
   {
@@ -108,7 +108,7 @@
   }
 }
 
--(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
   if (textField == formFieldCell_.valueTextField) {
     BOOL ok = ([formFieldCell_.valueTextField.text length] + [string length] - range.length) <= self.maximumDigits;
@@ -134,11 +134,11 @@
 	[super activate];
 }
 
-- (BOOL)deactivate {
+- (BOOL)deactivateForced:(BOOL)forced {
 	BOOL deactivated = [self setFormFieldValue:formFieldCell_.valueTextField.text];
-	if (deactivated) {
+	if (deactivated || forced) {
 		formFieldCell_.valueTextField.enabled = NO;
-		deactivated = [super deactivate];
+		deactivated = [super deactivateForced:forced];
 	}
 	
 	return deactivated;

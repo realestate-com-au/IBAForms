@@ -73,11 +73,11 @@
 	[super activate];
 }
 
-- (BOOL)deactivate {
+- (BOOL)deactivateForced:(BOOL)forced {
 	BOOL deactivated = [self setFormFieldValue:self.textFormFieldCell.textField.text];
-	if (deactivated) {
+	if (deactivated || forced) {
 		self.textFormFieldCell.textField.enabled = NO;
-		deactivated = [super deactivate];
+		deactivated = [super deactivateForced:forced];
 	}
 	
 	return deactivated;

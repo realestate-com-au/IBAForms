@@ -47,6 +47,10 @@
 }
 
 - (BOOL)deactivate {
+    return [self deactivateForced:NO];
+}
+
+- (BOOL)deactivateForced:(BOOL)forced {
 	NSDictionary *userInfo = [[NSMutableDictionary alloc] init];
 	[userInfo setValue:self forKey:IBAFormFieldKey];
 

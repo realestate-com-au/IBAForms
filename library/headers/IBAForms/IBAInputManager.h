@@ -58,5 +58,6 @@
 - (BOOL)activateNextInputRequestor;
 - (BOOL)activatePreviousInputRequestor;
 - (BOOL)deactivateActiveInputRequestor;
+- (BOOL)forceDeactivateActiveInputRequestor;
 
 @end
