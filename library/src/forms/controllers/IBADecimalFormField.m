@@ -169,9 +169,15 @@
 	return formFieldCell_.valueTextField;
 }
 
+- (BOOL)isiPad {
+  return [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad;
+}
+
 - (void)setNumberOfDecimals:(NSUInteger)numberOfDecimals {
   [[self numberFormatter] setMaximumFractionDigits:numberOfDecimals];
-  [[self.formFieldCell valueTextField] setKeyboardType:(numberOfDecimals > 0 ? UIKeyboardTypeDecimalPad : UIKeyboardTypeNumberPad)];
+  [[self.formFieldCell valueTextField] setKeyboardType:( (numberOfDecimals > 0)
+                                                        ? ([self isiPad]) ? UIKeyboardTypeNumbersAndPunctuation : UIKeyboardTypeDecimalPad 
+                                                        : UIKeyboardTypeNumberPad)];
 }
 
 @end
