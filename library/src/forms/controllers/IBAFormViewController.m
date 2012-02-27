@@ -247,11 +247,34 @@
 
 - (void)inputManagerWillShow:(NSNotification *)notification {
 	NSDictionary* info = [notification userInfo];
-	CGRect keyboardFrame = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
-	[self adjustTableViewHeightForCoveringFrame:[self rectForOrientationFrame:keyboardFrame]];
+	
+    CGRect keyboardBeginFrame = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+	CGRect keyboardEndFrame = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+
+    // TODO: fix frames as described in Apple docs using convertRect:fromView?
+
+    NSTimeInterval animationDuration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    UIViewAnimationCurve animationCurve = [[info objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue];
+    
+ 
+    [self willShowInputRequestorWithBeginFrame:keyboardBeginFrame endFrame:keyboardEndFrame animationDuration:animationDuration animationCurve:animationCurve];
+        
+	[self adjustTableViewHeightForCoveringFrame:[self rectForOrientationFrame:keyboardBeginFrame]];
 }
 
 - (void)inputManagerDidHide:(NSNotification *)notification {
+	NSDictionary* info = [notification userInfo];
+	
+    CGRect keyboardBeginFrame = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+	CGRect keyboardEndFrame = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+
+    // TODO: fix frames as described in Apple docs using convertRect:fromView?
+    
+    NSTimeInterval animationDuration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    UIViewAnimationCurve animationCurve = [[info objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue];
+    
+    [self didHideInputRequestorWithBeginFrame:keyboardBeginFrame endFrame:keyboardEndFrame animationDuration:animationDuration animationCurve:animationCurve];
+
 	[self adjustTableViewHeightForCoveringFrame:CGRectZero];
 }
 
@@ -361,6 +384,14 @@
     // Defaults to YES
     
     return YES;
+}
+
+- (void)didHideInputRequestorWithBeginFrame:(CGRect)beginFrame endFrame:(CGRect)endFrame animationDuration:(NSTimeInterval)animationDuration animationCurve:(UIViewAnimationCurve)animationCurve {
+    // NO-OP; subclasses to override  
+}
+
+- (void)willShowInputRequestorWithBeginFrame:(CGRect)beginFrame endFrame:(CGRect)endFrame animationDuration:(NSTimeInterval)animationDuration animationCurve:(UIViewAnimationCurve)animationCurve {
+    // NO-OP; subclasses to override
 }
 
 @end

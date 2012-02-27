@@ -43,6 +43,16 @@
 - (void)willDisplayCell:(IBAFormFieldCell *)cell forFormField:(IBAFormField *)formField atIndexPath:(NSIndexPath *)indexPath;
 
 /*
+ * Called before the input provider (eg, keyboard) is shown.
+ */
+- (void)willShowInputRequestorWithBeginFrame:(CGRect)beginFrame endFrame:(CGRect)endFrame animationDuration:(NSTimeInterval)animationDuration animationCurve:(UIViewAnimationCurve)animationCurve;
+
+/*
+ * Called before the input provider (eg, keyboard) is hidden.
+ */
+- (void)didHideInputRequestorWithBeginFrame:(CGRect)beginFrame endFrame:(CGRect)endFrame animationDuration:(NSTimeInterval)animationDuration animationCurve:(UIViewAnimationCurve)animationCurve;
+
+/*
  * Return YES if the table view should be automatically scrolled to the active field.
  * Defaults to YES.
  */
