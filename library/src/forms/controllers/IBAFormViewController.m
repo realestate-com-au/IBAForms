@@ -36,6 +36,13 @@
 
 @end
 
+
+@interface UIViewController (KeyboardDismissal)
+- (BOOL)canDismissKeyboard;
+@end
+
+
+
 @implementation IBAFormViewController
 
 @synthesize tableView = tableView_;
@@ -121,14 +128,11 @@
 	[[IBAInputManager sharedIBAInputManager] setInputRequestorDataSource:self];	
 	
 	// SW. There is a bug with UIModalPresentationFormSheet where the keyboard won't dismiss even when there is
-	// no first responder, so we remove the 'Done' button when UIModalPresentationFormSheet is used.
-	BOOL displayDoneButton = (self.modalPresentationStyle != UIModalPresentationFormSheet);
-	if (self.navigationController != nil) {
-		displayDoneButton &= (self.navigationController.modalPresentationStyle != UIModalPresentationFormSheet);
-	}
-	
-	[[[IBAInputManager sharedIBAInputManager] inputNavigationToolbar] setDisplayDoneButton:displayDoneButton];
-		
+  // no first responder, so we remove the 'Done' button when UIModalPresentationFormSheet is used. Prior to iOS 4.3 there
+  // was no way aroud this. After 4.3 you can override '-(BOOL)disablesAutomaticKeyboardDismissal' on UIViewController
+  // to make the keyboard dismiss properly.
+  [[[IBAInputManager sharedIBAInputManager] inputNavigationToolbar] setDisplayDoneButton:([self canDismissKeyboard] && [self.navigationController canDismissKeyboard])];
+  
 	// Make sure the hidden cell cache is attached to the view hierarchy
 	if ([self.hiddenCellCache window] == nil) {
 		if ([self.view isKindOfClass:[UITableView class]]) {
@@ -392,6 +396,18 @@
 
 - (void)willShowInputRequestorWithBeginFrame:(CGRect)beginFrame endFrame:(CGRect)endFrame animationDuration:(NSTimeInterval)animationDuration animationCurve:(UIViewAnimationCurve)animationCurve {
     // NO-OP; subclasses to override
+}
+
+@end
+
+
+@implementation UIViewController (KeyboardDismissal)
+
+- (BOOL)canDismissKeyboard {
+  return (self.modalPresentationStyle != UIModalPresentationFormSheet) || 
+    (self.modalPresentationStyle == UIModalPresentationFormSheet && 
+     [self respondsToSelector:@selector(disablesAutomaticKeyboardDismissal)] && 
+     (![self disablesAutomaticKeyboardDismissal]));
 }
 
 @end
