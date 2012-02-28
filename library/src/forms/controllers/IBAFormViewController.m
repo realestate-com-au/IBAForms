@@ -269,17 +269,19 @@
 - (void)inputManagerDidHide:(NSNotification *)notification {
 	NSDictionary* info = [notification userInfo];
 	
-    CGRect keyboardBeginFrame = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+  CGRect keyboardBeginFrame = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
 	CGRect keyboardEndFrame = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
 
-    // TODO: fix frames as described in Apple docs using convertRect:fromView?
-    
-    NSTimeInterval animationDuration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    UIViewAnimationCurve animationCurve = [[info objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue];
-    
-    [self didHideInputRequestorWithBeginFrame:keyboardBeginFrame endFrame:keyboardEndFrame animationDuration:animationDuration animationCurve:animationCurve];
-
-	[self adjustTableViewHeightForCoveringFrame:CGRectZero];
+  // TODO: fix frames as described in Apple docs using convertRect:fromView?
+  
+  NSTimeInterval animationDuration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+  UIViewAnimationCurve animationCurve = [[info objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue];
+  
+  [self didHideInputRequestorWithBeginFrame:keyboardBeginFrame endFrame:keyboardEndFrame animationDuration:animationDuration animationCurve:animationCurve];
+  
+  if (![[IBAInputManager sharedIBAInputManager] activeInputRequestor]) {
+    [self adjustTableViewHeightForCoveringFrame:CGRectZero];
+  }
 }
 
 - (void)formFieldActivated:(NSNotification *)notification {
@@ -315,18 +317,13 @@
 		CGRect normalisedWindowBounds = [self rectForOrientationFrame:[[[UIApplication sharedApplication] keyWindow] bounds]];
 		CGRect normalisedTableViewFrame = [self rectForOrientationFrame:[self.tableView.superview convertRect:self.tableView.frame 
 																							 toView:[[UIApplication sharedApplication] keyWindow]]];
-		[UIView animateWithDuration:0.2 
-						 animations: ^(void){
-							 CGFloat height = (CGRectEqualToRect(coveringFrame, CGRectZero)) ? 0 : 
-								coveringFrame.size.height - (normalisedWindowBounds.size.height - CGRectGetMaxY(normalisedTableViewFrame));
-							 UIEdgeInsets contentInsets = UIEdgeInsetsMake(0, 0, height, 0);
-							 //NSLog(@"UIEdgeInsets contentInsets bottom %f", contentInsets.bottom);
-							 self.tableView.contentInset = contentInsets;
-							 self.tableView.scrollIndicatorInsets = contentInsets;
-						 }
-						 completion: ^(BOOL finished){
-							 self.tableView.scrollEnabled = YES;
-						 }];
+
+    CGFloat height = (CGRectEqualToRect(coveringFrame, CGRectZero)) ? 0 : 
+    coveringFrame.size.height - (normalisedWindowBounds.size.height - CGRectGetMaxY(normalisedTableViewFrame));
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0, 0, height, 0);
+    //NSLog(@"UIEdgeInsets contentInsets bottom %f", contentInsets.bottom);
+    self.tableView.contentInset = contentInsets;
+    self.tableView.scrollIndicatorInsets = contentInsets;
 	}
 	
 }
