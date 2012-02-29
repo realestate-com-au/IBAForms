@@ -22,6 +22,7 @@
 	CGRect tableViewOriginalFrame_;
 	IBAFormDataSource *formDataSource_;
 	CGRect keyboardFrame_;
+  BOOL scrollEnabledOnFormFieldActivation_;
 	
 	@private
 	UIView *hiddenCellCache_;
@@ -30,6 +31,7 @@
 @property (nonatomic, retain) IBOutlet UITableView *tableView;
 @property (nonatomic, readonly) CGRect tableViewOriginalFrame;
 @property (nonatomic, retain) IBAFormDataSource *formDataSource;
+@property (nonatomic, assign) BOOL scrollEnabledOnFormFieldActivation;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil 
 	   formDataSource:(IBAFormDataSource *)formDataSource;

@@ -50,6 +50,7 @@
 @synthesize formDataSource = formDataSource_;
 @synthesize keyboardFrame = keyboardFrame_;
 @synthesize hiddenCellCache = hiddenCellCache_;
+@synthesize scrollEnabledOnFormFieldActivation = scrollEnabledOnFormFieldActivation_;
 
 #pragma mark -
 #pragma mark Initialisation and memory management
@@ -71,6 +72,7 @@
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
 		self.formDataSource = formDataSource;
 		self.hidesBottomBarWhenPushed = YES;
+    self.scrollEnabledOnFormFieldActivation = YES;
 		
 		[self registerForNotifications];
 	}
@@ -264,6 +266,8 @@
     [self willShowInputRequestorWithBeginFrame:keyboardBeginFrame endFrame:keyboardEndFrame animationDuration:animationDuration animationCurve:animationCurve];
         
 	[self adjustTableViewHeightForCoveringFrame:[self rectForOrientationFrame:keyboardBeginFrame]];
+
+  [[self tableView] setScrollEnabled:[self scrollEnabledOnFormFieldActivation]];
 }
 
 - (void)inputManagerDidHide:(NSNotification *)notification {
@@ -281,6 +285,7 @@
   
   if (![[IBAInputManager sharedIBAInputManager] activeInputRequestor]) {
     [self adjustTableViewHeightForCoveringFrame:CGRectZero];
+    [[self tableView] setScrollEnabled:YES];
   }
 }
 
