@@ -20,10 +20,15 @@
 
 @property (nonatomic, retain) IBADecimalFormFieldCell *formFieldCell;
 @property (nonatomic, readonly) NSNumberFormatter *numberFormatter;
-@property (nonatomic, assign) NSUInteger maximumIntegralDigits;
-@property (nonatomic, assign) NSUInteger maximumFractionalDigits;
 @property (nonatomic, retain) UIImage *customClearButonImage;
 
+/*!
+ @abstract    A regular expression that if set validates the text entered into the form field.
+ @discussion  When entering text into the field the value that would be the result after the text is inserted is
+              evaluated against this expression.  If the value does not match against the expression the newly input
+              text is rejected and the original value of the field is kept.
+ */
+@property (nonatomic, retain) NSRegularExpression *inputValidationRegularExpression_;
 
 + (id)formFieldWithKeyPath:(NSString *)keyPath 
                      title:(NSString *)title
@@ -37,9 +42,10 @@
    displayTransformer:(NSValueTransformer *)displayTransformer
 customClearButtonImage:(UIImage *)image;
 
+/*!
+ @abstract    Sets the number of decimals to use when displaying/formatting the decimal value.
+ */
 - (void)setNumberOfDecimals:(NSUInteger)numberOfDecimals;
-
-
 
 @end
 

@@ -20,55 +20,57 @@
 
 @implementation IBADecimalFormField
 {
-  NSValueTransformer *displayTransformer_;
+@private
+    NSValueTransformer *displayTransformer_;
+    NSNumberFormatter *numberFormatter_;
+    NSRegularExpression *inputValidationRegularExpression_;
 }
 
 @synthesize formFieldCell = formFieldCell_;
+@synthesize inputValidationRegularExpression_ = inputValidationRegularExpression_;
 @synthesize customClearButonImage = customClearButonImage_;
-@synthesize numberFormatter = numberFormatter_;
-@synthesize maximumIntegralDigits = maximumIntegralDigits_;
-@synthesize maximumFractionalDigits = maximumFractionalDigits_;
 
-+ (id)formFieldWithKeyPath:(NSString *)keyPath 
++ (id)formFieldWithKeyPath:(NSString *)keyPath
                      title:(NSString *)title
-          valueTransformer:(NSValueTransformer *)valueTransformer 
+          valueTransformer:(NSValueTransformer *)valueTransformer
         displayTransformer:(NSValueTransformer *)displayTransformer
     customClearButtonImage:(UIImage *)image
 {
   return [[[self alloc] initWithKeyPath:keyPath title:title valueTransformer:valueTransformer displayTransformer:displayTransformer customClearButtonImage:image] autorelease];
 }
 
-- (id)initWithKeyPath:(NSString *)keyPath 
+- (id)initWithKeyPath:(NSString *)keyPath
                 title:(NSString *)title
-     valueTransformer:(NSValueTransformer *)valueTransformer 
+     valueTransformer:(NSValueTransformer *)valueTransformer
    displayTransformer:(NSValueTransformer *)displayTransformer
 customClearButtonImage:(UIImage *)image
 {
   if ((self = [super initWithKeyPath:keyPath title:title valueTransformer:valueTransformer]))
   {
     displayTransformer_ = [displayTransformer retain];
-    maximumIntegralDigits_ = NSUIntegerMax;
-    maximumFractionalDigits_ = NSUIntegerMax;
     [self setCustomClearButonImage:image];
   }
   
   return self;
 }
 
-- (void)dealloc {
-	IBA_RELEASE_SAFELY(formFieldCell_);
-	IBA_RELEASE_SAFELY(numberFormatter_);
-  IBA_RELEASE_SAFELY(displayTransformer_);
-  IBA_RELEASE_SAFELY(customClearButonImage_);
+- (void)dealloc
+{
+    IBA_RELEASE_SAFELY(formFieldCell_);
+    IBA_RELEASE_SAFELY(numberFormatter_);
+    IBA_RELEASE_SAFELY(displayTransformer_);
+    IBA_RELEASE_SAFELY(inputValidationRegularExpression_);
+    IBA_RELEASE_SAFELY(customClearButonImage_);
 
-	[super dealloc];
+    [super dealloc];
 }
 
 #pragma mark -
 #pragma mark Cell management
 
-- (IBAFormFieldCell *)cell {
-	return [self formFieldCell];
+- (IBAFormFieldCell *)cell
+{
+    return [self formFieldCell];
 }
 
 - (IBADecimalFormFieldCell *)formFieldCell {
@@ -83,115 +85,108 @@ customClearButtonImage:(UIImage *)image
 
 - (NSNumberFormatter *)numberFormatter
 {
-  if (numberFormatter_ == nil) {
-    numberFormatter_ = [[NSNumberFormatter alloc] init];
-    [numberFormatter_ setLocale:[NSLocale currentLocale]];
-    [numberFormatter_ setNumberStyle:NSNumberFormatterDecimalStyle];
-  }
-  
-  return numberFormatter_;
+    if (numberFormatter_ == nil)
+    {
+        numberFormatter_ = [[NSNumberFormatter alloc] init];
+        [numberFormatter_ setLocale:[NSLocale currentLocale]];
+        [numberFormatter_ setNumberStyle:NSNumberFormatterDecimalStyle];
+    }
+
+    return numberFormatter_;
 }
 
-- (void)updateCellContents {
-  NSNumber *labelValue = (displayTransformer_ ? [displayTransformer_ transformedValue:[self formFieldValue]] : [self formFieldValue]);
-  
-	formFieldCell_.label.text = self.title;
-	formFieldCell_.valueTextField.text = [self formFieldStringValue];
-  formFieldCell_.valueLabel.text = [[self numberFormatter] stringFromNumber:labelValue];
+- (void)updateCellContents
+{
+    NSNumber *labelValue = (displayTransformer_ ? [displayTransformer_ transformedValue:[self formFieldValue]] : [self formFieldValue]);
+
+    formFieldCell_.label.text = self.title;
+    formFieldCell_.valueTextField.text = [self formFieldStringValue];
+    formFieldCell_.valueLabel.text = [[self numberFormatter] stringFromNumber:labelValue];
 }
 
 #pragma mark -
 #pragma mark UITextFieldDelegate
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-	return [[IBAInputManager sharedIBAInputManager] activateNextInputRequestor];
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    return [[IBAInputManager sharedIBAInputManager] activateNextInputRequestor];
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-  if ([textField.text isEqualToString:@"0"])
-  {
-    textField.text = @"";
-  }
+    if ([textField.text isEqualToString:@"0"])
+    {
+        textField.text = @"";
+    }
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-  if (textField == formFieldCell_.valueTextField) {
-    NSString *resultText = [formFieldCell_.valueTextField.text stringByReplacingCharactersInRange:range withString:string];
-    NSArray *numberParts = [resultText componentsSeparatedByString:@"."];
-    //no decimal point
-    if ([numberParts count] == 1)
+    if (textField == formFieldCell_.valueTextField && inputValidationRegularExpression_)
     {
-      if ([(NSString *)[numberParts objectAtIndex:0] length] > maximumIntegralDigits_) {
-        return NO;
-      }
+        NSString *resultText = [formFieldCell_.valueTextField.text stringByReplacingCharactersInRange:range withString:string];
+
+        if ([inputValidationRegularExpression_ numberOfMatchesInString:resultText options:0 range:NSMakeRange(0, [resultText length])] < 1)
+        {
+          return NO;
+        }
     }
-    //1 decimal point
-    if ([numberParts count] == 2)
-    {
-      if ([(NSString *)[numberParts objectAtIndex:0] length] > maximumIntegralDigits_) {
-        return NO;
-      }
-      if ([(NSString *)[numberParts objectAtIndex:1] length] > maximumFractionalDigits_) {
-        return NO;
-      }
-    }
-    //more than 1 decimal points
-    if ([numberParts count] > 2)
-    {
-      return NO;
-    }
-  }
-  
-  return YES;
+
+    return YES;
 }
 
 
 #pragma mark -
 #pragma mark IBAInputRequestor
 
-- (NSString *)dataType {
-	return IBAInputDataTypeNumber;
+- (NSString *)dataType
+{
+    return IBAInputDataTypeNumber;
 }
 
-- (void)activate {
-	formFieldCell_.valueTextField.enabled = YES;
-	[super activate];
+- (void)activate
+{
+    formFieldCell_.valueTextField.enabled = YES;
+    [super activate];
 }
 
-- (BOOL)deactivateForced:(BOOL)forced {
-	BOOL deactivated = [self setFormFieldValue:formFieldCell_.valueTextField.text];
-	if (deactivated || forced) {
-		formFieldCell_.valueTextField.enabled = NO;
-		deactivated = [super deactivateForced:forced];
-	}
-	
-	return deactivated;
+- (BOOL)deactivateForced:(BOOL)forced
+{
+    BOOL deactivated = [self setFormFieldValue:formFieldCell_.valueTextField.text];
+    if (deactivated || forced)
+    {
+        formFieldCell_.valueTextField.enabled = NO;
+        deactivated = [super deactivateForced:forced];
+    }
+
+    return deactivated;
 }
 
-- (UIResponder *)responder {
-	return formFieldCell_.valueTextField;
+- (UIResponder *)responder
+{
+    return formFieldCell_.valueTextField;
 }
 
-- (BOOL)isiPad {
-  return [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad;
+- (BOOL)isiPad
+{
+    return [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad;
 }
 
-- (void)setNumberOfDecimals:(NSUInteger)numberOfDecimals {
-  [[self numberFormatter] setMaximumFractionDigits:numberOfDecimals];
-  [[self.formFieldCell valueTextField] setKeyboardType:( (numberOfDecimals > 0)
-                                                        ? ([self isiPad]) ? UIKeyboardTypeNumbersAndPunctuation : UIKeyboardTypeDecimalPad 
-                                                        : UIKeyboardTypeNumberPad)];
+- (void)setNumberOfDecimals:(NSUInteger)numberOfDecimals
+{
+    [[self numberFormatter] setMaximumFractionDigits:numberOfDecimals];
+    [[self.formFieldCell valueTextField] setKeyboardType:((numberOfDecimals > 0)
+            ? ([self isiPad]) ? UIKeyboardTypeNumbersAndPunctuation : UIKeyboardTypeDecimalPad
+            : UIKeyboardTypeNumberPad)];
 }
 
 @end
 
 @implementation IBAFormSection (IBADecimalFormField)
 
-- (IBADecimalFormField *)decimalFormFieldWithKeyPath:(NSString *)keyPath 
+- (IBADecimalFormField *)decimalFormFieldWithKeyPath:(NSString *)keyPath
                                                title:(NSString *)title
-                                    valueTransformer:(NSValueTransformer *)valueTransformer 
+                                    valueTransformer:(NSValueTransformer *)valueTransformer
                                   displayTransformer:(NSValueTransformer *)displayTransformer
                               customClearButtonImage:(UIImage *)image
 {
@@ -200,13 +195,13 @@ customClearButtonImage:(UIImage *)image
   return field;
 }
 
-- (IBADecimalFormField *)decimalFormFieldWithKeyPath:(NSString *)keyPath 
+- (IBADecimalFormField *)decimalFormFieldWithKeyPath:(NSString *)keyPath
                                                title:(NSString *)title
                                     valueTransformer:(NSValueTransformer *)valueTransformer
 {
-  IBADecimalFormField *field = [IBADecimalFormField formFieldWithKeyPath:keyPath title:title valueTransformer:valueTransformer];
-  [self addFormField:field];
-  return field;
+    IBADecimalFormField *field = [IBADecimalFormField formFieldWithKeyPath:keyPath title:title valueTransformer:valueTransformer];
+    [self addFormField:field];
+    return field;
 }
 
 @end
