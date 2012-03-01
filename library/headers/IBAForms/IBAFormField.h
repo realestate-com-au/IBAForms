@@ -58,7 +58,7 @@
 #pragma mark Getting and setting the form field value
 - (id)formFieldValue;
 - (NSString *)formFieldStringValue;
-- (BOOL)setFormFieldValue:(id)formVieldValue;
+- (BOOL)setFormFieldValue:(id)formFieldValue;
 
 #pragma mark -
 #pragma mark Selection notification
