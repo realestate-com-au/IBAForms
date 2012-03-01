@@ -14,10 +14,13 @@
 
 #import "IBADecimalFormFieldCell.h"
 #import "IBAFormConstants.h"
+#import "IBATextField.h"
+
 
 @implementation IBADecimalFormFieldCell
 
-@synthesize valueTextField = valueTextField_, valueLabel = valueLabel_;
+@synthesize valueTextField = valueTextField_;
+@synthesize valueLabel = valueLabel_;
 
 - (void)dealloc {
   IBA_RELEASE_SAFELY(valueTextField_);
@@ -26,15 +29,16 @@
   [super dealloc];
 }
 
-- (id)initWithFormFieldStyle:(IBAFormFieldStyle *)style reuseIdentifier:(NSString *)reuseIdentifier {
+- (id)initWithFormFieldStyle:(IBAFormFieldStyle *)style customClearButtonImage:(UIImage *)image reuseIdentifier:(NSString *)reuseIdentifier {
   if ((self = [super initWithFormFieldStyle:style reuseIdentifier:reuseIdentifier])) {
     
 		// Create the text field for data entry (hidden by default)
-		valueTextField_ = [[UITextField alloc] initWithFrame:style.valueFrame];
+		valueTextField_ = [[IBATextField alloc] initWithFrame:style.valueFrame customClearButtonImage:image];
 		valueTextField_.autoresizingMask = style.valueAutoresizingMask;
 		valueTextField_.returnKeyType = UIReturnKeyNext;
     valueTextField_.hidden = YES;
     valueTextField_.keyboardType = UIKeyboardTypeDecimalPad;
+    valueTextField_.clipsToBounds = NO;
     
     // Create the lable for data display (shown by default)
     valueLabel_ = [[UILabel alloc] initWithFrame:style.valueFrame];

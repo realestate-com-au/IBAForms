@@ -22,16 +22,20 @@
 @property (nonatomic, readonly) NSNumberFormatter *numberFormatter;
 @property (nonatomic, assign) NSUInteger maximumIntegralDigits;
 @property (nonatomic, assign) NSUInteger maximumFractionalDigits;
+@property (nonatomic, retain) UIImage *customClearButonImage;
+
 
 + (id)formFieldWithKeyPath:(NSString *)keyPath 
-                         title:(NSString *)title
-              valueTransformer:(NSValueTransformer *)valueTransformer 
-            displayTransformer:(NSValueTransformer *)displayTransformer;
+                     title:(NSString *)title
+          valueTransformer:(NSValueTransformer *)valueTransformer 
+        displayTransformer:(NSValueTransformer *)displayTransformer
+    customClearButtonImage:(UIImage *)image;
 
 - (id)initWithKeyPath:(NSString *)keyPath 
                 title:(NSString *)title
      valueTransformer:(NSValueTransformer *)valueTransformer 
-   displayTransformer:(NSValueTransformer *)displayTransformer;
+   displayTransformer:(NSValueTransformer *)displayTransformer
+customClearButtonImage:(UIImage *)image;
 
 - (void)setNumberOfDecimals:(NSUInteger)numberOfDecimals;
 
@@ -44,7 +48,8 @@
 - (IBADecimalFormField *)decimalFormFieldWithKeyPath:(NSString *)keyPath 
                                                title:(NSString *)title
                                     valueTransformer:(NSValueTransformer *)valueTransformer 
-                                  displayTransformer:(NSValueTransformer *)displayTransformer;
+                                  displayTransformer:(NSValueTransformer *)displayTransformer
+                              customClearButtonImage:(UIImage *)image;
 
 - (IBADecimalFormField*)decimalFormFieldWithKeyPath:(NSString *)keyPath 
                                               title:(NSString *)title
