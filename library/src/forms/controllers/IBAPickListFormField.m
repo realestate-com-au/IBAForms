@@ -53,7 +53,7 @@
 	
 	if (self.formFieldValue != nil) {
 		NSMutableArray *itemNames = [[[NSMutableArray alloc] init] autorelease];
-
+    
 		for (id<IBAPickListOption> item in [self pickListOptions]) {
 			NSString *itemName = [item name];
 			if (([[self formFieldValue] containsObject:item]) && (itemName.length > 0)) {
@@ -61,9 +61,11 @@
 			}
 		}
 		
-		value = [itemNames componentsJoinedByString:@", "];
+    if ([itemNames count] > 0) {
+      value = [itemNames componentsJoinedByString:@", "];
+    }
 	}
-
+  
 	return value;
 }
 
