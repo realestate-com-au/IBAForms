@@ -14,7 +14,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IBAFormFieldStyle : NSObject {
+@interface IBAFormFieldStyle : NSObject <NSCopying> {
 	UIColor *labelTextColor_;
 	UIColor *labelBackgroundColor_;
 	UIFont *labelFont_;
@@ -47,5 +47,15 @@
 @property (nonatomic, assign) UIViewAutoresizing valueAutoresizingMask;
 
 @property (nonatomic, retain) UIColor *activeColor;
+
+- (void)setLabelX:(CGFloat)x;
+- (void)setLabelY:(CGFloat)y;
+- (void)setLabelWidth:(CGFloat)width;
+- (void)setLabelHeight:(CGFloat)height;
+
+- (void)setValueX:(CGFloat)x;
+- (void)setValueY:(CGFloat)y;
+- (void)setValueWidth:(CGFloat)width;
+- (void)setValueHeight:(CGFloat)height;
 
 @end
