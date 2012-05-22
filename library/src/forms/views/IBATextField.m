@@ -17,7 +17,6 @@
 
 @interface IBATextField ()
 - (void)clearContent;
-- (void)updateCustomClearButtonVisibility;
 @end
 
 
@@ -37,7 +36,6 @@
 
       [self setRightView:clearButton];
       [self setRightViewMode:UITextFieldViewModeAlways];
-      [self addTarget:self action:@selector(updateCustomClearButtonVisibility) forControlEvents:UIControlEventEditingChanged];
     }
   }
   
@@ -52,11 +50,6 @@
 - (void)clearContent
 {
   [self setText:nil];
-}
-
-- (void)updateCustomClearButtonVisibility
-{
-  [self setHidden:[[self text] length] == 0];
 }
 
 - (CGRect)rightViewRectForBounds:(CGRect)bounds
