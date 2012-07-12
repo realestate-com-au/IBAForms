@@ -38,7 +38,7 @@
 		style.labelTextAlignment = UITextAlignmentLeft;
 		style.valueTextAlignment = UITextAlignmentRight;
 		style.valueTextColor = [UIColor darkGrayColor];
-		style.activeColor = [UIColor colorWithRed:0.934 green:0.791 blue:0.905 alpha:1.000];
+//		style.activeColor = [UIColor colorWithRed:0.934 green:0.791 blue:0.905 alpha:1.000];
 
 		styledFieldSection.formFieldStyle = style;
 

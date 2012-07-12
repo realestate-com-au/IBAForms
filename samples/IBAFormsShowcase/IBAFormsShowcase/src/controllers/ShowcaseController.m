@@ -19,15 +19,20 @@
 
 @implementation ShowcaseController
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil formDataSource:(IBAFormDataSource *)formDataSource
+{
+  if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil formDataSource:formDataSource])) {
+    UIBarButtonItem *backButton = [[[UIBarButtonItem alloc] initWithTitle:@"Back"
+                                                                    style:UIBarButtonItemStyleBordered 
+                                                                   target:nil 
+                                                                   action:nil] autorelease];
+    self.navigationItem.backBarButtonItem = backButton;
+  }
+  return self;
+}
+
 - (void)loadView {
-	[super loadView];
-	
-	UIBarButtonItem *backButton = [[[UIBarButtonItem alloc] initWithTitle:@"Back"
-																	style:UIBarButtonItemStyleBordered 
-																   target:nil 
-																   action:nil] autorelease];
-	self.navigationItem.backBarButtonItem = backButton;
-	
+
 	UIView *view = [[[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
 	[view setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
 	

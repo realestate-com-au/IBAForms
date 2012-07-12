@@ -21,7 +21,6 @@
 @synthesize tableViewStyle = tableViewStyle_;
 
 - (void)loadView {
-	[super loadView];
 
 	UIView *view = [[[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
 	[view setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];

@@ -19,7 +19,6 @@
 
 
 @interface IBAFormsShowcaseAppDelegate ()
-@property (nonatomic, retain) IBOutlet UIWindow *window;
 @end
 
 
