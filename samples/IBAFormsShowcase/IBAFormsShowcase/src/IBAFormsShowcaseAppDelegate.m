@@ -14,9 +14,9 @@
 
 #import "IBAFormsShowcaseAppDelegate.h"
 #import "ShowcaseModel.h"
-#import "ShowcaseFormDataSource.h"
+#import "ShowcaseFormDataSourceiPhone.h"
 #import "ShowcaseController.h"
-
+#import "ShowcaseSplitViewController.h"
 
 @interface IBAFormsShowcaseAppDelegate ()
 @end
@@ -31,22 +31,30 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
 
-	ShowcaseModel *showcaseModel = [[[ShowcaseModel alloc] init] autorelease];
+  UIViewController *rootViewController = nil;
+
+  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+  {
+    rootViewController = [[[ShowcaseSplitViewController alloc] init] autorelease];
+  }
+  else
+  {
+    ShowcaseModel *showcaseModel = [[[ShowcaseModel alloc] init] autorelease];
     showcaseModel.shouldAutoRotate = YES;
     showcaseModel.tableViewStyleGrouped = YES;
     showcaseModel.displayNavigationToolbar = YES;
-    
-	ShowcaseFormDataSource *showcaseDataSource = [[[ShowcaseFormDataSource alloc] initWithModel:showcaseModel] autorelease];
-	ShowcaseController *showcaseController = [[[ShowcaseController alloc] initWithNibName:nil bundle:nil formDataSource:showcaseDataSource] autorelease];
-	[showcaseController setTitle:@"IBAForms Showcase"];
-	
-	UINavigationController *navController = [[[UINavigationController alloc] initWithRootViewController:showcaseController] autorelease];
-	
-	[self setWindow:[[[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds] autorelease]];
-	[[self window] setRootViewController:navController];
+
+    IBAFormDataSource *showcaseDataSource_iPhone = [[[ShowcaseFormDataSourceiPhone alloc] initWithModel:showcaseModel] autorelease];
+    IBAFormViewController *showcaseController_iPhone = [[[ShowcaseController alloc] initWithNibName:nil bundle:nil formDataSource:showcaseDataSource_iPhone] autorelease];
+    [showcaseController_iPhone setTitle:@"IBAForms iPhone Showcase"];
+    rootViewController = [[[UINavigationController alloc] initWithRootViewController:showcaseController_iPhone] autorelease];
+  }
+
+  [self setWindow:[[[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds] autorelease]];
+	[[self window] setRootViewController:rootViewController];
 	[[self window] makeKeyAndVisible];
-	
-    return YES;
+
+  return YES;
 }
 
 - (void)dealloc {

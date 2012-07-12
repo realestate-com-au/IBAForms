@@ -12,10 +12,12 @@
 // permissions and limitations under the License.
 //
 
-#import <IBAForms/IBAFormDataSource.h>
+#import <IBAForms/IBAFormViewController.h>
 
-@interface ShowcaseFormDataSource : IBAFormDataSource {
+@class ShowcaseDetailViewController;
 
-}
+@interface ShowcaseMasterViewController : IBAFormViewController
+
+@property (nonatomic, retain) ShowcaseDetailViewController *detailViewController;
 
 @end

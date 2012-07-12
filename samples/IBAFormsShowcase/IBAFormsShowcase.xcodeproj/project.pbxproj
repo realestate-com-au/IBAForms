@@ -16,12 +16,16 @@
 		756A423E13A8863A0093279E /* SampleFormController.m in Sources */ = {isa = PBXBuildFile; fileRef = 756A422913A8863A0093279E /* SampleFormController.m */; };
 		756A423F13A8863A0093279E /* ShowcaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 756A422B13A8863A0093279E /* ShowcaseController.m */; };
 		756A424013A8863A0093279E /* SampleFormDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 756A422E13A8863A0093279E /* SampleFormDataSource.m */; };
-		756A424113A8863A0093279E /* ShowcaseFormDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 756A423013A8863A0093279E /* ShowcaseFormDataSource.m */; };
+		756A424113A8863A0093279E /* ShowcaseFormDataSourceiPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 756A423013A8863A0093279E /* ShowcaseFormDataSourceiPhone.m */; };
 		756A424213A8863A0093279E /* IBAFormsShowcaseAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 756A423213A8863A0093279E /* IBAFormsShowcaseAppDelegate.m */; };
 		756A424313A8863A0093279E /* ShowcaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 756A423513A8863A0093279E /* ShowcaseModel.m */; };
 		756A424413A8863A0093279E /* ShowcaseButtonStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 756A423813A8863A0093279E /* ShowcaseButtonStyle.m */; };
 		756A424513A8863A0093279E /* ShowcaseFieldStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 756A423A13A8863A0093279E /* ShowcaseFieldStyle.m */; };
 		756A424613A8863A0093279E /* StringToNumberTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 756A423D13A8863A0093279E /* StringToNumberTransformer.m */; };
+		8878732615AEA76900CA55C5 /* ShowcaseFormDataSourceiPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 8878732515AEA76900CA55C5 /* ShowcaseFormDataSourceiPad.m */; };
+		8878732915AEA84100CA55C5 /* ShowcaseSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8878732815AEA84000CA55C5 /* ShowcaseSplitViewController.m */; };
+		88F1A7BD15AEA9AC00FF4972 /* ShowcaseMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88F1A7BC15AEA9AC00FF4972 /* ShowcaseMasterViewController.m */; };
+		88F1A7C115AEA9FB00FF4972 /* ShowcaseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88F1A7C015AEA9FB00FF4972 /* ShowcaseDetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,8 +62,8 @@
 		756A422B13A8863A0093279E /* ShowcaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowcaseController.m; sourceTree = "<group>"; };
 		756A422D13A8863A0093279E /* SampleFormDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleFormDataSource.h; sourceTree = "<group>"; };
 		756A422E13A8863A0093279E /* SampleFormDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleFormDataSource.m; sourceTree = "<group>"; };
-		756A422F13A8863A0093279E /* ShowcaseFormDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowcaseFormDataSource.h; sourceTree = "<group>"; };
-		756A423013A8863A0093279E /* ShowcaseFormDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowcaseFormDataSource.m; sourceTree = "<group>"; };
+		756A422F13A8863A0093279E /* ShowcaseFormDataSourceiPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowcaseFormDataSourceiPhone.h; sourceTree = "<group>"; };
+		756A423013A8863A0093279E /* ShowcaseFormDataSourceiPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowcaseFormDataSourceiPhone.m; sourceTree = "<group>"; };
 		756A423113A8863A0093279E /* IBAFormsShowcaseAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBAFormsShowcaseAppDelegate.h; sourceTree = "<group>"; };
 		756A423213A8863A0093279E /* IBAFormsShowcaseAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IBAFormsShowcaseAppDelegate.m; sourceTree = "<group>"; };
 		756A423413A8863A0093279E /* ShowcaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowcaseModel.h; sourceTree = "<group>"; };
@@ -70,6 +74,14 @@
 		756A423A13A8863A0093279E /* ShowcaseFieldStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowcaseFieldStyle.m; sourceTree = "<group>"; };
 		756A423C13A8863A0093279E /* StringToNumberTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringToNumberTransformer.h; sourceTree = "<group>"; };
 		756A423D13A8863A0093279E /* StringToNumberTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringToNumberTransformer.m; sourceTree = "<group>"; };
+		8878732415AEA76900CA55C5 /* ShowcaseFormDataSourceiPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowcaseFormDataSourceiPad.h; sourceTree = "<group>"; };
+		8878732515AEA76900CA55C5 /* ShowcaseFormDataSourceiPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowcaseFormDataSourceiPad.m; sourceTree = "<group>"; };
+		8878732715AEA84000CA55C5 /* ShowcaseSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowcaseSplitViewController.h; sourceTree = "<group>"; };
+		8878732815AEA84000CA55C5 /* ShowcaseSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowcaseSplitViewController.m; sourceTree = "<group>"; };
+		88F1A7BB15AEA9AC00FF4972 /* ShowcaseMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowcaseMasterViewController.h; sourceTree = "<group>"; };
+		88F1A7BC15AEA9AC00FF4972 /* ShowcaseMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowcaseMasterViewController.m; sourceTree = "<group>"; };
+		88F1A7BF15AEA9FB00FF4972 /* ShowcaseDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowcaseDetailViewController.h; sourceTree = "<group>"; };
+		88F1A7C015AEA9FB00FF4972 /* ShowcaseDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowcaseDetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +177,12 @@
 				756A422913A8863A0093279E /* SampleFormController.m */,
 				756A422A13A8863A0093279E /* ShowcaseController.h */,
 				756A422B13A8863A0093279E /* ShowcaseController.m */,
+				8878732715AEA84000CA55C5 /* ShowcaseSplitViewController.h */,
+				8878732815AEA84000CA55C5 /* ShowcaseSplitViewController.m */,
+				88F1A7BB15AEA9AC00FF4972 /* ShowcaseMasterViewController.h */,
+				88F1A7BC15AEA9AC00FF4972 /* ShowcaseMasterViewController.m */,
+				88F1A7BF15AEA9FB00FF4972 /* ShowcaseDetailViewController.h */,
+				88F1A7C015AEA9FB00FF4972 /* ShowcaseDetailViewController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -174,8 +192,10 @@
 			children = (
 				756A422D13A8863A0093279E /* SampleFormDataSource.h */,
 				756A422E13A8863A0093279E /* SampleFormDataSource.m */,
-				756A422F13A8863A0093279E /* ShowcaseFormDataSource.h */,
-				756A423013A8863A0093279E /* ShowcaseFormDataSource.m */,
+				756A422F13A8863A0093279E /* ShowcaseFormDataSourceiPhone.h */,
+				756A423013A8863A0093279E /* ShowcaseFormDataSourceiPhone.m */,
+				8878732415AEA76900CA55C5 /* ShowcaseFormDataSourceiPad.h */,
+				8878732515AEA76900CA55C5 /* ShowcaseFormDataSourceiPad.m */,
 			);
 			path = datasources;
 			sourceTree = "<group>";
@@ -291,12 +311,16 @@
 				756A423E13A8863A0093279E /* SampleFormController.m in Sources */,
 				756A423F13A8863A0093279E /* ShowcaseController.m in Sources */,
 				756A424013A8863A0093279E /* SampleFormDataSource.m in Sources */,
-				756A424113A8863A0093279E /* ShowcaseFormDataSource.m in Sources */,
+				756A424113A8863A0093279E /* ShowcaseFormDataSourceiPhone.m in Sources */,
 				756A424213A8863A0093279E /* IBAFormsShowcaseAppDelegate.m in Sources */,
 				756A424313A8863A0093279E /* ShowcaseModel.m in Sources */,
 				756A424413A8863A0093279E /* ShowcaseButtonStyle.m in Sources */,
 				756A424513A8863A0093279E /* ShowcaseFieldStyle.m in Sources */,
 				756A424613A8863A0093279E /* StringToNumberTransformer.m in Sources */,
+				8878732615AEA76900CA55C5 /* ShowcaseFormDataSourceiPad.m in Sources */,
+				8878732915AEA84100CA55C5 /* ShowcaseSplitViewController.m in Sources */,
+				88F1A7BD15AEA9AC00FF4972 /* ShowcaseMasterViewController.m in Sources */,
+				88F1A7C115AEA9FB00FF4972 /* ShowcaseDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

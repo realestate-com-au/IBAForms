@@ -12,7 +12,7 @@
 // permissions and limitations under the License.
 //
 
-#import "ShowcaseFormDataSource.h"
+#import "ShowcaseFormDataSourceiPhone.h"
 #import <IBAForms/IBAForms.h>
 #import "SampleFormDataSource.h"
 #import "SampleFormController.h"
@@ -20,13 +20,13 @@
 #import "ShowcaseButtonStyle.h"
 #import "ShowcaseFieldStyle.h"
 
-@interface ShowcaseFormDataSource()
+@interface ShowcaseFormDataSourceiPhone()
 - (void)displaySampleForm;
 - (void)dismissSampleForm;
 @end
 
 
-@implementation ShowcaseFormDataSource
+@implementation ShowcaseFormDataSourceiPhone
 
 - (id)initWithModel:(id)aModel {
 	if ((self = [super initWithModel:aModel])) {
