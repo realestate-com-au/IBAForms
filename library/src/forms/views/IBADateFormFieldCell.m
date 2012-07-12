@@ -94,7 +94,7 @@ static UIImage *clearImage_ = nil;
 		[stroke2 closePath];
 		[stroke2 strokeWithBlendMode:kCGBlendModeClear alpha:1.0];
 		
-		clearImage_ = UIGraphicsGetImageFromCurrentImageContext();
+		clearImage_ = [UIGraphicsGetImageFromCurrentImageContext() retain];
 		UIGraphicsEndImageContext();
 	}
 	
