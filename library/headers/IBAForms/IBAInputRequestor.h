@@ -15,12 +15,19 @@
 #import <Foundation/Foundation.h>
 #import "IBAFormFieldCell.h"
 
+typedef enum {
+  IBAInputRequestorDisplayStyleKeyboard = 0,
+  IBAInputRequestorDisplayStylePopover,
+} IBAInputRequestorDisplayStyle;
+
 @protocol IBAInputRequestor <NSObject>
 
 @property (nonatomic, readonly) NSString *dataType;
 @property (nonatomic, assign) id inputRequestorValue;
 @property (nonatomic, readonly) id defaultInputRequestorValue;
 @property (nonatomic, readonly) UIResponder *responder;
+@property (nonatomic, assign) IBAInputRequestorDisplayStyle displayStyle;
+@property (nonatomic, readonly) IBAFormFieldCell *cell;
 
 - (void)activate;
 - (BOOL)deactivate;

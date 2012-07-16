@@ -18,6 +18,15 @@
 
 
 @implementation IBAInputRequestorFormField
+@synthesize displayStyle = displayStyle_;
+
+- (id)initWithKeyPath:(NSString*)keyPath title:(NSString*)title valueTransformer:(NSValueTransformer *)valueTransformer {
+  if ((self = [super initWithKeyPath:keyPath title:title valueTransformer:valueTransformer]))
+  {
+    self.displayStyle = IBAInputRequestorDisplayStyleKeyboard;
+  }
+  return self;
+}
 
 #pragma mark -
 #pragma mark IBAInputRequestor
