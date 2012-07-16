@@ -30,11 +30,8 @@
 - (void)activate {
 	[[self responder] becomeFirstResponder];
 
-	NSDictionary *userInfo = [[NSMutableDictionary alloc] init];
-	[userInfo setValue:self forKey:IBAFormFieldKey];
-
+	NSDictionary *userInfo = [NSMutableDictionary dictionaryWithObjectsAndKeys:self,IBAFormFieldKey,nil];
 	[[NSNotificationCenter defaultCenter] postNotificationName:IBAInputRequestorFormFieldActivated object:self userInfo:userInfo];
-	[userInfo release];
 	
 	if ([self hasDetailViewController]) {
 		// If the form field has a detailViewController, then it should be displayed, and the form field should
@@ -51,11 +48,8 @@
 }
 
 - (BOOL)deactivateForced:(BOOL)forced {
-	NSDictionary *userInfo = [[NSMutableDictionary alloc] init];
-	[userInfo setValue:self forKey:IBAFormFieldKey];
-
+	NSDictionary *userInfo = [NSMutableDictionary dictionaryWithObjectsAndKeys:self,IBAFormFieldKey,nil];
 	[[NSNotificationCenter defaultCenter] postNotificationName:IBAInputRequestorFormFieldDeactivated object:self userInfo:userInfo];
-	[userInfo release];
 	
 	[self.cell deactivate];
 	
