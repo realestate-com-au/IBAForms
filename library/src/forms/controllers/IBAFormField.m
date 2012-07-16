@@ -119,6 +119,11 @@
 	// Subclasses should override this method
 }
 
+- (BOOL)shouldAutoScrollFormWhenActive
+{
+  return YES;
+}
+
 
 #pragma mark -
 #pragma mark Cell management

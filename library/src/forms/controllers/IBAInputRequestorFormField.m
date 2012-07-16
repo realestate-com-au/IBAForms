@@ -81,4 +81,9 @@
 	return self.cell;
 }
 
+- (BOOL)shouldAutoScrollFormWhenActive
+{
+  return !(self.displayStyle == IBAInputRequestorDisplayStylePopover && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad);
+}
+
 @end

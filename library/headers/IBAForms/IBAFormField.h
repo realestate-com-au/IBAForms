@@ -64,6 +64,8 @@
 #pragma mark Selection notification
 - (void)select;
 
+- (BOOL)shouldAutoScrollFormWhenActive;
+
 @end
 
 
