@@ -56,18 +56,16 @@
 
 - (UIView *)datePickerView {
 	if (datePickerView_ == nil) {
-		datePickerView_ = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 216)];
-		datePickerView_.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-		datePickerView_.backgroundColor = [UIColor viewFlipsideBackgroundColor];
 		
 		datePicker_ = [[UIDatePicker alloc] init];
 		datePicker_.datePickerMode = self.datePickerMode;
 		datePicker_.minuteInterval = 5;
-		datePicker_.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
 		[datePicker_ addTarget:self action:@selector(datePickerValueChanged) forControlEvents:UIControlEventValueChanged];
 		
+		datePickerView_ = [[UIView alloc] initWithFrame:[datePicker_ frame]];
+		datePickerView_.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+		datePickerView_.backgroundColor = [UIColor viewFlipsideBackgroundColor];
 		[datePickerView_ addSubview:datePicker_];
-		[datePicker_ sizeToFit];
 	}
 	
 	return datePickerView_;
