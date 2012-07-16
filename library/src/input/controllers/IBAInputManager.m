@@ -30,7 +30,7 @@
 @end
 
 
-@interface IBAInputManager ()
+@interface IBAInputManager () <UIPopoverControllerDelegate>
 - (void)nextPreviousButtonSelected;
 - (void)displayInputProvider:(id<IBAInputProvider>)inputProvider forInputRequestor:(id<IBAInputRequestor>)requestor;
 - (BOOL)activateInputRequestor:(id<IBAInputRequestor>)inputRequestor;
@@ -246,6 +246,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(IBAInputManager);
     NSAssert(inputProvider.view != nil,@"InputProvider view cannot be nil if InputRequestor displayStyle == IBAInputRequestorDisplayStylePopover");
 
     UIPopoverController *popoverController = [[UIPopoverController alloc] initWithContentViewController:[[[IBAPoppedOverViewController alloc] initWithInputProviderView:inputProvider.view] autorelease]];
+    popoverController.delegate = self;
     [popoverController presentPopoverFromRect:requestor.cell.bounds inView:requestor.cell permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
   } else {
     if (inputProvider.view != nil) {
@@ -255,6 +256,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(IBAInputManager);
     [self updateInputNavigationToolbarVisibility];
   }
 
+}
+
+#pragma mark - 
+#pragma mark UIPopoverControllerDelegate
+
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController {
+  NSLog(@"popoverController did dismiss");
 }
 
 
