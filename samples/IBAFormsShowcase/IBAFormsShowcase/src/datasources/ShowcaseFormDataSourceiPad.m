@@ -26,6 +26,7 @@
 @end
 
 @implementation ShowcaseFormDataSourceiPad
+@synthesize splitViewController = splitViewController_;
 
 - (id)initWithModel:(id)aModel {
 	if ((self = [super initWithModel:aModel])) {
@@ -44,11 +45,13 @@
                                                                                                @"Current Context",
                                                                                                nil]];	
 		IBASingleIndexTransformer *modalPresentationStyleTransformer = [[[IBASingleIndexTransformer alloc] initWithPickListOptions:modalPresentationStyleOptions] autorelease];
-		[displayOptionsSection addFormField:[[[IBAPickListFormField alloc] initWithKeyPath:@"modalPresentationStyle"
-                                                                                 title:@"Modal Style"
-                                                                      valueTransformer:modalPresentationStyleTransformer
-                                                                         selectionMode:IBAPickListSelectionModeSingle
-                                                                               options:modalPresentationStyleOptions] autorelease]];	
+
+		IBAPickListFormField *modalStylePickListFormField = [[[IBAPickListFormField alloc] initWithKeyPath:@"modalPresentationStyle"
+                                                                                                 title:@"Modal Style"
+                                                                                      valueTransformer:modalPresentationStyleTransformer
+                                                                                         selectionMode:IBAPickListSelectionModeSingle
+                                                                                               options:modalPresentationStyleOptions] autorelease];
+    [displayOptionsSection addFormField:modalStylePickListFormField];	
 		
 		
 		IBAFormSection *buttonSection = [self addSectionWithHeaderTitle:nil footerTitle:nil];
@@ -76,10 +79,7 @@
 	sampleFormController.title = @"Sample Form";
 	sampleFormController.shouldAutoRotate = showcaseModel.shouldAutoRotate;
 	sampleFormController.tableViewStyle = showcaseModel.tableViewStyleGrouped ? UITableViewStyleGrouped : UITableViewStylePlain;
-	
-  [[IBAInputManager sharedIBAInputManager] setInputNavigationToolbarEnabled:showcaseModel.displayNavigationToolbar];
-  
-	UIViewController *rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
+
 	if (showcaseModel.modalPresentation) {
 		UIBarButtonItem *doneButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone 
                                                                                  target:self 
@@ -87,16 +87,15 @@
 		sampleFormController.navigationItem.rightBarButtonItem = doneButton;
 		UINavigationController *formNavigationController = [[[UINavigationController alloc] initWithRootViewController:sampleFormController] autorelease];
 		formNavigationController.modalPresentationStyle = showcaseModel.modalPresentationStyle;
-		[rootViewController presentModalViewController:formNavigationController animated:YES];
+		[splitViewController_ presentModalViewController:formNavigationController animated:YES];
 	} else {
-    if ([rootViewController isKindOfClass:[UINavigationController class]]) {
-			[(UINavigationController *)rootViewController pushViewController:sampleFormController animated:YES];
-		}
-	}
+    //push it onto the left hand side of the splitView
+		[(UINavigationController *)[[splitViewController_ viewControllers] objectAtIndex:0] pushViewController:sampleFormController animated:YES];
+  }
 }
 
 - (void)dismissSampleForm {
-	[[[[UIApplication sharedApplication] keyWindow] rootViewController] dismissModalViewControllerAnimated:YES];
+	[splitViewController_ dismissModalViewControllerAnimated:YES];
 }
 
 @end

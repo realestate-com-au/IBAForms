@@ -29,7 +29,8 @@
     showcaseModel.tableViewStyleGrouped = YES;
     showcaseModel.displayNavigationToolbar = YES;
     
-    IBAFormDataSource *showcaseDataSource_iPad = [[[ShowcaseFormDataSourceiPad alloc] initWithModel:showcaseModel] autorelease];
+    ShowcaseFormDataSourceiPad *showcaseDataSource_iPad = [[[ShowcaseFormDataSourceiPad alloc] initWithModel:showcaseModel] autorelease];
+    showcaseDataSource_iPad.splitViewController = self;
     
     ShowcaseMasterViewController *masterViewController = [[ShowcaseMasterViewController alloc] initWithNibName:nil bundle:nil formDataSource:showcaseDataSource_iPad];
     UINavigationController *masterNavigationController = [[UINavigationController alloc] initWithRootViewController:masterViewController];

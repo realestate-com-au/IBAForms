@@ -16,4 +16,6 @@
 
 @interface ShowcaseFormDataSourceiPad : IBAFormDataSource
 
+@property (nonatomic, assign) UISplitViewController *splitViewController;
+
 @end

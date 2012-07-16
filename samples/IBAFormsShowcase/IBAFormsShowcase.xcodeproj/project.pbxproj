@@ -173,16 +173,8 @@
 		756A422713A8863A0093279E /* controllers */ = {
 			isa = PBXGroup;
 			children = (
-				756A422813A8863A0093279E /* SampleFormController.h */,
-				756A422913A8863A0093279E /* SampleFormController.m */,
-				756A422A13A8863A0093279E /* ShowcaseController.h */,
-				756A422B13A8863A0093279E /* ShowcaseController.m */,
-				8878732715AEA84000CA55C5 /* ShowcaseSplitViewController.h */,
-				8878732815AEA84000CA55C5 /* ShowcaseSplitViewController.m */,
-				88F1A7BB15AEA9AC00FF4972 /* ShowcaseMasterViewController.h */,
-				88F1A7BC15AEA9AC00FF4972 /* ShowcaseMasterViewController.m */,
-				88F1A7BF15AEA9FB00FF4972 /* ShowcaseDetailViewController.h */,
-				88F1A7C015AEA9FB00FF4972 /* ShowcaseDetailViewController.m */,
+				880BC0B315B3DF280029E726 /* iPhone */,
+				880BC0B115B3DF210029E726 /* iPad */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -227,6 +219,30 @@
 				756A423D13A8863A0093279E /* StringToNumberTransformer.m */,
 			);
 			path = transformers;
+			sourceTree = "<group>";
+		};
+		880BC0B115B3DF210029E726 /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+				8878732715AEA84000CA55C5 /* ShowcaseSplitViewController.h */,
+				8878732815AEA84000CA55C5 /* ShowcaseSplitViewController.m */,
+				88F1A7BB15AEA9AC00FF4972 /* ShowcaseMasterViewController.h */,
+				88F1A7BC15AEA9AC00FF4972 /* ShowcaseMasterViewController.m */,
+				88F1A7BF15AEA9FB00FF4972 /* ShowcaseDetailViewController.h */,
+				88F1A7C015AEA9FB00FF4972 /* ShowcaseDetailViewController.m */,
+			);
+			name = iPad;
+			sourceTree = "<group>";
+		};
+		880BC0B315B3DF280029E726 /* iPhone */ = {
+			isa = PBXGroup;
+			children = (
+				756A422813A8863A0093279E /* SampleFormController.h */,
+				756A422913A8863A0093279E /* SampleFormController.m */,
+				756A422A13A8863A0093279E /* ShowcaseController.h */,
+				756A422B13A8863A0093279E /* ShowcaseController.m */,
+			);
+			name = iPhone;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
