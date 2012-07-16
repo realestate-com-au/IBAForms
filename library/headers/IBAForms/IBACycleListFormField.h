@@ -12,7 +12,6 @@
 // permissions and limitations under the License.
 //
 
-#import "IBAInputRequestorFormField.h"
 #import "IBATextFormFieldCell.h"
 #import "IBACycleListOptionsProvider.h"
 #import "IBAFormSection.h"
