@@ -36,6 +36,12 @@
 - (BOOL)activateInputRequestor:(id<IBAInputRequestor>)inputRequestor;
 - (void)updateInputNavigationToolbarVisibility;
 - (BOOL)setActiveInputRequestor:(id<IBAInputRequestor>)inputRequestor forced:(BOOL)forced;
+
+- (void)applicationWillChangeStatusBarOrientation:(NSDictionary *)change;
+- (void)applicationDidChangeStatusBarOrientation:(NSDictionary *)change;
+
+@property (nonatomic, retain) id temporaryInputRequestor;
+
 @end
 
 
@@ -47,6 +53,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(IBAInputManager);
 @synthesize inputNavigationToolbar = inputNavigationToolbar_;
 @synthesize inputNavigationToolbarEnabled = inputNavigationToolbarEnabled_;
 @synthesize inputProviderCoordinator = inputProviderCoordinator_;
+@synthesize temporaryInputRequestor = temporaryInputRequestor_;
 
 #pragma mark -
 #pragma mark Memory management
@@ -56,9 +63,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(IBAInputManager);
 	IBA_RELEASE_SAFELY(inputRequestorDataSource_);
 	IBA_RELEASE_SAFELY(activeInputRequestor_);
 	IBA_RELEASE_SAFELY(inputNavigationToolbar_);
-    
-    IBA_RELEASE_SAFELY(inputProviderCoordinator_);
-	
+
+  IBA_RELEASE_SAFELY(inputProviderCoordinator_);
+  IBA_RELEASE_SAFELY(temporaryInputRequestor_);
+
+  [[UIApplication sharedApplication] removeObserver:self forKeyPath:UIApplicationWillChangeStatusBarOrientationNotification];
+  [[UIApplication sharedApplication] removeObserver:self forKeyPath:UIApplicationDidChangeStatusBarOrientationNotification];
+
 	[super dealloc];
 }
 
@@ -73,7 +84,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(IBAInputManager);
                                              forControlEvents:UIControlEventValueChanged];
         
         inputNavigationToolbarEnabled_ = YES;
-		
+
+    [[UIApplication sharedApplication] addObserver:self forKeyPath:UIApplicationWillChangeStatusBarOrientationNotification options:NSKeyValueObservingOptionNew context:nil];
+    [[UIApplication sharedApplication] addObserver:self forKeyPath:UIApplicationDidChangeStatusBarOrientationNotification options:NSKeyValueObservingOptionNew context:nil];
+
 		// Setup some default input providers
 		
 		// Text
@@ -119,16 +133,17 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(IBAInputManager);
 	id<IBAInputProvider>oldInputProvider = nil;
 	if (activeInputRequestor_ != nil) {
 		oldInputProvider = [self inputProviderForRequestor:activeInputRequestor_];
-		
+
 		if (![activeInputRequestor_ deactivateForced:forced]) {
 			return NO;
 		}
-		
-        [[activeInputRequestor_ responder] resignFirstResponder];
-        
+
+    //TODO: remove UIPopoverController here, as you haven't tapped outside of it, but you want it to disappear
+    [[activeInputRequestor_ responder] resignFirstResponder];
+
 		oldInputProvider.inputRequestor = nil;
 		[activeInputRequestor_ release];
-        activeInputRequestor_ = nil;
+    activeInputRequestor_ = nil;
 	}
 	
 	if (inputRequestor != nil)  {
@@ -288,5 +303,39 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(IBAInputManager);
   [self.inputNavigationToolbar.nextPreviousButton setEnabled:hasNextInputRequestor forSegmentAtIndex:1];
 }
 
+#pragma mark -
+#pragma mark KVO
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+  if ([keyPath isEqualToString:UIApplicationWillChangeStatusBarOrientationNotification]) {
+    [self applicationWillChangeStatusBarOrientation:change];
+  } else if ([keyPath isEqualToString:UIApplicationDidChangeStatusBarOrientationNotification]) {
+    [self applicationDidChangeStatusBarOrientation:change];
+  } else {
+    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+  }
+                
+}
+
+#pragma mark -
+#pragma mark RotationCallBacks
+
+- (void)applicationWillChangeStatusBarOrientation:(NSDictionary *)change
+{
+  if (self.activeInputRequestor.displayStyle == IBAInputRequestorDisplayStylePopover && 
+      UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+    self.temporaryInputRequestor = self.activeInputRequestor;
+    [self deactivateActiveInputRequestor];    
+  }
+}
+
+- (void)applicationDidChangeStatusBarOrientation:(NSDictionary *)change
+{
+  if (self.temporaryInputRequestor) {
+    [self setActiveInputRequestor:self.temporaryInputRequestor];
+    self.temporaryInputRequestor = nil;
+  }
+}
 
 @end
