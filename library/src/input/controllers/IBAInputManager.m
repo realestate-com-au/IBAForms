@@ -22,6 +22,7 @@
 #import "IBAInputNavigationToolbar.h"
 #import "IBAMultiplePickListInputProvider.h"
 #import "IBASinglePickListInputProvider.h"
+#import "IBAPoppedOverViewController.h"
 
 @interface UIResponder (InputViews)
 - (void)setInputView:(UIView *)inputView;
@@ -235,17 +236,25 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(IBAInputManager);
 #pragma mark Presenting the input provider
 
 - (void)displayInputProvider:(id<IBAInputProvider>)inputProvider forInputRequestor:(id<IBAInputRequestor>)requestor {
-    
-    if (nil != inputProviderCoordinator_)
-    {
-        return [inputProviderCoordinator_ setInputView:inputProvider.view];
-    }
-	
+
+  if (nil != inputProviderCoordinator_)
+  {
+    return [inputProviderCoordinator_ setInputView:inputProvider.view];
+  }
+
+  if (requestor.displayStyle == IBAInputRequestorDisplayStylePopover && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+    NSAssert(inputProvider.view != nil,@"InputProvider view cannot be nil if InputRequestor displayStyle == IBAInputRequestorDisplayStylePopover");
+
+    UIPopoverController *popoverController = [[UIPopoverController alloc] initWithContentViewController:[[[IBAPoppedOverViewController alloc] initWithInputProviderView:inputProvider.view] autorelease]];
+    [popoverController presentPopoverFromRect:requestor.cell.bounds inView:requestor.cell permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+  } else {
     if (inputProvider.view != nil) {
-		[[requestor responder] setInputView:inputProvider.view];
-	}
-    
+      [[requestor responder] setInputView:inputProvider.view];
+    }
+
     [self updateInputNavigationToolbarVisibility];
+  }
+
 }
 
 
