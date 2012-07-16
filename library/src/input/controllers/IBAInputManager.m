@@ -247,6 +247,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(IBAInputManager);
 
     UIPopoverController *popoverController = [[UIPopoverController alloc] initWithContentViewController:[[[IBAPoppedOverViewController alloc] initWithInputProviderView:inputProvider.view] autorelease]];
     popoverController.delegate = self;
+    popoverController.popoverContentSize = inputProvider.view.frame.size;
     [popoverController presentPopoverFromRect:requestor.cell.bounds inView:requestor.cell permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
   } else {
     if (inputProvider.view != nil) {
