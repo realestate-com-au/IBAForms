@@ -36,6 +36,7 @@
 	if ((self = [super initWithKeyPath:keyPath title:title valueTransformer:valueTransformer])) {
 		self.selectionMode = selectionMode;
 		self.pickListOptions = pickListOptions;
+    self.displayStyle = IBAInputRequestorDisplayStylePopover;
 	}
 
 	return self;

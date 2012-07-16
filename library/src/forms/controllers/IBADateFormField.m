@@ -46,6 +46,7 @@
 			[dateFormatter setDateFormat:@"EEE d MMM yyyy"];
 		}
 	}
+  self.displayStyle = IBAInputRequestorDisplayStylePopover;
 
 	return self;
 }
