@@ -41,6 +41,7 @@
 - (void)applicationDidChangeStatusBarOrientation:(NSDictionary *)change;
 
 @property (nonatomic, retain) id temporaryInputRequestor;
+@property (nonatomic, retain) UIPopoverController *popoverController;
 
 @end
 
@@ -54,6 +55,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(IBAInputManager);
 @synthesize inputNavigationToolbarEnabled = inputNavigationToolbarEnabled_;
 @synthesize inputProviderCoordinator = inputProviderCoordinator_;
 @synthesize temporaryInputRequestor = temporaryInputRequestor_;
+@synthesize popoverController = popoverController_;
 
 #pragma mark -
 #pragma mark Memory management
@@ -66,6 +68,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(IBAInputManager);
 
   IBA_RELEASE_SAFELY(inputProviderCoordinator_);
   IBA_RELEASE_SAFELY(temporaryInputRequestor_);
+  IBA_RELEASE_SAFELY(popoverController_);
 
   [[UIApplication sharedApplication] removeObserver:self forKeyPath:UIApplicationWillChangeStatusBarOrientationNotification];
   [[UIApplication sharedApplication] removeObserver:self forKeyPath:UIApplicationDidChangeStatusBarOrientationNotification];
@@ -139,7 +142,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(IBAInputManager);
 		}
 
     //TODO: remove UIPopoverController here, as you haven't tapped outside of it, but you want it to disappear
-    [[activeInputRequestor_ responder] resignFirstResponder];
+    if (activeInputRequestor_.displayStyle == IBAInputRequestorDisplayStylePopover && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+      [self.popoverController dismissPopoverAnimated:YES];
+    } else {
+      [[activeInputRequestor_ responder] resignFirstResponder];
+    }
 
 		oldInputProvider.inputRequestor = nil;
 		[activeInputRequestor_ release];
@@ -260,10 +267,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(IBAInputManager);
   if (requestor.displayStyle == IBAInputRequestorDisplayStylePopover && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
     NSAssert(inputProvider.view != nil,@"InputProvider view cannot be nil if InputRequestor displayStyle == IBAInputRequestorDisplayStylePopover");
 
-    UIPopoverController *popoverController = [[UIPopoverController alloc] initWithContentViewController:[[[IBAPoppedOverViewController alloc] initWithInputProviderView:inputProvider.view] autorelease]];
-    popoverController.delegate = self;
-    popoverController.popoverContentSize = inputProvider.view.frame.size;
-    [popoverController presentPopoverFromRect:requestor.cell.bounds inView:requestor.cell permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    self.popoverController = [[[UIPopoverController alloc] initWithContentViewController:[[[IBAPoppedOverViewController alloc] initWithInputProviderView:inputProvider.view] autorelease]] autorelease];
+    self.popoverController.delegate = self;
+    self.popoverController.popoverContentSize = inputProvider.view.frame.size;
+    [self.popoverController presentPopoverFromRect:requestor.cell.bounds inView:requestor.cell permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
   } else {
     if (inputProvider.view != nil) {
       [[requestor responder] setInputView:inputProvider.view];
@@ -278,7 +285,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(IBAInputManager);
 #pragma mark UIPopoverControllerDelegate
 
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController {
-  NSLog(@"popoverController did dismiss");
+  if (self.popoverController == popoverController) { //being extra safe
+    self.popoverController = nil;
+  }
 }
 
 
@@ -315,7 +324,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(IBAInputManager);
   } else {
     [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
   }
-                
 }
 
 #pragma mark -
