@@ -24,6 +24,7 @@
 		756A424613A8863A0093279E /* StringToNumberTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 756A423D13A8863A0093279E /* StringToNumberTransformer.m */; };
 		8878732615AEA76900CA55C5 /* ShowcaseFormDataSourceiPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 8878732515AEA76900CA55C5 /* ShowcaseFormDataSourceiPad.m */; };
 		8878732915AEA84100CA55C5 /* ShowcaseSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8878732815AEA84000CA55C5 /* ShowcaseSplitViewController.m */; };
+		888177C315B4F3E1000CF4A5 /* iPadModalNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 888177C215B4F3E1000CF4A5 /* iPadModalNavigationController.m */; };
 		88F1A7BD15AEA9AC00FF4972 /* ShowcaseMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88F1A7BC15AEA9AC00FF4972 /* ShowcaseMasterViewController.m */; };
 		88F1A7C115AEA9FB00FF4972 /* ShowcaseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88F1A7C015AEA9FB00FF4972 /* ShowcaseDetailViewController.m */; };
 /* End PBXBuildFile section */
@@ -78,6 +79,8 @@
 		8878732515AEA76900CA55C5 /* ShowcaseFormDataSourceiPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowcaseFormDataSourceiPad.m; sourceTree = "<group>"; };
 		8878732715AEA84000CA55C5 /* ShowcaseSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowcaseSplitViewController.h; sourceTree = "<group>"; };
 		8878732815AEA84000CA55C5 /* ShowcaseSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowcaseSplitViewController.m; sourceTree = "<group>"; };
+		888177C115B4F3E1000CF4A5 /* iPadModalNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iPadModalNavigationController.h; sourceTree = "<group>"; };
+		888177C215B4F3E1000CF4A5 /* iPadModalNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iPadModalNavigationController.m; sourceTree = "<group>"; };
 		88F1A7BB15AEA9AC00FF4972 /* ShowcaseMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowcaseMasterViewController.h; sourceTree = "<group>"; };
 		88F1A7BC15AEA9AC00FF4972 /* ShowcaseMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowcaseMasterViewController.m; sourceTree = "<group>"; };
 		88F1A7BF15AEA9FB00FF4972 /* ShowcaseDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowcaseDetailViewController.h; sourceTree = "<group>"; };
@@ -230,6 +233,8 @@
 				88F1A7BC15AEA9AC00FF4972 /* ShowcaseMasterViewController.m */,
 				88F1A7BF15AEA9FB00FF4972 /* ShowcaseDetailViewController.h */,
 				88F1A7C015AEA9FB00FF4972 /* ShowcaseDetailViewController.m */,
+				888177C115B4F3E1000CF4A5 /* iPadModalNavigationController.h */,
+				888177C215B4F3E1000CF4A5 /* iPadModalNavigationController.m */,
 			);
 			name = iPad;
 			sourceTree = "<group>";
@@ -337,6 +342,7 @@
 				8878732915AEA84100CA55C5 /* ShowcaseSplitViewController.m in Sources */,
 				88F1A7BD15AEA9AC00FF4972 /* ShowcaseMasterViewController.m in Sources */,
 				88F1A7C115AEA9FB00FF4972 /* ShowcaseDetailViewController.m in Sources */,
+				888177C315B4F3E1000CF4A5 /* iPadModalNavigationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

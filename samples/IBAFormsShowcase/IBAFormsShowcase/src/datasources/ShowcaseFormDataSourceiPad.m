@@ -19,6 +19,7 @@
 #import "ShowcaseModel.h"
 #import "SampleFormDataSource.h"
 #import "SampleFormController.h"
+#import "iPadModalNavigationController.h"
 
 @interface ShowcaseFormDataSourceiPad()
 - (void)displaySampleForm;
@@ -30,6 +31,10 @@
 
 - (id)initWithModel:(id)aModel {
 	if ((self = [super initWithModel:aModel])) {
+
+    [(ShowcaseModel*)aModel setModalPresentation:YES];
+    [(ShowcaseModel*)aModel setModalPresentationStyle:UIModalPresentationFormSheet];
+    
 		IBAFormSection *displayOptionsSection = [self addSectionWithHeaderTitle:@"Display Options" footerTitle:nil];
 		displayOptionsSection.formFieldStyle = [[[ShowcaseFieldStyle alloc] init] autorelease];
 		
@@ -76,6 +81,7 @@
   
 	SampleFormDataSource *sampleFormDataSource = [[[SampleFormDataSource alloc] initWithModel:sampleFormModel] autorelease];
 	SampleFormController *sampleFormController = [[[SampleFormController alloc] initWithNibName:nil bundle:nil formDataSource:sampleFormDataSource] autorelease];
+
 	sampleFormController.title = @"Sample Form";
 	sampleFormController.shouldAutoRotate = showcaseModel.shouldAutoRotate;
 	sampleFormController.tableViewStyle = showcaseModel.tableViewStyleGrouped ? UITableViewStyleGrouped : UITableViewStylePlain;
@@ -85,7 +91,7 @@
                                                                                  target:self 
                                                                                  action:@selector(dismissSampleForm)] autorelease];
 		sampleFormController.navigationItem.rightBarButtonItem = doneButton;
-		UINavigationController *formNavigationController = [[[UINavigationController alloc] initWithRootViewController:sampleFormController] autorelease];
+		UINavigationController *formNavigationController = [[[iPadModalNavigationController alloc] initWithRootViewController:sampleFormController] autorelease];
 		formNavigationController.modalPresentationStyle = showcaseModel.modalPresentationStyle;
 		[splitViewController_ presentModalViewController:formNavigationController animated:YES];
 	} else {
