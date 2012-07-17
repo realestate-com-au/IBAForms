@@ -150,9 +150,9 @@
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
 
-	[[IBAInputManager sharedIBAInputManager] forceDeactivateActiveInputRequestor];
-	[[[IBAInputManager sharedIBAInputManager] inputNavigationToolbar] setDisplayDoneButton:YES];
 	if ([[IBAInputManager sharedIBAInputManager] inputRequestorDataSource] == self) {
+    [[IBAInputManager sharedIBAInputManager] forceDeactivateActiveInputRequestor];
+    [[[IBAInputManager sharedIBAInputManager] inputNavigationToolbar] setDisplayDoneButton:YES];
 		[[IBAInputManager sharedIBAInputManager] setInputRequestorDataSource:nil];
 	}
 }
