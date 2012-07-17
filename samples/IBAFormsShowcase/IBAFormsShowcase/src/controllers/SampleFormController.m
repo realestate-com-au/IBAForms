@@ -13,6 +13,7 @@
 //
 
 #import "SampleFormController.h"
+#import <IBAForms/IBAInputManager.h>
 
 
 @implementation SampleFormController
@@ -35,6 +36,13 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
 	return self.shouldAutoRotate;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
+
+  [[IBAInputManager sharedIBAInputManager] setInputRequestorDataSource:self];
 }
 
 @end
