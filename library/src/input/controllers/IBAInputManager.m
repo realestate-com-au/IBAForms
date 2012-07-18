@@ -70,8 +70,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(IBAInputManager);
   IBA_RELEASE_SAFELY(temporaryInputRequestor_);
   IBA_RELEASE_SAFELY(popoverController_);
 
-  [[UIApplication sharedApplication] removeObserver:self forKeyPath:UIApplicationWillChangeStatusBarOrientationNotification];
-  [[UIApplication sharedApplication] removeObserver:self forKeyPath:UIApplicationDidChangeStatusBarOrientationNotification];
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
 
 	[super dealloc];
 }
@@ -88,11 +87,18 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(IBAInputManager);
         
         inputNavigationToolbarEnabled_ = YES;
 
-    [[UIApplication sharedApplication] addObserver:self forKeyPath:UIApplicationWillChangeStatusBarOrientationNotification options:NSKeyValueObservingOptionNew context:nil];
-    [[UIApplication sharedApplication] addObserver:self forKeyPath:UIApplicationDidChangeStatusBarOrientationNotification options:NSKeyValueObservingOptionNew context:nil];
+    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationWillChangeStatusBarOrientation:)
+                                                 name:UIApplicationWillChangeStatusBarOrientationNotification object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationDidChangeStatusBarOrientation:)
+                                                 name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
 
 		// Setup some default input providers
-		
+
 		// Text
 		[self registerInputProvider:[[[IBATextInputProvider alloc] init] autorelease]
 						forDataType:IBAInputDataTypeText];
@@ -313,28 +319,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(IBAInputManager);
 }
 
 #pragma mark -
-#pragma mark KVO
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-  if ([keyPath isEqualToString:UIApplicationWillChangeStatusBarOrientationNotification]) {
-    [self applicationWillChangeStatusBarOrientation:change];
-  } else if ([keyPath isEqualToString:UIApplicationDidChangeStatusBarOrientationNotification]) {
-    [self applicationDidChangeStatusBarOrientation:change];
-  } else {
-    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-  }
-}
-
-#pragma mark -
-#pragma mark RotationCallBacks
+#pragma mark StatusBarOrientationCallBacks
 
 - (void)applicationWillChangeStatusBarOrientation:(NSDictionary *)change
 {
   if (self.activeInputRequestor.displayStyle == IBAInputRequestorDisplayStylePopover && 
       UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
     self.temporaryInputRequestor = self.activeInputRequestor;
-    [self deactivateActiveInputRequestor];    
+    [self deactivateActiveInputRequestor];
   }
 }
 
