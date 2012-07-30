@@ -47,7 +47,7 @@
 		self.selectionStyle = UITableViewCellSelectionStyleNone;
     
 		self.cellView = [[[UIView alloc] initWithFrame:self.contentView.bounds] autorelease];
-		self.cellView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+		self.cellView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 		self.cellView.userInteractionEnabled = YES;
 		[self.contentView addSubview:self.cellView];
     
