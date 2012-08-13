@@ -37,6 +37,10 @@
 @end
 
 
+@interface UIViewController (KeyboardDismissal)
+- (BOOL)canDismissKeyboard;
+@end
+
 @implementation IBAFormViewController
 
 @synthesize tableView = tableView_;
@@ -122,12 +126,23 @@
 	[super viewWillAppear:animated];
 	
   [[IBAInputManager sharedIBAInputManager] setInputRequestorDataSource:self];
-  /* Note: JC - The Done button will only dismiss a a modal in UIPresentModalFormSheet mode if your UIViewController/UINavigationController implements disablesAutomaticKeyboardDismissal. 
-     Get learned here: http://stackoverflow.com/questions/3019709/modal-dialog-does-not-dismiss-keyboard 
+
+  /* Note: JC - The Done button will only dismiss a a modal in UIPresentModalFormSheet mode if your UIViewController/UINavigationController implements disablesAutomaticKeyboardDismissal.
+     Get learned here: http://stackoverflow.com/questions/3019709/modal-dialog-does-not-dismiss-keyboard
              and here: http://stackoverflow.com/questions/3372333/ipad-keyboard-will-not-dismiss-if-modal-view-controller-presentation-style-is-ui
-     As noted in the above SO pages this behaviour is only supported in iOS 4.3 (but it's 2012 so that's okay)
+     As noted in the above SO pages this behaviour is only supported in iOS 4.3.
+
+     Additionally, this causes all sorts of issues with the DONE button, NEXT and PREVIOUS too. Best to just leave it how it was for now ;(
   */
-  [[[IBAInputManager sharedIBAInputManager] inputNavigationToolbar] setDisplayDoneButton:YES];
+
+	// SW. There is a bug with UIModalPresentationFormSheet where the keyboard won't dismiss even when there is
+  // no first responder, so we remove the 'Done' button when UIModalPresentationFormSheet is used. Prior to iOS 4.3 there
+  // was no way aroud this. After 4.3 you can override '-(BOOL)disablesAutomaticKeyboardDismissal' on UIViewController
+  // to make the keyboard dismiss properly.
+
+  //[[[IBAInputManager sharedIBAInputManager] inputNavigationToolbar] setDisplayDoneButton:YES];
+  [[[IBAInputManager sharedIBAInputManager] inputNavigationToolbar] setDisplayDoneButton:([self canDismissKeyboard] && [self.navigationController canDismissKeyboard])];
+
   
 	// Make sure the hidden cell cache is attached to the view hierarchy
 	if ([self.hiddenCellCache window] == nil) {
@@ -396,3 +411,13 @@
 
 @end
 
+@implementation UIViewController (KeyboardDismissal)
+
+- (BOOL)canDismissKeyboard {
+  return (self.modalPresentationStyle != UIModalPresentationFormSheet) ||
+  (self.modalPresentationStyle == UIModalPresentationFormSheet &&
+   [self respondsToSelector:@selector(disablesAutomaticKeyboardDismissal)] &&
+   (![self disablesAutomaticKeyboardDismissal]));
+}
+
+@end
