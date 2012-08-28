@@ -103,12 +103,14 @@
   self.label.opaque = self.formFieldStyle.labelOpaque;
   
 	self.backgroundColor = self.formFieldStyle.backgroundColor;
+  self.backgroundView = self.formFieldStyle.backgroundView;
 
 	self.styleApplied = YES;
 }
 
 - (void)applyActiveStyle {
 	self.backgroundColor = self.formFieldStyle.activeBackgroundColor;
+  self.backgroundView = self.formFieldStyle.activeBackgroundView;
 }
 
 - (void)updateActiveStyle {

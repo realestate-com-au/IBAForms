@@ -36,6 +36,8 @@
   UIViewContentMode valueContentMode_;
 	UIColor *activeBackgroundColor_;
   UIColor *backgroundColor_;
+  UIView *activeBackgroundView_;
+  UIView *backgroundView_;
 }
 
 @property (nonatomic, retain) UIColor *labelTextColor;
@@ -59,6 +61,8 @@
 
 @property (nonatomic, retain) UIColor *activeBackgroundColor;
 @property (nonatomic, retain) UIColor *backgroundColor;
+@property (nonatomic, retain) UIView *activeBackgroundView;
+@property (nonatomic, retain) UIView *backgroundView;
 
 - (void)setLabelX:(CGFloat)x;
 - (void)setLabelY:(CGFloat)y;

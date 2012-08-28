@@ -34,6 +34,8 @@
 @synthesize valueAutoresizingMask = valueAutoresizingMask_;
 @synthesize backgroundColor = backgroundColor_;
 @synthesize activeBackgroundColor = activeBackgroundColor_;
+@synthesize activeBackgroundView = activeBackgroundView_;
+@synthesize backgroundView = backgroundView_;
 @synthesize valueVerticalAlignment = valueVerticalAlignment_;
 @synthesize valueContentMode = valueContentMode_;
 @synthesize valueOpaque = valueOpaque_;
@@ -49,6 +51,9 @@
 	
   IBA_RELEASE_SAFELY(backgroundColor_);
 	IBA_RELEASE_SAFELY(activeBackgroundColor_);
+  
+  IBA_RELEASE_SAFELY(backgroundView_);
+	IBA_RELEASE_SAFELY(activeBackgroundView_);
 
 	[super dealloc];
 }
