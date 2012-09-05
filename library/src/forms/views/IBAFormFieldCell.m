@@ -112,7 +112,9 @@
 
 - (void)applyActiveStyle {
 	self.backgroundColor = self.formFieldStyle.activeBackgroundColor;
-  self.backgroundView = self.formFieldStyle.activeBackgroundView;
+  if (self.formFieldStyle.activeBackgroundView) {
+    self.backgroundView = self.formFieldStyle.activeBackgroundView;
+  }
 }
 
 - (void)updateActiveStyle {
