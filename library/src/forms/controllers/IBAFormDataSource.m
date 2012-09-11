@@ -166,6 +166,15 @@
 }
 
 
+- (void)pushFormFieldChanges
+{
+  for (IBAFormSection *section in self.sections) {
+    for (IBAFormField *field in section.formFields) {
+      [field pushChanges];
+    }
+  }
+}
+
 #pragma mark -
 #pragma mark UITableViewDataSource
 

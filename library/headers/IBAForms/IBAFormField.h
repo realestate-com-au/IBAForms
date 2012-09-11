@@ -59,6 +59,7 @@
 - (id)formFieldValue;
 - (NSString *)formFieldStringValue;
 - (BOOL)setFormFieldValue:(id)formFieldValue;
+- (BOOL)pushChanges;
 
 #pragma mark -
 #pragma mark Selection notification

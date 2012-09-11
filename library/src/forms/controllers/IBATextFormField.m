@@ -89,7 +89,7 @@
 }
 
 - (BOOL)deactivateForced:(BOOL)forced {
-	BOOL deactivated = [self setFormFieldValue:self.textFormFieldCell.textField.text];
+	BOOL deactivated = [self pushChanges];
 	if (deactivated || forced) {
 		self.textFormFieldCell.textField.enabled = NO;
 		deactivated = [super deactivateForced:forced];
@@ -100,6 +100,14 @@
 
 - (UIResponder *)responder {
 	return self.textFormFieldCell.textField;
+}
+
+
+#pragma mark -
+#pragma mark IBAFormField
+
+- (BOOL)pushChanges {
+	return [self setFormFieldValue:self.textFormFieldCell.textField.text];
 }
 
 @end

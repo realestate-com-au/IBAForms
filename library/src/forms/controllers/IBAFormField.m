@@ -168,6 +168,10 @@
 	return [self.formFieldValue description];
 }
 
+- (BOOL)pushChanges {
+	return NO;
+}
+
 - (BOOL)setFormFieldValue:(id)formVieldValue {
 	BOOL setValue = YES;
 

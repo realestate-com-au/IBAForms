@@ -47,4 +47,6 @@
 - (IBAFormField *)formFieldBefore:(IBAFormField *)field;
 - (NSIndexPath *)indexPathForFormField:(IBAFormField *)formField;
 
+- (void)pushFormFieldChanges; // Pushes uncommited changes (particularly with text field based form fields) from the form filed to the model without removing focus.
+
 @end
