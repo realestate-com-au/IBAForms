@@ -122,6 +122,19 @@
 	[super viewDidUnload];
 }
 
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    
+    /* For compatibility with both iOS 6 and earlier
+     */
+    if ([self isViewLoaded] && self.view.window == nil)
+    {
+        self.view = nil;
+        [self viewDidUnload];
+    }
+}
+
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	
