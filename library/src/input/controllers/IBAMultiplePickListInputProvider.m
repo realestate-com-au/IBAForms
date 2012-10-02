@@ -43,12 +43,11 @@
 		pickListTableView_.dataSource = self;
 		pickListTableView_.delegate = self;
 
-    // RC: Changing the backgroundColor property doesn't work under iOS 6. In order to
-    // ensure the colour is set correctly, we have to set it on a background placeholder
-    // view, instead of on the view itself.
-    UIView *backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
-    backgroundView.backgroundColor = [UIColor viewFlipsideBackgroundColor];
-    pickListTableView_.backgroundView = backgroundView;
+    // RC: In order to be able to change the background colour, the background view needs
+    // to be nil'ed out. If this isn't done, then under iOS 6, the background colour
+    // will not change to the dark colour.
+    pickListTableView_.backgroundColor = [UIColor viewFlipsideBackgroundColor];
+    pickListTableView_.backgroundView = nil;
     
 		pickListTableView_.autoresizingMask = UIViewAutoresizingFlexibleHeight;
 	}
