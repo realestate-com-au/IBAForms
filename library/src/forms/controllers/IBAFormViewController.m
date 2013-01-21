@@ -201,6 +201,14 @@
 }
 
 #pragma mark -
+#pragma mark UIScrollviewDelegate
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [[IBAInputManager sharedIBAInputManager] deactivateActiveInputRequestor];
+}
+
+
+#pragma mark -
 #pragma mark UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
