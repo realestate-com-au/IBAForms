@@ -150,6 +150,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(IBAInputManager);
     //TODO: remove UIPopoverController here, as you haven't tapped outside of it, but you want it to disappear
     if (activeInputRequestor_.displayStyle == IBAInputRequestorDisplayStylePopover && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
       [self.popoverController dismissPopoverAnimated:YES];
+      self.popoverController = nil;
     } else {
       [[activeInputRequestor_ responder] resignFirstResponder];
     }
