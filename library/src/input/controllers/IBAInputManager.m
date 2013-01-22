@@ -38,9 +38,7 @@
 - (BOOL)setActiveInputRequestor:(id<IBAInputRequestor>)inputRequestor forced:(BOOL)forced;
 
 - (void)applicationWillChangeStatusBarOrientation:(NSDictionary *)change;
-- (void)applicationDidChangeStatusBarOrientation:(NSDictionary *)change;
 
-@property (nonatomic, retain) id temporaryInputRequestor;
 @property (nonatomic, retain) UIPopoverController *popoverController;
 
 @end
@@ -54,7 +52,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(IBAInputManager);
 @synthesize inputNavigationToolbar = inputNavigationToolbar_;
 @synthesize inputNavigationToolbarEnabled = inputNavigationToolbarEnabled_;
 @synthesize inputProviderCoordinator = inputProviderCoordinator_;
-@synthesize temporaryInputRequestor = temporaryInputRequestor_;
 @synthesize popoverController = popoverController_;
 
 #pragma mark -
@@ -67,7 +64,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(IBAInputManager);
 	IBA_RELEASE_SAFELY(inputNavigationToolbar_);
 
   IBA_RELEASE_SAFELY(inputProviderCoordinator_);
-  IBA_RELEASE_SAFELY(temporaryInputRequestor_);
   IBA_RELEASE_SAFELY(popoverController_);
 
   [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -92,10 +88,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(IBAInputManager);
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(applicationWillChangeStatusBarOrientation:)
                                                  name:UIApplicationWillChangeStatusBarOrientationNotification object:nil];
-
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(applicationDidChangeStatusBarOrientation:)
-                                                 name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
 
 		// Setup some default input providers
 
@@ -328,16 +320,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(IBAInputManager);
 - (void)applicationWillChangeStatusBarOrientation:(NSDictionary *)change
 {
   if (self.activeInputRequestor.displayStyle == IBAInputRequestorDisplayStylePopover) {
-    self.temporaryInputRequestor = self.activeInputRequestor;
     [self deactivateActiveInputRequestor];
-  }
-}
-
-- (void)applicationDidChangeStatusBarOrientation:(NSDictionary *)change
-{
-  if (self.temporaryInputRequestor) {
-    [self setActiveInputRequestor:self.temporaryInputRequestor];
-    self.temporaryInputRequestor = nil;
   }
 }
 
