@@ -83,7 +83,16 @@
 
 - (BOOL)shouldAutoScrollFormWhenActive
 {
-  return !(self.displayStyle == IBAInputRequestorDisplayStylePopover && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad);
+  return !(self.displayStyle == IBAInputRequestorDisplayStylePopover);
+}
+
+- (void)setDisplayStyle:(IBAInputRequestorDisplayStyle)displayStyle
+{
+    if (displayStyle == IBAInputRequestorDisplayStylePopover && UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad)
+    {
+        @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"IBAInputRequestorDisplayStylePopover can only be used on iPad" userInfo:nil];
+    }
+    displayStyle_ = displayStyle;
 }
 
 @end
