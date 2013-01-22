@@ -272,6 +272,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(IBAInputManager);
   }
 
   if (requestor.displayStyle == IBAInputRequestorDisplayStylePopover && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+
+    [[requestor responder] setInputView:[[[UIView alloc] initWithFrame:CGRectZero] autorelease]];
+
     NSAssert(inputProvider.view != nil,@"InputProvider view cannot be nil if InputRequestor displayStyle == IBAInputRequestorDisplayStylePopover");
 
     self.popoverController = [[[UIPopoverController alloc] initWithContentViewController:[[[IBAPoppedOverViewController alloc] initWithInputProviderView:inputProvider.view] autorelease]] autorelease];

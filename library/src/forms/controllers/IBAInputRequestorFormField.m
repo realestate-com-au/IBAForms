@@ -37,9 +37,7 @@
 }
 
 - (void)activate {
-  if (!(self.displayStyle == IBAInputRequestorDisplayStylePopover && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)) {
-    [[self responder] becomeFirstResponder];
-  }
+        [[self responder] becomeFirstResponder];
 
 	NSDictionary *userInfo = [NSMutableDictionary dictionaryWithObjectsAndKeys:self,IBAFormFieldKey,nil];
 	[[NSNotificationCenter defaultCenter] postNotificationName:IBAInputRequestorFormFieldActivated object:self userInfo:userInfo];
