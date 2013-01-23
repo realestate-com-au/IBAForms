@@ -30,7 +30,7 @@
 
 + (id)formFieldWithKeyPath:(NSString *)keyPath title:(NSString *)title valueTransformer:(NSValueTransformer *)valueTransformer options:(NSArray *)options
 {
-    return [[[self alloc] initWithKeyPath:keyPath title:title valueTransformer:valueTransformer options:options] autorelease];
+    return [[self alloc] initWithKeyPath:keyPath title:title valueTransformer:valueTransformer options:options];
 }
 
 - (id)initWithKeyPath:(NSString *)keyPath title:(NSString *)title valueTransformer:(NSValueTransformer *)valueTransformer options:(NSArray *)options {
@@ -41,12 +41,6 @@
 	return self;
 }
 
-- (void)dealloc {
-	IBA_RELEASE_SAFELY(cycleListCell_);
-	IBA_RELEASE_SAFELY(cycleListOptions_);
-    
-	[super dealloc];
-}
 
 #pragma mark -
 #pragma mark Cell management
@@ -112,7 +106,7 @@
 
 + (id)cycleListFormOptionWithName:(NSString *)name
 {
-    return [[[self alloc] initWithName:name] autorelease];
+    return [[self alloc] initWithName:name];
 }
 
 - (id)initWithName:(NSString *)name {
@@ -123,11 +117,6 @@
 	return self;
 }
 
-- (void)dealloc {
-	IBA_RELEASE_SAFELY(name_);
-	
-	[super dealloc];
-}
 
 - (NSString *)description {
 	return self.name;
@@ -144,7 +133,7 @@
 
 + (id)cycleListFormOptionsTransformerWithOptions:(NSArray *)options
 {
-    return [[[self alloc] initWithCycleListOptions:options] autorelease];
+    return [[self alloc] initWithCycleListOptions:options];
 }
 
 + (BOOL)allowsReverseTransformation
@@ -162,11 +151,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    IBA_RELEASE_SAFELY(cycleListOptions_);
-    [super dealloc];
-}
 
 @end
 

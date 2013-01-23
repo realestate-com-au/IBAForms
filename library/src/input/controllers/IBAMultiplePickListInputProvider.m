@@ -30,12 +30,6 @@
 #pragma mark -
 #pragma mark Memory management
 
-- (void)dealloc
-{	
-	IBA_RELEASE_SAFELY(pickListTableView_);
-	
-	[super dealloc];
-}
 
 - (id)init {
 	if ((self = [super init])) {
@@ -80,7 +74,7 @@
 	static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 		cell.selectionStyle = UITableViewCellSelectionStyleNone;
 	}
 

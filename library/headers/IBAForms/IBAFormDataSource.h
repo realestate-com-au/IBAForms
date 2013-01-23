@@ -25,8 +25,8 @@
 
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSMutableArray *sections;
-@property (nonatomic, retain, readonly) id model;
-@property (nonatomic, retain) IBAFormFieldStyle *formFieldStyle;
+@property (nonatomic, strong, readonly) id model;
+@property (nonatomic, strong) IBAFormFieldStyle *formFieldStyle;
 
 - (id)initWithModel:(id)model;
 

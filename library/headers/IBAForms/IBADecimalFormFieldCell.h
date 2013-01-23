@@ -18,7 +18,7 @@
 
 - (id)initWithFormFieldStyle:(IBAFormFieldStyle *)style customClearButtonImage:(UIImage *)image reuseIdentifier:(NSString *)reuseIdentifier;
 
-@property (nonatomic, retain) UITextField *valueTextField;
-@property (nonatomic, retain) UILabel *valueLabel;
+@property (nonatomic, strong) UITextField *valueTextField;
+@property (nonatomic, strong) UILabel *valueLabel;
 
 @end

@@ -16,8 +16,8 @@
 #import "IBACommon.h"
 
 @interface IBADateInputProvider ()
-@property (nonatomic, readonly) UIView *datePickerView;
-@property (nonatomic, readonly) UIDatePicker *datePicker;
+@property (nonatomic, strong, readonly) UIView *datePickerView;
+@property (nonatomic, strong, readonly) UIDatePicker *datePicker;
 - (void)datePickerValueChanged;
 @end
 
@@ -31,12 +31,6 @@
 #pragma mark -
 #pragma mark Memory management
 
-- (void)dealloc {
-	IBA_RELEASE_SAFELY(datePickerView_);
-	IBA_RELEASE_SAFELY(datePicker_);
-	
-	[super dealloc];
-}
 
 - (id)init {
 	return [self initWithDatePickerMode:UIDatePickerModeDate];

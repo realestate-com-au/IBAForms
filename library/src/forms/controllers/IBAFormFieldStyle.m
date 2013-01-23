@@ -40,23 +40,6 @@
 @synthesize valueContentMode = valueContentMode_;
 @synthesize valueOpaque = valueOpaque_;
 
-- (void)dealloc {
-	IBA_RELEASE_SAFELY(labelTextColor_);
-	IBA_RELEASE_SAFELY(labelBackgroundColor_);
-	IBA_RELEASE_SAFELY(labelFont_);
-	
-	IBA_RELEASE_SAFELY(valueTextColor_);
-	IBA_RELEASE_SAFELY(valueBackgroundColor_);
-	IBA_RELEASE_SAFELY(valueFont_);
-	
-  IBA_RELEASE_SAFELY(backgroundColor_);
-	IBA_RELEASE_SAFELY(activeBackgroundColor_);
-  
-  IBA_RELEASE_SAFELY(backgroundView_);
-	IBA_RELEASE_SAFELY(activeBackgroundView_);
-
-	[super dealloc];
-}
 
 
 - (id)init {

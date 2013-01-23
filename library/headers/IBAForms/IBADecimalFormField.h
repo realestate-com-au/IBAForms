@@ -18,9 +18,9 @@
 
 @interface IBADecimalFormField : IBAInputRequestorFormField <UITextFieldDelegate>
 
-@property (nonatomic, retain) IBADecimalFormFieldCell *formFieldCell;
-@property (nonatomic, readonly) NSNumberFormatter *numberFormatter;
-@property (nonatomic, retain) UIImage *customClearButonImage;
+@property (nonatomic, strong) IBADecimalFormFieldCell *formFieldCell;
+@property (unsafe_unretained, nonatomic, readonly) NSNumberFormatter *numberFormatter;
+@property (nonatomic, strong) UIImage *customClearButonImage;
 
 /*!
  @abstract    A regular expression that if set validates the text entered into the form field.
@@ -28,7 +28,7 @@
               evaluated against this expression.  If the value does not match against the expression the newly input
               text is rejected and the original value of the field is kept.
  */
-@property (nonatomic, retain) NSRegularExpression *inputValidationRegularExpression_;
+@property (nonatomic, strong) NSRegularExpression *inputValidationRegularExpression_;
 
 + (id)formFieldWithKeyPath:(NSString *)keyPath 
                      title:(NSString *)title

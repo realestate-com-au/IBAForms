@@ -40,18 +40,18 @@
   UIView *backgroundView_;
 }
 
-@property (nonatomic, retain) UIColor *labelTextColor;
-@property (nonatomic, retain) UIColor *labelBackgroundColor;
-@property (nonatomic, retain) UIFont *labelFont;
+@property (nonatomic, strong) UIColor *labelTextColor;
+@property (nonatomic, strong) UIColor *labelBackgroundColor;
+@property (nonatomic, strong) UIFont *labelFont;
 @property (nonatomic, assign) CGRect labelFrame;
 @property (nonatomic, assign) UITextAlignment labelTextAlignment;
 @property (nonatomic, assign) UIViewAutoresizing labelAutoresizingMask;
 @property (nonatomic, assign) UIViewContentMode labelContentMode;
 @property (nonatomic, assign) BOOL labelOpaque;
 
-@property (nonatomic, retain) UIColor *valueTextColor;
-@property (nonatomic, retain) UIColor *valueBackgroundColor;
-@property (nonatomic, retain) UIFont *valueFont;
+@property (nonatomic, strong) UIColor *valueTextColor;
+@property (nonatomic, strong) UIColor *valueBackgroundColor;
+@property (nonatomic, strong) UIFont *valueFont;
 @property (nonatomic, assign) CGRect valueFrame;
 @property (nonatomic, assign) UITextAlignment valueTextAlignment;
 @property (nonatomic, assign) UIViewAutoresizing valueAutoresizingMask;
@@ -59,10 +59,10 @@
 @property (nonatomic, assign) UIViewContentMode valueContentMode;
 @property (nonatomic, assign) BOOL valueOpaque;
 
-@property (nonatomic, retain) UIColor *activeBackgroundColor;
-@property (nonatomic, retain) UIColor *backgroundColor;
-@property (nonatomic, retain) UIView *activeBackgroundView;
-@property (nonatomic, retain) UIView *backgroundView;
+@property (nonatomic, strong) UIColor *activeBackgroundColor;
+@property (nonatomic, strong) UIColor *backgroundColor;
+@property (nonatomic, strong) UIView *activeBackgroundView;
+@property (nonatomic, strong) UIView *backgroundView;
 
 - (void)setLabelX:(CGFloat)x;
 - (void)setLabelY:(CGFloat)y;

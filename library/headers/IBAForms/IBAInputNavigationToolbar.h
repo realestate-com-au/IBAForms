@@ -28,8 +28,8 @@ typedef enum {
 	BOOL displayNextPreviousButton_;
 }
 
-@property (nonatomic, retain) UIBarButtonItem *doneButton;
-@property (nonatomic, retain) UISegmentedControl *nextPreviousButton;
+@property (nonatomic, strong) UIBarButtonItem *doneButton;
+@property (nonatomic, strong) UISegmentedControl *nextPreviousButton;
 @property (nonatomic, assign) BOOL displayDoneButton;
 @property (nonatomic, assign) BOOL displayNextPreviousButton;
 

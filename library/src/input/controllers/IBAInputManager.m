@@ -40,7 +40,7 @@
 
 - (void)applicationWillChangeStatusBarOrientation:(NSDictionary *)change;
 
-@property (nonatomic, retain) UIPopoverController *popoverController;
+@property (nonatomic, strong) UIPopoverController *popoverController;
 
 @end
 
@@ -59,17 +59,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(IBAInputManager);
 #pragma mark Memory management
 
 - (void)dealloc {
-	IBA_RELEASE_SAFELY(inputProviders_);
-	IBA_RELEASE_SAFELY(inputRequestorDataSource_);
-	IBA_RELEASE_SAFELY(activeInputRequestor_);
-	IBA_RELEASE_SAFELY(inputNavigationToolbar_);
 
-  IBA_RELEASE_SAFELY(inputProviderCoordinator_);
-  IBA_RELEASE_SAFELY(popoverController_);
 
   [[NSNotificationCenter defaultCenter] removeObserver:self];
 
-	[super dealloc];
 }
 
 - (id)init {
@@ -93,30 +86,30 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(IBAInputManager);
 		// Setup some default input providers
 
 		// Text
-		[self registerInputProvider:[[[IBATextInputProvider alloc] init] autorelease]
+		[self registerInputProvider:[[IBATextInputProvider alloc] init]
 						forDataType:IBAInputDataTypeText];
         
         // Numbers
-        [self registerInputProvider:[[[IBATextInputProvider alloc] init] autorelease]
+        [self registerInputProvider:[[IBATextInputProvider alloc] init]
                         forDataType:IBAInputDataTypeNumber];
         
 		// Date
-		[self registerInputProvider:[[[IBADateInputProvider alloc] init] autorelease]
+		[self registerInputProvider:[[IBADateInputProvider alloc] init]
 						forDataType:IBAInputDataTypeDate];
 		// Time
-		[self registerInputProvider:[[[IBADateInputProvider alloc] initWithDatePickerMode:UIDatePickerModeTime] autorelease] 
+		[self registerInputProvider:[[IBADateInputProvider alloc] initWithDatePickerMode:UIDatePickerModeTime] 
 						forDataType:IBAInputDataTypeTime];
 		
 		// Date & Time
-		[self registerInputProvider:[[[IBADateInputProvider alloc] initWithDatePickerMode:UIDatePickerModeDateAndTime] autorelease]
+		[self registerInputProvider:[[IBADateInputProvider alloc] initWithDatePickerMode:UIDatePickerModeDateAndTime]
 						forDataType:IBAInputDataTypeDateTime];
 		
 		// Single Picklist
-		[self registerInputProvider:[[[IBASinglePickListInputProvider alloc] init] autorelease]
+		[self registerInputProvider:[[IBASinglePickListInputProvider alloc] init]
 						forDataType:IBAInputDataTypePickListSingle];
 		
 		// Multiple Picklist
-		[self registerInputProvider:[[[IBAMultiplePickListInputProvider alloc] init] autorelease]
+		[self registerInputProvider:[[IBAMultiplePickListInputProvider alloc] init]
 						forDataType:IBAInputDataTypePickListMultiple];
         
 	}
@@ -140,7 +133,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(IBAInputManager);
 			return NO;
 		}
 
-    //TODO: remove UIPopoverController here, as you haven't tapped outside of it, but you want it to disappear
     if (activeInputRequestor_.displayStyle == IBAInputRequestorDisplayStylePopover) {
       [self.popoverController dismissPopoverAnimated:YES];
       self.popoverController = nil;
@@ -149,12 +141,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(IBAInputManager);
     }
 
 		oldInputProvider.inputRequestor = nil;
-		[activeInputRequestor_ release];
     activeInputRequestor_ = nil;
 	}
 	
 	if (inputRequestor != nil)  {
-		activeInputRequestor_ = [inputRequestor retain];
+		activeInputRequestor_ = inputRequestor;
 
 		id<IBAInputProvider>newInputProvider = [self inputProviderForRequestor:activeInputRequestor_];
 		[self displayInputProvider:newInputProvider forInputRequestor:inputRequestor];
@@ -267,11 +258,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(IBAInputManager);
   if (requestor.displayStyle == IBAInputRequestorDisplayStylePopover && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 
     //prevent the keyboard from appearing
-    [[requestor responder] setInputView:[[[UIView alloc] initWithFrame:CGRectZero] autorelease]];
+    [[requestor responder] setInputView:[[UIView alloc] initWithFrame:CGRectZero]];
 
     NSAssert(inputProvider.view != nil,@"InputProvider view cannot be nil if InputRequestor displayStyle == IBAInputRequestorDisplayStylePopover");
 
-    self.popoverController = [[[UIPopoverController alloc] initWithContentViewController:[[[IBAPoppedOverViewController alloc] initWithInputProviderView:inputProvider.view] autorelease]] autorelease];
+    self.popoverController = [[UIPopoverController alloc] initWithContentViewController:[[IBAPoppedOverViewController alloc] initWithInputProviderView:inputProvider.view]];
     self.popoverController.delegate = self;
     self.popoverController.popoverContentSize = inputProvider.view.frame.size;
 

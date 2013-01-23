@@ -17,7 +17,6 @@
 
 @interface IBAFormSection : NSObject {
 	NSMutableArray *formFields_;
-	id<IBAFormModelManager> modelManager_;
 	IBAFormFieldStyle *formFieldStyle_;
 	NSString *headerTitle_;
 	NSString *footerTitle_;	
@@ -27,11 +26,11 @@
 
 @property (nonatomic, readonly) NSMutableArray *formFields;
 @property (nonatomic, assign) id<IBAFormModelManager> modelManager;
-@property (nonatomic, retain) IBAFormFieldStyle *formFieldStyle;
+@property (nonatomic, strong) IBAFormFieldStyle *formFieldStyle;
 @property (nonatomic, copy) NSString *headerTitle;
 @property (nonatomic, copy) NSString *footerTitle;
-@property (nonatomic, retain) UIView *headerView;
-@property (nonatomic, retain) UIView *footerView;
+@property (nonatomic, strong) UIView *headerView;
+@property (nonatomic, strong) UIView *footerView;
 
 - (id)initWithHeaderTitle:(NSString *)header footerTitle:(NSString *)footer;
 

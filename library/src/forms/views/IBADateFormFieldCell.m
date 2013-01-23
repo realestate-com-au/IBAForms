@@ -28,11 +28,6 @@ static UIImage *clearImage_ = nil;
 @synthesize clearButton = clearButton_;
 @synthesize nullable = nullable_;
 
-- (void)dealloc {	
-	IBA_RELEASE_SAFELY(clearButton_);
-	
-	[super dealloc];
-}
 
 - (id)initWithFormFieldStyle:(IBAFormFieldStyle *)style reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithFormFieldStyle:style reuseIdentifier:reuseIdentifier])) {
@@ -94,7 +89,7 @@ static UIImage *clearImage_ = nil;
 		[stroke2 closePath];
 		[stroke2 strokeWithBlendMode:kCGBlendModeClear alpha:1.0];
 		
-		clearImage_ = [UIGraphicsGetImageFromCurrentImageContext() retain];
+		clearImage_ = UIGraphicsGetImageFromCurrentImageContext();
 		UIGraphicsEndImageContext();
 	}
 	

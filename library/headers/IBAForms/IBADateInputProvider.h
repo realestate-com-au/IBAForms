@@ -20,7 +20,6 @@
 	UIView *datePickerView_;
 	UIDatePickerMode datePickerMode_;
 	UIDatePicker *datePicker_;
-	id<IBAInputRequestor> inputRequestor_;
 }
 
 @property (nonatomic, assign) UIDatePickerMode datePickerMode;

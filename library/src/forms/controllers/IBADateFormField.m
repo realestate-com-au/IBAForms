@@ -23,13 +23,6 @@
 @synthesize dateFormFieldType = dateFormFieldType_;
 @synthesize defaultValue = defaultValue_;
 
-- (void)dealloc {
-	IBA_RELEASE_SAFELY(dateFormFieldCell_);
-	IBA_RELEASE_SAFELY(dateFormatter_);
-	IBA_RELEASE_SAFELY(defaultValue_);
-
-	[super dealloc];
-}
 
 
 - (id)initWithKeyPath:(NSString *)keyPath title:(NSString *)title defaultValue:(NSDate *)date type:(IBADateFormFieldType)dateFieldType
@@ -40,7 +33,7 @@
 
 		self.dateFormatter = dateFormatter;
 		if (self.dateFormatter == nil) {
-			self.dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+			self.dateFormatter = [[NSDateFormatter alloc] init];
 			[self.dateFormatter setDateStyle:NSDateFormatterMediumStyle];
 			[self.dateFormatter setTimeStyle:NSDateFormatterNoStyle];
 			[dateFormatter setDateFormat:@"EEE d MMM yyyy"];

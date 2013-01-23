@@ -27,11 +27,11 @@
 	BOOL active_;
 }
 
-@property (readwrite, retain) UIView *inputView;
-@property (readwrite, retain) UIView *inputAccessoryView;
-@property (nonatomic, retain) UIView *cellView;
-@property (nonatomic, retain) UILabel *label;
-@property (nonatomic, retain) IBAFormFieldStyle *formFieldStyle;
+@property (readwrite, strong) UIView *inputView;
+@property (readwrite, strong) UIView *inputAccessoryView;
+@property (nonatomic, strong) UIView *cellView;
+@property (nonatomic, strong) UILabel *label;
+@property (nonatomic, strong) IBAFormFieldStyle *formFieldStyle;
 @property (nonatomic, assign) BOOL styleApplied;
 
 - (id)initWithFormFieldStyle:(IBAFormFieldStyle *)style reuseIdentifier:(NSString *)reuseIdentifier;

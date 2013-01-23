@@ -29,10 +29,10 @@ typedef enum {
 	NSDate *defaultValue_;
 }
 
-@property (nonatomic, retain) IBADateFormFieldCell *dateFormFieldCell;
-@property (nonatomic, retain) NSDateFormatter *dateFormatter;
+@property (nonatomic, strong) IBADateFormFieldCell *dateFormFieldCell;
+@property (nonatomic, strong) NSDateFormatter *dateFormatter;
 @property (nonatomic, assign) IBADateFormFieldType dateFormFieldType;
-@property (nonatomic, retain) NSDate *defaultValue;
+@property (nonatomic, strong) NSDate *defaultValue;
 
 - (id)initWithKeyPath:(NSString *)keyPath title:(NSString *)title defaultValue:(NSDate *)date;
 - (id)initWithKeyPath:(NSString *)keyPath title:(NSString *)title defaultValue:(NSDate *)date type:(IBADateFormFieldType)dateFieldType;

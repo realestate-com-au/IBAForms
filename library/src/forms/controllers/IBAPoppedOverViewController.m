@@ -16,7 +16,7 @@
 #import "IBAFormConstants.h"
 
 @interface IBAPoppedOverViewController ()
-@property (nonatomic, retain) UIView *inputProviderView;
+@property (nonatomic, strong) UIView *inputProviderView;
 @end
 
 @implementation IBAPoppedOverViewController
@@ -34,12 +34,6 @@
   [self setView:self.inputProviderView];
 }
 
-- (void)dealloc
-{
-  IBA_RELEASE_SAFELY(inputProviderView_);
-
-  [super dealloc];
-}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {

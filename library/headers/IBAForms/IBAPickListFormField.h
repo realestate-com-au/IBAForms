@@ -24,7 +24,7 @@
 	NSArray *pickListOptions_;
 }
 
-@property (nonatomic, retain) IBATextFormFieldCell *pickListCell;
+@property (nonatomic, strong) IBATextFormFieldCell *pickListCell;
 @property (nonatomic, assign) IBAPickListSelectionMode selectionMode;
 @property (nonatomic, copy) NSArray *pickListOptions;
 

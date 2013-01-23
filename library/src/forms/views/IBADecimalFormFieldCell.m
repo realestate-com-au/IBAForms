@@ -22,12 +22,6 @@
 @synthesize valueTextField = valueTextField_;
 @synthesize valueLabel = valueLabel_;
 
-- (void)dealloc {
-  IBA_RELEASE_SAFELY(valueTextField_);
-  IBA_RELEASE_SAFELY(valueLabel_);
-  
-  [super dealloc];
-}
 
 - (id)initWithFormFieldStyle:(IBAFormFieldStyle *)style customClearButtonImage:(UIImage *)image reuseIdentifier:(NSString *)reuseIdentifier {
   if ((self = [super initWithFormFieldStyle:style reuseIdentifier:reuseIdentifier])) {

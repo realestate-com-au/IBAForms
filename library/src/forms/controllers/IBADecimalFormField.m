@@ -36,7 +36,7 @@
         displayTransformer:(NSValueTransformer *)displayTransformer
     customClearButtonImage:(UIImage *)image
 {
-  return [[[self alloc] initWithKeyPath:keyPath title:title valueTransformer:valueTransformer displayTransformer:displayTransformer customClearButtonImage:image] autorelease];
+  return [[self alloc] initWithKeyPath:keyPath title:title valueTransformer:valueTransformer displayTransformer:displayTransformer customClearButtonImage:image];
 }
 
 - (id)initWithKeyPath:(NSString *)keyPath
@@ -47,23 +47,13 @@ customClearButtonImage:(UIImage *)image
 {
   if ((self = [super initWithKeyPath:keyPath title:title valueTransformer:valueTransformer]))
   {
-    displayTransformer_ = [displayTransformer retain];
+    displayTransformer_ = displayTransformer;
     [self setCustomClearButonImage:image];
   }
   
   return self;
 }
 
-- (void)dealloc
-{
-    IBA_RELEASE_SAFELY(formFieldCell_);
-    IBA_RELEASE_SAFELY(numberFormatter_);
-    IBA_RELEASE_SAFELY(displayTransformer_);
-    IBA_RELEASE_SAFELY(inputValidationRegularExpression_);
-    IBA_RELEASE_SAFELY(customClearButonImage_);
-
-    [super dealloc];
-}
 
 #pragma mark -
 #pragma mark Cell management

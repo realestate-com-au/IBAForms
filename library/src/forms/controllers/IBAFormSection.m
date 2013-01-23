@@ -25,16 +25,6 @@
 @synthesize headerView = headerView_;
 @synthesize footerView = footerView_;
 
-- (void)dealloc {
-	IBA_RELEASE_SAFELY(formFields_);
-	IBA_RELEASE_SAFELY(formFieldStyle_);
-	IBA_RELEASE_SAFELY(headerTitle_);
-	IBA_RELEASE_SAFELY(footerTitle_);
-	IBA_RELEASE_SAFELY(headerView_);
-	IBA_RELEASE_SAFELY(footerView_);
-	
-	[super dealloc];
-}
 
 - (id)initWithHeaderTitle:(NSString *)header footerTitle:(NSString *)footer {
 	if ((self = [super init])) {

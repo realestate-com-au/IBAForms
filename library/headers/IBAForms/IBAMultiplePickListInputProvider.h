@@ -17,7 +17,6 @@
 
 @interface IBAMultiplePickListInputProvider : NSObject <IBAInputProvider, UITableViewDataSource, UITableViewDelegate> {
 	UITableView *pickListTableView_;
-	id<IBAInputRequestor> inputRequestor_;
 }
 
 @property (nonatomic, readonly) UITableView *pickListTableView;

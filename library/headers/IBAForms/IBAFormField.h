@@ -22,8 +22,6 @@
 @interface IBAFormField : NSObject {
 	NSString *keyPath_;
 	NSString *title_;
-	id<IBAFormModelManager> modelManager_;
-	id<IBAFormFieldDelegate> delegate_;
 	IBAFormFieldStyle *formFieldStyle_;
 	BOOL nullable_;
 	NSValueTransformer *valueTransformer_;
@@ -34,9 +32,9 @@
 @property (nonatomic, readonly) IBAFormFieldCell *cell;
 @property (nonatomic, assign) id<IBAFormModelManager> modelManager;
 @property (nonatomic, assign) id<IBAFormFieldDelegate> delegate;
-@property (nonatomic, retain) IBAFormFieldStyle *formFieldStyle;
+@property (nonatomic, strong) IBAFormFieldStyle *formFieldStyle;
 @property (nonatomic, assign, getter=isNullable) BOOL nullable;
-@property (nonatomic, retain) NSValueTransformer *valueTransformer;
+@property (nonatomic, strong) NSValueTransformer *valueTransformer;
 
 + (id)formFieldWithKeyPath:(NSString *)keyPath title:(NSString *)title valueTransformer:(NSValueTransformer *)valueTransformer;
 + (id)formFieldWithKeyPath:(NSString *)keyPath title:(NSString *)title;

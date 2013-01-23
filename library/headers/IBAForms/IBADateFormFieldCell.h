@@ -19,7 +19,7 @@
 	BOOL nullable_;
 }
 
-@property (nonatomic, retain) UIButton *clearButton;
+@property (nonatomic, strong) UIButton *clearButton;
 @property (nonatomic, assign, getter=isNullable) BOOL nullable;
 
 @end

@@ -16,7 +16,7 @@
 
 @interface IBATextField : UITextField
 
-@property (nonatomic, readonly) UIButton *clearButton;
+@property (nonatomic, strong, readonly) UIButton *clearButton;
 
 - (id)initWithFrame:(CGRect)frame customClearButtonImage:(UIImage *)image;
 

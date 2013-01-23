@@ -24,6 +24,7 @@
 @synthesize formFieldStyle = formFieldStyle_;
 @synthesize nullable = nullable_;
 @synthesize valueTransformer = valueTransformer_;
+@dynamic cell;
 
 #pragma mark -
 #pragma mark Initialisation and memory management
@@ -32,29 +33,21 @@
                      title:(NSString *)title
           valueTransformer:(NSValueTransformer *)valueTransformer
 {
-    return [[[self alloc] initWithKeyPath:keyPath title:title valueTransformer:valueTransformer] autorelease];
+    return [[self alloc] initWithKeyPath:keyPath title:title valueTransformer:valueTransformer];
 }
 
 + (id)formFieldWithKeyPath:(NSString *)keyPath 
                      title:(NSString *)title
 {
-    return [[[self alloc] initWithKeyPath:keyPath title:title] autorelease];
+    return [[self alloc] initWithKeyPath:keyPath title:title];
 }
 
 
 + (id)formFieldWithKeyPath:(NSString *)keyPath
 {
-    return [[[self alloc] initWithKeyPath:keyPath] autorelease];
+    return [[self alloc] initWithKeyPath:keyPath];
 }
 
-- (void)dealloc {
-	IBA_RELEASE_SAFELY(keyPath_);
-	IBA_RELEASE_SAFELY(title_);
-	IBA_RELEASE_SAFELY(formFieldStyle_);
-	IBA_RELEASE_SAFELY(valueTransformer_);
-
-	[super dealloc];
-}
 
 - (id)initWithKeyPath:(NSString*)keyPath title:(NSString*)title valueTransformer:(NSValueTransformer *)valueTransformer {
 	if ((self = [super init])) {
@@ -96,8 +89,7 @@
 - (void)setFormFieldStyle:(IBAFormFieldStyle *)formFieldStyle {
 	if (formFieldStyle != formFieldStyle_) {
 		IBAFormFieldStyle *oldStyle = formFieldStyle_;
-		formFieldStyle_ = [formFieldStyle retain];
-		IBA_RELEASE_SAFELY(oldStyle);
+		formFieldStyle_ = formFieldStyle;
 
 		self.cell.formFieldStyle = formFieldStyle;
 	}
@@ -106,8 +98,7 @@
 - (void)setTitle:(NSString *)title {
 	if (![title isEqualToString:title_]) {
 		NSString *oldTitle = title_;
-		title_ = [title copyWithZone:[self zone]];
-		IBA_RELEASE_SAFELY(oldTitle);
+		title_ = [title copyWithZone:nil];
 
 		[self updateCellContents];
 	}

@@ -16,7 +16,7 @@
 #import "IBATextField.h"
 
 @interface IBATextField ()
-@property (nonatomic, readwrite) UIButton *clearButton;
+@property (nonatomic, strong, readwrite) UIButton *clearButton;
 - (void)clearContent;
 @end
 

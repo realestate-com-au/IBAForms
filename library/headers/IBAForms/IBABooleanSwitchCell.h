@@ -19,6 +19,6 @@
 	UISwitch *switchControl_;
 }
 
-@property (nonatomic, retain) UISwitch *switchControl;
+@property (nonatomic, strong) UISwitch *switchControl;
 
 @end

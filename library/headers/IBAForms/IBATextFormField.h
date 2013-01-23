@@ -20,7 +20,7 @@
 	IBATextFormFieldCell *textFormFieldCell_;
 }
 
-@property (nonatomic, retain) IBATextFormFieldCell *textFormFieldCell;
+@property (nonatomic, strong) IBATextFormFieldCell *textFormFieldCell;
 @property (nonatomic, assign) NSInteger maxCharacterLength; // The maximum number of characters the user can enter into the field when editing. 
                                                             // Set to a negative value for no limit.
 

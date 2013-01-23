@@ -19,11 +19,6 @@
 
 @synthesize switchControl = switchControl_;
 
-- (void)dealloc {
-	IBA_RELEASE_SAFELY(switchControl_);
-
-	[super dealloc];
-}
 
 
 - (id)initWithFormFieldStyle:(IBAFormFieldStyle *)style reuseIdentifier:(NSString *)reuseIdentifier {

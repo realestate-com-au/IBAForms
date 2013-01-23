@@ -53,14 +53,12 @@
 
 - (void)dealloc {
 	[self releaseViews];
-	IBA_RELEASE_SAFELY(formDataSource_);
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	
-    [super dealloc];
 }
 
 - (void)releaseViews {
-	IBA_RELEASE_SAFELY(tableView_);
+	tableView_ = nil;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil formDataSource:(IBAFormDataSource *)formDataSource {
@@ -175,8 +173,7 @@
 - (void)setFormDataSource:(IBAFormDataSource *)dataSource {
 	if (dataSource != formDataSource_) {
 		IBAFormDataSource *oldDataSource = formDataSource_;
-		formDataSource_ = [dataSource retain];
-		IBA_RELEASE_SAFELY(oldDataSource);
+		formDataSource_ = dataSource;
 
 		self.tableView.dataSource = formDataSource_;
 		[self.tableView reloadData];
