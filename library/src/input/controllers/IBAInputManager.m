@@ -247,14 +247,19 @@
 
     [self updateInputNavigationToolbarVisibility];
 
-    if (requestor.displayStyle == IBAInputRequestorDisplayStylePopover && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-
-        //prevent the keyboard from appearing
-        [[requestor responder] setInputView:[[UIView alloc] initWithFrame:CGRectZero]];
+    if (requestor.displayStyle == IBAInputRequestorDisplayStylePopover) {
 
         NSAssert(inputProvider.view != nil,@"InputProvider view cannot be nil if InputRequestor displayStyle == IBAInputRequestorDisplayStylePopover");
 
-        self.popoverController = [[UIPopoverController alloc] initWithContentViewController:[[IBAPoppedOverViewController alloc] initWithInputProviderView:inputProvider.view]];
+        UIView *inputAccessoryView = [[requestor responder] inputAccessoryView];
+
+        //prevent the keyboard & accessory view from appearing
+        [[requestor responder] setInputView:[[UIView alloc] initWithFrame:CGRectZero]];
+//        [[requestor responder] setInputAccessoryView:nil];
+
+        UIViewController *poppedoverController = [[IBAPoppedOverViewController alloc] initWithInputProviderView:inputProvider.view accessoryView:inputAccessoryView];
+
+        self.popoverController = [[UIPopoverController alloc] initWithContentViewController:poppedoverController];
         self.popoverController.delegate = self;
         self.popoverController.popoverContentSize = inputProvider.view.frame.size;
 
