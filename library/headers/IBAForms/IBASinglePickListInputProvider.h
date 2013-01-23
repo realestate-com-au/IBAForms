@@ -16,8 +16,8 @@
 #import "IBAInputProvider.h"
 
 @interface IBASinglePickListInputProvider : NSObject <IBAInputProvider, UIPickerViewDataSource, UIPickerViewDelegate> {
-	UIPickerView *pickerView_;
-	UIView *providerView_;
+    UIPickerView *pickerView_;
+    UIView *providerView_;
 }
 
 @end

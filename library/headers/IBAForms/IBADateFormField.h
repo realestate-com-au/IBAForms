@@ -16,17 +16,17 @@
 #import "IBADateFormFieldCell.h"
 
 typedef enum {
-	IBADateFormFieldTypeDate = 0,
-	IBADateFormFieldTypeTime,
-	IBADateFormFieldTypeDateTime,
+    IBADateFormFieldTypeDate = 0,
+    IBADateFormFieldTypeTime,
+    IBADateFormFieldTypeDateTime,
 } IBADateFormFieldType;
 
 
 @interface IBADateFormField : IBAInputRequestorFormField {
-	IBADateFormFieldCell *dateFormFieldCell_;
-	NSDateFormatter *dateFormatter_;
-	IBADateFormFieldType dateFormFieldType_;
-	NSDate *defaultValue_;
+    IBADateFormFieldCell *dateFormFieldCell_;
+    NSDateFormatter *dateFormatter_;
+    IBADateFormFieldType dateFormFieldType_;
+    NSDate *defaultValue_;
 }
 
 @property (nonatomic, strong) IBADateFormFieldCell *dateFormFieldCell;

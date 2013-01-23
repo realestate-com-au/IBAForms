@@ -15,8 +15,6 @@
 #import "IBATextFormField.h"
 
 
-@interface IBAPasswordFormField : IBATextFormField {
-
-}
+@interface IBAPasswordFormField : IBATextFormField 
 
 @end

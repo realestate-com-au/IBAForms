@@ -15,7 +15,6 @@
 #import "IBAFormFieldCell.h"
 
 
-@interface IBALabelFormCell : IBAFormFieldCell {
-}
+@interface IBALabelFormCell : IBAFormFieldCell
 
 @end

@@ -17,60 +17,51 @@
 
 @interface IBATextField ()
 @property (nonatomic, strong, readwrite) UIButton *clearButton;
-- (void)clearContent;
 @end
 
 
 @implementation IBATextField
 @synthesize clearButton = clearButton_;
 
-- (id)initWithFrame:(CGRect)frame customClearButtonImage:(UIImage *)image
-{
-  if (self = [super initWithFrame:frame]) 
-  {
-    if (image != nil)
-    {
-      UIButton *clearButton = [UIButton buttonWithType:UIButtonTypeCustom];
-      [clearButton setImage:image forState:UIControlStateNormal];
-      [clearButton setAdjustsImageWhenHighlighted:YES];
+- (id)initWithFrame:(CGRect)frame customClearButtonImage:(UIImage *)image {
+    if (self = [super initWithFrame:frame])  {
+        if (image != nil) {
+            UIButton *clearButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            [clearButton setImage:image forState:UIControlStateNormal];
+            [clearButton setAdjustsImageWhenHighlighted:YES];
 
-      [clearButton addTarget:self action:@selector(clearContent) forControlEvents:UIControlEventTouchUpInside];
-      self.clearButton = clearButton;
+            [clearButton addTarget:self action:@selector(clearContent) forControlEvents:UIControlEventTouchUpInside];
+            self.clearButton = clearButton;
 
-      [self setRightView:clearButton];
-      [self setRightViewMode:UITextFieldViewModeAlways];
+            [self setRightView:clearButton];
+            [self setRightViewMode:UITextFieldViewModeAlways];
+        }
     }
-  }
-  
-  return self;
+
+    return self;
 }
 
-- (id)initWithFrame:(CGRect)frame
-{
-  return [self initWithFrame:frame customClearButtonImage:nil];
+- (id)initWithFrame:(CGRect)frame {
+    return [self initWithFrame:frame customClearButtonImage:nil];
 }
 
-- (void)clearContent
-{
-  [self setText:nil];
+- (void)clearContent {
+    [self setText:nil];
 }
 
-- (CGRect)rightViewRectForBounds:(CGRect)bounds
-{
-  UIImage *image = [(UIButton *)[self rightView] imageForState:UIControlStateNormal];
-  return CGRectMake(bounds.size.width - 22 - floorf(image.size.width / 2), 0, bounds.size.height, bounds.size.height);
+- (CGRect)rightViewRectForBounds:(CGRect)bounds {
+    UIImage *image = [(UIButton *)[self rightView] imageForState:UIControlStateNormal];
+    return CGRectMake(bounds.size.width - 22 - floorf(image.size.width / 2), 0, bounds.size.height, bounds.size.height);
 }
 
-- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event
-{  
-  BOOL inside = [super pointInside:point withEvent:event];
-  
-  if (![[self rightView] isHidden])
-  {
-    return (CGRectContainsPoint([[self rightView] frame], point) || inside);
-  }
-  
-  return inside;
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
+    BOOL inside = [super pointInside:point withEvent:event];
+
+    if (![[self rightView] isHidden]) {
+        return (CGRectContainsPoint([[self rightView] frame], point) || inside);
+    }
+    
+    return inside;
 }
 
 @end

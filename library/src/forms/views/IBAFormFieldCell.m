@@ -32,113 +32,114 @@
 
 
 - (id)initWithFormFieldStyle:(IBAFormFieldStyle *)style reuseIdentifier:(NSString *)reuseIdentifier {
-  if ((self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier])) {
-		self.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-		self.cellView = [[UIView alloc] initWithFrame:self.contentView.bounds];
-		self.cellView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-		self.cellView.userInteractionEnabled = YES;
-		[self.contentView addSubview:self.cellView];
-    
-		// Create a label
-		self.label = [[UILabel alloc] initWithFrame:style.labelFrame];
-		self.label.autoresizingMask = style.labelAutoresizingMask;
-		self.label.adjustsFontSizeToFitWidth = YES;
-		self.label.minimumFontSize = 10;
-		[self.cellView addSubview:self.label];
-    
-		// set the style after the views have been created
-		self.formFieldStyle = style;
-	}
-  
-  return self;
+    if ((self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier])) {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+
+        self.cellView = [[UIView alloc] initWithFrame:self.contentView.bounds];
+        self.cellView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        self.cellView.userInteractionEnabled = YES;
+        [self.contentView addSubview:self.cellView];
+
+        // Create a label
+        self.label = [[UILabel alloc] initWithFrame:style.labelFrame];
+        self.label.autoresizingMask = style.labelAutoresizingMask;
+        self.label.adjustsFontSizeToFitWidth = YES;
+        self.label.minimumFontSize = 10;
+        [self.cellView addSubview:self.label];
+
+        // set the style after the views have been created
+        self.formFieldStyle = style;
+    }
+
+    return self;
 }
 
 - (void)setBackgroundColor:(UIColor *)backgroundColor {
-  [super setBackgroundColor:backgroundColor];
+    [super setBackgroundColor:backgroundColor];
 
-  if (self.backgroundView) {
-    self.backgroundView.backgroundColor = backgroundColor;
-  }
+    if (self.backgroundView) {
+        self.backgroundView.backgroundColor = backgroundColor;
+    }
 }
 
 - (void)activate {
-	[self applyActiveStyle];
-	self.active = YES;
+    [self applyActiveStyle];
+    self.active = YES;
+
 }
 
 
 - (void)deactivate {
-	[self applyFormFieldStyle];
-	self.active = NO;
+    [self applyFormFieldStyle];
+    self.active = NO;
 }
 
 - (void)setFormFieldStyle:(IBAFormFieldStyle *)style {
-	if (style != formFieldStyle_) {
-		formFieldStyle_ = style;
-		
-		self.styleApplied = NO;
-	}
+    if (style != formFieldStyle_) {
+        formFieldStyle_ = style;
+
+        self.styleApplied = NO;
+    }
 }
 
 - (void)applyFormFieldStyle {
-	self.label.font = self.formFieldStyle.labelFont;
-	self.label.textColor = self.formFieldStyle.labelTextColor;
-	self.label.textAlignment = self.formFieldStyle.labelTextAlignment;
-	self.label.backgroundColor = self.formFieldStyle.labelBackgroundColor;
-  self.label.contentMode = self.formFieldStyle.labelContentMode;
-  self.label.opaque = self.formFieldStyle.labelOpaque;
-  
-	self.backgroundColor = self.formFieldStyle.backgroundColor;
-  if (self.formFieldStyle.backgroundView) {
-    self.backgroundView = self.formFieldStyle.backgroundView;
-  }
+    self.label.font = self.formFieldStyle.labelFont;
+    self.label.textColor = self.formFieldStyle.labelTextColor;
+    self.label.textAlignment = self.formFieldStyle.labelTextAlignment;
+    self.label.backgroundColor = self.formFieldStyle.labelBackgroundColor;
+    self.label.contentMode = self.formFieldStyle.labelContentMode;
+    self.label.opaque = self.formFieldStyle.labelOpaque;
 
-	self.styleApplied = YES;
+    self.backgroundColor = self.formFieldStyle.backgroundColor;
+    if (self.formFieldStyle.backgroundView) {
+        self.backgroundView = self.formFieldStyle.backgroundView;
+    }
+
+    self.styleApplied = YES;
 }
 
 - (void)applyActiveStyle {
-	self.backgroundColor = self.formFieldStyle.activeBackgroundColor;
-  if (self.formFieldStyle.activeBackgroundView) {
-    self.backgroundView = self.formFieldStyle.activeBackgroundView;
-  }
+    self.backgroundColor = self.formFieldStyle.activeBackgroundColor;
+    if (self.formFieldStyle.activeBackgroundView) {
+        self.backgroundView = self.formFieldStyle.activeBackgroundView;
+    }
 }
 
 - (void)updateActiveStyle {
     if ([self isActive]) {
-		// We need to reapply the active style because the tableview has a nasty habbit of resetting the cell background 
-		// when the cell is reattached to the view hierarchy.
-		[self applyActiveStyle]; 
-	}
+        // We need to reapply the active style because the tableview has a nasty habbit of resetting the cell background
+        // when the cell is reattached to the view hierarchy.
+        [self applyActiveStyle];
+    }
 }
 
 - (void)drawRect:(CGRect)rect {
-	if (!self.styleApplied) {
-		[self applyFormFieldStyle];
-	}
+    if (!self.styleApplied) {
+        [self applyFormFieldStyle];
+    }
 
-	[super drawRect:rect];
+    [super drawRect:rect];
 }
 
 - (CGSize)sizeThatFits:(CGSize)size
 {
-  return [self.cellView bounds].size;
+    return [self.cellView bounds].size;
 }
 
 - (BOOL)canBecomeFirstResponder {
-	return YES;
+    return YES;
 }
 
 - (void)flashWithColor:(UIColor *)color
 {
-  UIColor *oldBackgroundColor = self.contentView.backgroundColor;
-  [UIView animateWithDuration:0.15 animations:^{
-    self.contentView.backgroundColor = color;
-  } completion:^(BOOL finished) {
+    UIColor *oldBackgroundColor = self.contentView.backgroundColor;
     [UIView animateWithDuration:0.15 animations:^{
-      self.contentView.backgroundColor = oldBackgroundColor;
+        self.contentView.backgroundColor = color;
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.15 animations:^{
+            self.contentView.backgroundColor = oldBackgroundColor;
+        }];
     }];
-  }];
 }
 
 @end

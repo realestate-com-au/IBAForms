@@ -21,35 +21,34 @@
 @synthesize displayStyle = displayStyle_;
 
 - (id)initWithKeyPath:(NSString*)keyPath title:(NSString*)title valueTransformer:(NSValueTransformer *)valueTransformer {
-  if ((self = [super initWithKeyPath:keyPath title:title valueTransformer:valueTransformer]))
-  {
-    self.displayStyle = IBAInputRequestorDisplayStyleKeyboard;
-  }
-  return self;
+    if ((self = [super initWithKeyPath:keyPath title:title valueTransformer:valueTransformer]))
+    {
+        self.displayStyle = IBAInputRequestorDisplayStyleKeyboard;
+    }
+    return self;
 }
 
-#pragma mark -
-#pragma mark IBAInputRequestor
+#pragma mark - IBAInputRequestor
 
 - (NSString *)dataType {
-	NSAssert(NO, @"Subclasses of IBAInputRequestorFormField should override dataType");
-	return nil;
+    NSAssert(NO, @"Subclasses of IBAInputRequestorFormField should override dataType");
+    return nil;
 }
 
 - (void)activate {
-        [[self responder] becomeFirstResponder];
+    [[self responder] becomeFirstResponder];
 
-	NSDictionary *userInfo = [NSMutableDictionary dictionaryWithObjectsAndKeys:self,IBAFormFieldKey,nil];
-	[[NSNotificationCenter defaultCenter] postNotificationName:IBAInputRequestorFormFieldActivated object:self userInfo:userInfo];
-	
-	if ([self hasDetailViewController]) {
-		// If the form field has a detailViewController, then it should be displayed, and the form field should
-		// be unselected when the detailViewController is popped back of the navigation stack
-		[self deactivate];
-	} else {
-		// Give the cell a chance to change it's visual state to show that it has been activated
-		[self.cell activate];		
-	}
+    NSDictionary *userInfo = [NSMutableDictionary dictionaryWithObjectsAndKeys:self,IBAFormFieldKey,nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:IBAInputRequestorFormFieldActivated object:self userInfo:userInfo];
+
+    if ([self hasDetailViewController]) {
+        // If the form field has a detailViewController, then it should be displayed, and the form field should
+        // be unselected when the detailViewController is popped back of the navigation stack
+        [self deactivate];
+    } else {
+        // Give the cell a chance to change it's visual state to show that it has been activated
+        [self.cell activate];
+    }
 }
 
 - (BOOL)deactivate {
@@ -57,33 +56,33 @@
 }
 
 - (BOOL)deactivateForced:(BOOL)forced {
-	NSDictionary *userInfo = [NSMutableDictionary dictionaryWithObjectsAndKeys:self,IBAFormFieldKey,nil];
-	[[NSNotificationCenter defaultCenter] postNotificationName:IBAInputRequestorFormFieldDeactivated object:self userInfo:userInfo];
-	
-	[self.cell deactivate];
-	
-	return YES;
+    NSDictionary *userInfo = [NSMutableDictionary dictionaryWithObjectsAndKeys:self,IBAFormFieldKey,nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:IBAInputRequestorFormFieldDeactivated object:self userInfo:userInfo];
+
+    [self.cell deactivate];
+
+    return YES;
 }
 
 - (id)inputRequestorValue {
-	return [self formFieldValue];
+    return [self formFieldValue];
 }
 
 - (void)setInputRequestorValue:(id)aValue {
-	[self setFormFieldValue:aValue];
+    [self setFormFieldValue:aValue];
 }
 
 - (id)defaultInputRequestorValue {
-	return nil;
+    return nil;
 }
 
 - (UIResponder *)responder {
-	return self.cell;
+    return self.cell;
 }
 
 - (BOOL)shouldAutoScrollFormWhenActive
 {
-  return !(self.displayStyle == IBAInputRequestorDisplayStylePopover);
+    return !(self.displayStyle == IBAInputRequestorDisplayStylePopover);
 }
 
 - (void)setDisplayStyle:(IBAInputRequestorDisplayStyle)displayStyle

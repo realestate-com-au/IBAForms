@@ -23,100 +23,94 @@
 @synthesize dateFormFieldType = dateFormFieldType_;
 @synthesize defaultValue = defaultValue_;
 
+- (id)initWithKeyPath:(NSString *)keyPath title:(NSString *)title defaultValue:(NSDate *)date type:(IBADateFormFieldType)dateFieldType dateFormatter:(NSDateFormatter *)dateFormatter {
+    if ((self = [super initWithKeyPath:keyPath title:title valueTransformer:nil])) {
+        self.dateFormFieldType = dateFieldType;
+        self.defaultValue = date;
 
+        self.dateFormatter = dateFormatter;
+        if (self.dateFormatter == nil) {
+            self.dateFormatter = [[NSDateFormatter alloc] init];
+            [self.dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+            [self.dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+            [dateFormatter setDateFormat:@"EEE d MMM yyyy"];
+        }
+    }
+    self.displayStyle = IBAInputRequestorDisplayStylePopover;
 
-- (id)initWithKeyPath:(NSString *)keyPath title:(NSString *)title defaultValue:(NSDate *)date type:(IBADateFormFieldType)dateFieldType
-		 dateFormatter:(NSDateFormatter *)dateFormatter {
-	if ((self = [super initWithKeyPath:keyPath title:title valueTransformer:nil])) {
-		self.dateFormFieldType = dateFieldType;
-		self.defaultValue = date;
-
-		self.dateFormatter = dateFormatter;
-		if (self.dateFormatter == nil) {
-			self.dateFormatter = [[NSDateFormatter alloc] init];
-			[self.dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-			[self.dateFormatter setTimeStyle:NSDateFormatterNoStyle];
-			[dateFormatter setDateFormat:@"EEE d MMM yyyy"];
-		}
-	}
-  self.displayStyle = IBAInputRequestorDisplayStylePopover;
-
-	return self;
+    return self;
 }
 
 - (id)initWithKeyPath:(NSString *)keyPath title:(NSString *)title defaultValue:(NSDate *)date type:(IBADateFormFieldType)dateFieldType {
-	return [self initWithKeyPath:keyPath title:title defaultValue:date type:dateFieldType dateFormatter:nil];
+    return [self initWithKeyPath:keyPath title:title defaultValue:date type:dateFieldType dateFormatter:nil];
 }
 
 - (id)initWithKeyPath:(NSString *)keyPath title:(NSString *)title defaultValue:(NSDate *)date {
-	return [self initWithKeyPath:keyPath title:title defaultValue:date type:IBADateFormFieldTypeDate];
+    return [self initWithKeyPath:keyPath title:title defaultValue:date type:IBADateFormFieldTypeDate];
 }
 
 - (NSString *)formFieldStringValue {
-	return [self.dateFormatter stringFromDate:[self formFieldValue]];
+    return [self.dateFormatter stringFromDate:[self formFieldValue]];
 }
 
 - (void)clear:(id)sender {
-	[self setFormFieldValue:nil];
+    [self setFormFieldValue:nil];
 }
 
-#pragma mark -
-#pragma mark Cell management
+#pragma mark - Cell management
 
 - (IBAFormFieldCell *)cell {
-	return [self dateFormFieldCell];
+    return [self dateFormFieldCell];
 }
 
 
 - (IBADateFormFieldCell *)dateFormFieldCell {
-	if (dateFormFieldCell_ == nil) {
-		dateFormFieldCell_ = [[IBADateFormFieldCell alloc] initWithFormFieldStyle:self.formFieldStyle reuseIdentifier:@"Cell"];
-		dateFormFieldCell_.nullable = self.nullable;
-		[dateFormFieldCell_.clearButton addTarget:self action:@selector(clear:) forControlEvents:UIControlEventTouchUpInside];
-	}
+    if (dateFormFieldCell_ == nil) {
+        dateFormFieldCell_ = [[IBADateFormFieldCell alloc] initWithFormFieldStyle:self.formFieldStyle reuseIdentifier:@"Cell"];
+        dateFormFieldCell_.nullable = self.nullable;
+        [dateFormFieldCell_.clearButton addTarget:self action:@selector(clear:) forControlEvents:UIControlEventTouchUpInside];
+    }
 
-	return dateFormFieldCell_;
+    return dateFormFieldCell_;
 }
 
 - (void)updateCellContents {
-	if (dateFormFieldCell_ != nil) {
-		self.dateFormFieldCell.label.text = self.title;
-		self.dateFormFieldCell.textField.text = [self formFieldStringValue];
-	}
+    if (dateFormFieldCell_ != nil) {
+        self.dateFormFieldCell.label.text = self.title;
+        self.dateFormFieldCell.textField.text = [self formFieldStringValue];
+    }
 }
 
-#pragma mark -
-#pragma mark IBAInputRequestor
+#pragma mark - IBAInputRequestor
 
 - (NSString *)dataType {
-	NSString *dataType = nil;
+    NSString *dataType = nil;
 
-	switch (self.dateFormFieldType) {
-		case IBADateFormFieldTypeDate:
-			dataType = IBAInputDataTypeDate;
-			break;
-		case IBADateFormFieldTypeTime:
-			dataType = IBAInputDataTypeTime;
-			break;
-		case IBADateFormFieldTypeDateTime:
-			dataType = IBAInputDataTypeDateTime;
-			break;
-		default:
-			break;
-	}
+    switch (self.dateFormFieldType) {
+        case IBADateFormFieldTypeDate:
+            dataType = IBAInputDataTypeDate;
+            break;
+        case IBADateFormFieldTypeTime:
+            dataType = IBAInputDataTypeTime;
+            break;
+        case IBADateFormFieldTypeDateTime:
+            dataType = IBAInputDataTypeDateTime;
+            break;
+        default:
+            break;
+    }
 
-	return dataType;
+    return dataType;
 }
 
 
 - (id)defaultInputRequestorValue {
-	NSDate *defaultDate = self.defaultValue;
-	if (defaultDate == nil) {
-		defaultDate = [NSDate date];
-	}
+    NSDate *defaultDate = self.defaultValue;
+    if (defaultDate == nil) {
+        defaultDate = [NSDate date];
+    }
 
-	return defaultDate;
+    return defaultDate;
 }
-
 
 @end

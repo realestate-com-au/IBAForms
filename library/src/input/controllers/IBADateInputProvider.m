@@ -18,7 +18,6 @@
 @interface IBADateInputProvider ()
 @property (nonatomic, strong, readonly) UIView *datePickerView;
 @property (nonatomic, strong, readonly) UIDatePicker *datePicker;
-- (void)datePickerValueChanged;
 @end
 
 
@@ -28,73 +27,67 @@
 @synthesize datePickerMode = datePickerMode_;
 @synthesize datePicker = datePicker_;
 
-#pragma mark -
-#pragma mark Memory management
-
 
 - (id)init {
-	return [self initWithDatePickerMode:UIDatePickerModeDate];
+    return [self initWithDatePickerMode:UIDatePickerModeDate];
 }
 
 - (id)initWithDatePickerMode:(UIDatePickerMode)datePickerMode {
-	if ((self = [super init])) {
-		self.datePickerMode = datePickerMode;
-	}
-	
-	return self;
+    if ((self = [super init])) {
+        self.datePickerMode = datePickerMode;
+    }
+
+    return self;
 }
 
 
-#pragma mark -
-#pragma mark Accessors
+#pragma mark - Accessors
 
 - (UIView *)datePickerView {
-	if (datePickerView_ == nil) {
-		
-		datePicker_ = [[UIDatePicker alloc] init];
-		datePicker_.datePickerMode = self.datePickerMode;
-		datePicker_.minuteInterval = 5;
-		[datePicker_ addTarget:self action:@selector(datePickerValueChanged) forControlEvents:UIControlEventValueChanged];
-		
-		datePickerView_ = [[UIView alloc] initWithFrame:[datePicker_ frame]];
-		datePickerView_.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-		datePickerView_.backgroundColor = [UIColor viewFlipsideBackgroundColor];
-		[datePickerView_ addSubview:datePicker_];
-	}
-	
-	return datePickerView_;
+    if (datePickerView_ == nil) {
+
+        datePicker_ = [[UIDatePicker alloc] init];
+        datePicker_.datePickerMode = self.datePickerMode;
+        datePicker_.minuteInterval = 5;
+        [datePicker_ addTarget:self action:@selector(datePickerValueChanged) forControlEvents:UIControlEventValueChanged];
+
+        datePickerView_ = [[UIView alloc] initWithFrame:[datePicker_ frame]];
+        datePickerView_.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+        datePickerView_.backgroundColor = [UIColor viewFlipsideBackgroundColor];
+        [datePickerView_ addSubview:datePicker_];
+    }
+
+    return datePickerView_;
 }
 
 
-#pragma mark -
-#pragma mark IBAInputProvider
+#pragma mark - IBAInputProvider
 
 - (UIView *)view {
-	return self.datePickerView;
+    return self.datePickerView;
 }
 
 
-#pragma mark -
-#pragma mark Date value change management
+#pragma mark -  Date value change management
 
 - (void)datePickerValueChanged {
-	inputRequestor_.inputRequestorValue = self.datePicker.date;
+    inputRequestor_.inputRequestorValue = self.datePicker.date;
 }
 
 
 - (void)setInputRequestor:(id<IBAInputRequestor>)inputRequestor {
-	inputRequestor_ = inputRequestor;
-	
-	if (inputRequestor != nil) {
-		// update the date picker's value with that of the new inputRequestors current value
-		NSDate *date = inputRequestor.inputRequestorValue;
-		if (date == nil) {
-			date = inputRequestor.defaultInputRequestorValue;
-			inputRequestor.inputRequestorValue = date;
-		}
-		
-		[self.datePicker setDate:date animated:YES];
-	}
+    inputRequestor_ = inputRequestor;
+
+    if (inputRequestor != nil) {
+        // update the date picker's value with that of the new inputRequestors current value
+        NSDate *date = inputRequestor.inputRequestorValue;
+        if (date == nil) {
+            date = inputRequestor.defaultInputRequestorValue;
+            inputRequestor.inputRequestorValue = date;
+        }
+
+        [self.datePicker setDate:date animated:YES];
+    }
 }
 
 @end

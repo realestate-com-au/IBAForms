@@ -18,16 +18,16 @@
 @implementation IBALabelFormField
 
 - (IBAFormFieldCell *)cell {
-	if (cell_ == nil) {
-		cell_ = [[IBALabelFormCell alloc] initWithFormFieldStyle:self.formFieldStyle reuseIdentifier:@"Cell"];
-	}
-	
-	return cell_;
+    if (cell_ == nil) {
+        cell_ = [[IBALabelFormCell alloc] initWithFormFieldStyle:self.formFieldStyle reuseIdentifier:@"Cell"];
+    }
+
+    return cell_;
 }
 
 
 - (void)updateCellContents {
-	self.cell.label.text = [self formFieldValue];
+    self.cell.label.text = [self formFieldValue];
 }
 
 @end

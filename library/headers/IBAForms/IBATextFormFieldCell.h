@@ -16,7 +16,7 @@
 
 
 @interface IBATextFormFieldCell : IBAFormFieldCell {
-	UITextField *textField_;
+    UITextField *textField_;
 }
 
 @property (nonatomic, strong) UITextField *textField;

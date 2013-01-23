@@ -15,29 +15,29 @@
 #import <UIKit/UIKit.h>
 
 @interface IBAFormFieldStyle : NSObject <NSCopying> {
-	UIColor *labelTextColor_;
-	UIColor *labelBackgroundColor_;
-	UIFont *labelFont_;
-	CGRect labelFrame_;
-	UITextAlignment labelTextAlignment_;
-	UIViewAutoresizing labelAutoresizingMask_;
-  UIViewContentMode labelContentMode_;
-  BOOL labelOpaque_;
-	
-	UIColor *valueTextColor_;
-	UIColor *valueBackgroundColor_;
-	UIFont *valueFont_;
-	CGRect valueFrame_;
-  BOOL valueOpaque_;
+    UIColor *labelTextColor_;
+    UIColor *labelBackgroundColor_;
+    UIFont *labelFont_;
+    CGRect labelFrame_;
+    UITextAlignment labelTextAlignment_;
+    UIViewAutoresizing labelAutoresizingMask_;
+    UIViewContentMode labelContentMode_;
+    BOOL labelOpaque_;
 
-	UITextAlignment valueTextAlignment_;
-	UIViewAutoresizing valueAutoresizingMask_;
-  UIControlContentVerticalAlignment valueVerticalAlignment_;
-  UIViewContentMode valueContentMode_;
-	UIColor *activeBackgroundColor_;
-  UIColor *backgroundColor_;
-  UIView *activeBackgroundView_;
-  UIView *backgroundView_;
+    UIColor *valueTextColor_;
+    UIColor *valueBackgroundColor_;
+    UIFont *valueFont_;
+    CGRect valueFrame_;
+    BOOL valueOpaque_;
+
+    UITextAlignment valueTextAlignment_;
+    UIViewAutoresizing valueAutoresizingMask_;
+    UIControlContentVerticalAlignment valueVerticalAlignment_;
+    UIViewContentMode valueContentMode_;
+    UIColor *activeBackgroundColor_;
+    UIColor *backgroundColor_;
+    UIView *activeBackgroundView_;
+    UIView *backgroundView_;
 }
 
 @property (nonatomic, strong) UIColor *labelTextColor;

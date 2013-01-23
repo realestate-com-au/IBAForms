@@ -24,85 +24,79 @@
 @synthesize maxCharacterLength = maxCharacterLength_;
 
 - (id)initWithKeyPath:(NSString*)keyPath title:(NSString*)title valueTransformer:(NSValueTransformer *)valueTransformer {
-	if ((self = [super initWithKeyPath:keyPath title:title valueTransformer:valueTransformer])) {
-		self.maxCharacterLength = -1;
-	}
-  
-	return self;
+    if ((self = [super initWithKeyPath:keyPath title:title valueTransformer:valueTransformer])) {
+        self.maxCharacterLength = -1;
+    }
+
+    return self;
 }
 
-
-
-#pragma mark -
-#pragma mark Cell management
+#pragma mark - Cell management
 
 - (IBAFormFieldCell *)cell {
-	return [self textFormFieldCell];
+    return [self textFormFieldCell];
 }
 
 
 - (IBATextFormFieldCell *)textFormFieldCell {
-	if (textFormFieldCell_ == nil) {
-		textFormFieldCell_ = [[IBATextFormFieldCell alloc] initWithFormFieldStyle:self.formFieldStyle reuseIdentifier:@"Cell"];
-		textFormFieldCell_.textField.delegate = self;
-		textFormFieldCell_.textField.enabled = NO;
-	}
-	
-	return textFormFieldCell_;
+    if (textFormFieldCell_ == nil) {
+        textFormFieldCell_ = [[IBATextFormFieldCell alloc] initWithFormFieldStyle:self.formFieldStyle reuseIdentifier:@"Cell"];
+        textFormFieldCell_.textField.delegate = self;
+        textFormFieldCell_.textField.enabled = NO;
+    }
+
+    return textFormFieldCell_;
 }
 
 - (void)updateCellContents {
-	self.textFormFieldCell.label.text = self.title;
-	self.textFormFieldCell.textField.text = [self formFieldStringValue];
+    self.textFormFieldCell.label.text = self.title;
+    self.textFormFieldCell.textField.text = [self formFieldStringValue];
 }
 
 
-#pragma mark -
-#pragma mark UITextFieldDelegate
+#pragma mark - UITextFieldDelegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-	return [[IBAInputManager sharedIBAInputManager] activateNextInputRequestor];;
+    return [[IBAInputManager sharedIBAInputManager] activateNextInputRequestor];;
 }
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-  // Enforce the maximum character length if it has been set
-  NSInteger newLength = [textField.text length] + [string length] - range.length;
-  return (self.maxCharacterLength < 0) || (self.maxCharacterLength >= newLength);
+    // Enforce the maximum character length if it has been set
+    NSInteger newLength = [textField.text length] + [string length] - range.length;
+    return (self.maxCharacterLength < 0) || (self.maxCharacterLength >= newLength);
 }
 
-#pragma mark -
-#pragma mark IBAInputRequestor
+#pragma mark - IBAInputRequestor
 
 - (NSString *)dataType {
-	return IBAInputDataTypeText;
+    return IBAInputDataTypeText;
 }
 
 - (void)activate {
-	self.textFormFieldCell.textField.enabled = YES;
-	[super activate];
+    self.textFormFieldCell.textField.enabled = YES;
+    [super activate];
 }
 
 - (BOOL)deactivateForced:(BOOL)forced {
-	BOOL deactivated = [self pushChanges];
-	if (deactivated || forced) {
-		self.textFormFieldCell.textField.enabled = NO;
-		deactivated = [super deactivateForced:forced];
-	}
-	
-	return deactivated;
+    BOOL deactivated = [self pushChanges];
+    if (deactivated || forced) {
+        self.textFormFieldCell.textField.enabled = NO;
+        deactivated = [super deactivateForced:forced];
+    }
+
+    return deactivated;
 }
 
 - (UIResponder *)responder {
-	return self.textFormFieldCell.textField;
+    return self.textFormFieldCell.textField;
 }
 
 
-#pragma mark -
-#pragma mark IBAFormField
+#pragma mark - IBAFormField
 
 - (BOOL)pushChanges {
-	return [self setFormFieldValue:self.textFormFieldCell.textField.text];
+    return [self setFormFieldValue:self.textFormFieldCell.textField.text];
 }
 
 @end
@@ -115,7 +109,7 @@
     [self addFormField:field];
     return field;
 }
-                               
+
 - (IBATextFormField *)textFormFieldWithKeyPath:(NSString *)keyPath title:(NSString *)title
 {
     IBATextFormField *field = [IBATextFormField formFieldWithKeyPath:keyPath title:title];

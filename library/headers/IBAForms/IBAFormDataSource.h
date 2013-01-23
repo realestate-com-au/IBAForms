@@ -17,10 +17,10 @@
 #import "IBAFormFieldStyle.h"
 
 @interface IBAFormDataSource : NSObject <UITableViewDataSource, IBAFormModelManager> {
-	NSString *name_;
-	id model_; // the underlying object this datasource represents
-	NSMutableArray *sections_;
-	IBAFormFieldStyle *formFieldStyle_;
+    NSString *name_;
+    id model_; // the underlying object this datasource represents
+    NSMutableArray *sections_;
+    IBAFormFieldStyle *formFieldStyle_;
 }
 
 @property (nonatomic, copy) NSString *name;
@@ -30,8 +30,7 @@
 
 - (id)initWithModel:(id)model;
 
-#pragma mark -
-#pragma mark Section and field management
+#pragma mark - Section and field management
 
 - (NSInteger)sectionCount;
 - (IBAFormSection *)addSectionWithHeaderTitle:(NSString *)headerTitle footerTitle:(NSString *)footerTitle;

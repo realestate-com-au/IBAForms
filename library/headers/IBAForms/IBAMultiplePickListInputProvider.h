@@ -16,7 +16,7 @@
 #import "IBAInputProvider.h"
 
 @interface IBAMultiplePickListInputProvider : NSObject <IBAInputProvider, UITableViewDataSource, UITableViewDelegate> {
-	UITableView *pickListTableView_;
+    UITableView *pickListTableView_;
 }
 
 @property (nonatomic, readonly) UITableView *pickListTableView;

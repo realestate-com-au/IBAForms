@@ -23,15 +23,15 @@
 @synthesize inputProviderView = inputProviderView_;
 
 - (id)initWithInputProviderView:(UIView *)inputProviderView {
-  if ((self = [super initWithNibName:nil bundle:nil])) {
-    [self setInputProviderView:inputProviderView];
-  }
-  return self;
+    if ((self = [super initWithNibName:nil bundle:nil])) {
+        [self setInputProviderView:inputProviderView];
+    }
+    return self;
 }
 
 - (void)loadView
 {
-  [self setView:self.inputProviderView];
+    [self setView:self.inputProviderView];
 }
 
 

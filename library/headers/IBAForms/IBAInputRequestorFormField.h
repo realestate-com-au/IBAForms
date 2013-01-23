@@ -15,8 +15,6 @@
 #import "IBAFormField.h"
 #import "IBAInputRequestor.h"
 
-@interface IBAInputRequestorFormField : IBAFormField <IBAInputRequestor> {
-
-}
+@interface IBAInputRequestorFormField : IBAFormField <IBAInputRequestor>
 
 @end

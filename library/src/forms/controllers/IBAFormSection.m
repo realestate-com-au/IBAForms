@@ -27,27 +27,27 @@
 
 
 - (id)initWithHeaderTitle:(NSString *)header footerTitle:(NSString *)footer {
-	if ((self = [super init])) {
-		self.headerTitle = header;
-		self.footerTitle = footer;
-		formFields_ = [[NSMutableArray alloc] init];
-		headerView_ = nil;
-		footerView_ = nil;
-	}
-  
-	return self;
+    if ((self = [super init])) {
+        self.headerTitle = header;
+        self.footerTitle = footer;
+        formFields_ = [[NSMutableArray alloc] init];
+        headerView_ = nil;
+        footerView_ = nil;
+    }
+
+    return self;
 }
 
 - (id)init {
-	return [self initWithHeaderTitle:nil footerTitle:nil];
+    return [self initWithHeaderTitle:nil footerTitle:nil];
 }
 
 - (void)addFormField:(IBAFormField *)newFormField {
-	if (self.formFieldStyle && nil == newFormField.formFieldStyle) {
-		newFormField.formFieldStyle = self.formFieldStyle;
-	}
-	newFormField.modelManager = self.modelManager;
-	[self.formFields addObject:newFormField];
+    if (self.formFieldStyle && nil == newFormField.formFieldStyle) {
+        newFormField.formFieldStyle = self.formFieldStyle;
+    }
+    newFormField.modelManager = self.modelManager;
+    [self.formFields addObject:newFormField];
 }
 
 @end

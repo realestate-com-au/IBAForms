@@ -16,15 +16,15 @@
 #import "IBABooleanSwitchCell.h"
 
 typedef enum {
-	IBABooleanFormFieldTypeSwitch = 0,
-	IBABooleanFormFieldTypeCheck,
+    IBABooleanFormFieldTypeSwitch = 0,
+    IBABooleanFormFieldTypeCheck,
 } IBABooleanFormFieldType;
 
 
 @interface IBABooleanFormField : IBAFormField {
-	IBABooleanSwitchCell *switchCell_;
-	IBAFormFieldCell *checkCell_;
-	IBABooleanFormFieldType booleanFormFieldType_;
+    IBABooleanSwitchCell *switchCell_;
+    IBAFormFieldCell *checkCell_;
+    IBABooleanFormFieldType booleanFormFieldType_;
 }
 
 @property (nonatomic, readonly) IBABooleanSwitchCell *switchCell;

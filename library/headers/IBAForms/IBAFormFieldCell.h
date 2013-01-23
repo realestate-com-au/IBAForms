@@ -18,13 +18,13 @@
 @class IBAFormField;
 
 @interface IBAFormFieldCell : UITableViewCell {
-	UIView *inputView_;
-	UIView *inputAccessoryView_;
-	UIView *cellView_;
-	UILabel *label_;
-	IBAFormFieldStyle *formFieldStyle_;
-	BOOL styleApplied_;
-	BOOL active_;
+    UIView *inputView_;
+    UIView *inputAccessoryView_;
+    UIView *cellView_;
+    UILabel *label_;
+    IBAFormFieldStyle *formFieldStyle_;
+    BOOL styleApplied_;
+    BOOL active_;
 }
 
 @property (readwrite, strong) UIView *inputView;

@@ -16,8 +16,7 @@
 #import "IBATextFormFieldCell.h"
 #import "IBAInputCommon.h"
 
-#pragma mark -
-#pragma mark IBACycleListFormField
+#pragma mark - IBACycleListFormField
 
 @interface IBACycleListFormField ()
 - (id)nextFormFieldValue;
@@ -34,38 +33,37 @@
 }
 
 - (id)initWithKeyPath:(NSString *)keyPath title:(NSString *)title valueTransformer:(NSValueTransformer *)valueTransformer options:(NSArray *)options {
-	if ((self = [super initWithKeyPath:keyPath title:title valueTransformer:valueTransformer])) {
-		self.cycleListOptions = options;
-	}
-    
-	return self;
+    if ((self = [super initWithKeyPath:keyPath title:title valueTransformer:valueTransformer])) {
+        self.cycleListOptions = options;
+    }
+
+    return self;
 }
 
 
-#pragma mark -
-#pragma mark Cell management
+#pragma mark - Cell management
 
 - (IBAFormFieldCell *)cell {
-	if (cycleListCell_ == nil) {
-		cycleListCell_ = [[IBATextFormFieldCell alloc] initWithFormFieldStyle:self.formFieldStyle reuseIdentifier:@"Cell"];
+    if (cycleListCell_ == nil) {
+        cycleListCell_ = [[IBATextFormFieldCell alloc] initWithFormFieldStyle:self.formFieldStyle reuseIdentifier:@"Cell"];
         cycleListCell_.textField.enabled = NO;
-		cycleListCell_.textField.userInteractionEnabled = NO;	// read only
-	}
-    
-	return cycleListCell_;
+        cycleListCell_.textField.userInteractionEnabled = NO;	// read only
+    }
+
+    return cycleListCell_;
 }
 
 - (void)updateCellContents {
-	if (cycleListCell_ != nil) {
-		cycleListCell_.label.text = self.title;
+    if (cycleListCell_ != nil) {
+        cycleListCell_.label.text = self.title;
         cycleListCell_.textField.text = [self formFieldStringValue];
-	}
+    }
 }
 
 - (void)select
 {
     [super select];
-    
+
     self.formFieldValue = [self nextFormFieldValue];
 }
 
@@ -83,8 +81,7 @@
 
 @end
 
-#pragma mark -
-#pragma mark IBACycleListFormOption
+#pragma mark - IBACycleListFormOption
 
 @interface IBACycleListFormOption ()
 @property (nonatomic, readwrite, copy) NSString *name;
@@ -96,11 +93,11 @@
 
 + (NSArray *)cycleListOptionsForStrings:(NSArray *)optionNames {
     NSMutableArray *options = [NSMutableArray array];
-	for (NSString *optionName in optionNames) {
-		[options addObject:[IBACycleListFormOption cycleListFormOptionWithName:optionName]];
-	}
-	
-	return options;
+    for (NSString *optionName in optionNames) {
+        [options addObject:[IBACycleListFormOption cycleListFormOptionWithName:optionName]];
+    }
+
+    return options;
 
 }
 
@@ -110,22 +107,21 @@
 }
 
 - (id)initWithName:(NSString *)name {
-	if ((self = [super init])) {
-		self.name = name;
-	}
-    
-	return self;
+    if ((self = [super init])) {
+        self.name = name;
+    }
+
+    return self;
 }
 
 
 - (NSString *)description {
-	return self.name;
+    return self.name;
 }
 
 @end
 
-#pragma mark -
-#pragma IBAAbstractCycleListFormOptionsTransformer
+#pragma mark - IBAAbstractCycleListFormOptionsTransformer
 
 @implementation IBAAbstractCycleListFormOptionsTransformer
 
@@ -147,15 +143,14 @@
     {
         self.cycleListOptions = options;
     }
-    
+
     return self;
 }
 
 
 @end
 
-#pragma mark -
-#pragma mark IBAFormSection Support for IBACycleListFormField
+#pragma mark - IBAFormSection Support for IBACycleListFormField
 
 @implementation IBAFormSection (IBACycleListFormField)
 

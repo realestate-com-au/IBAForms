@@ -20,29 +20,26 @@
 
 @synthesize textFormFieldCell = textFormFieldCell_;
 
-
-
-#pragma mark -
-#pragma mark Cell management
+#pragma mark - Cell management
 
 - (IBAFormFieldCell *)cell {
-	return [self textFormFieldCell];
+    return [self textFormFieldCell];
 }
 
 
 - (IBATextFormFieldCell *)textFormFieldCell {
-	if (textFormFieldCell_ == nil) {
-		textFormFieldCell_ = [[IBATextFormFieldCell alloc] initWithFormFieldStyle:self.formFieldStyle reuseIdentifier:@"Cell"];
-		textFormFieldCell_.textField.enabled = NO;
-		textFormFieldCell_.textField.userInteractionEnabled = NO;	// read only
-	}
-	
-	return textFormFieldCell_;
+    if (textFormFieldCell_ == nil) {
+        textFormFieldCell_ = [[IBATextFormFieldCell alloc] initWithFormFieldStyle:self.formFieldStyle reuseIdentifier:@"Cell"];
+        textFormFieldCell_.textField.enabled = NO;
+        textFormFieldCell_.textField.userInteractionEnabled = NO;	// read only
+    }
+
+    return textFormFieldCell_;
 }
 
 - (void)updateCellContents {
-	self.textFormFieldCell.label.text = self.title;
-	self.textFormFieldCell.textField.text = [self formFieldStringValue];
+    self.textFormFieldCell.label.text = self.title;
+    self.textFormFieldCell.textField.text = [self formFieldStringValue];
 }
 
 

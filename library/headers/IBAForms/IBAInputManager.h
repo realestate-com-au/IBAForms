@@ -22,10 +22,10 @@
 
 
 @interface IBAInputManager : NSObject {
-	NSMutableDictionary *inputProviders_;
-	id<IBAInputRequestorDataSource> inputRequestorDataSource_;
-	id<IBAInputRequestor> activeInputRequestor_;
-	IBAInputNavigationToolbar *inputNavigationToolbar_;
+    NSMutableDictionary *inputProviders_;
+    id<IBAInputRequestorDataSource> inputRequestorDataSource_;
+    id<IBAInputRequestor> activeInputRequestor_;
+    IBAInputNavigationToolbar *inputNavigationToolbar_;
     id<IBAInputProviderCoordinator> inputProviderCoordinator_;
     BOOL inputNavigationToolbarEnabled_;
 }
@@ -41,20 +41,17 @@
 - (BOOL)setActiveInputRequestor:(id<IBAInputRequestor>)inputRequestor;
 - (id<IBAInputRequestor>)activeInputRequestor;
 
-#pragma mark -
-#pragma mark Input Provider Registration/Deregistration
+#pragma mark - Input Provider Registration/Deregistration
 - (void)registerInputProvider:(id<IBAInputProvider>)provider forDataType:(NSString *)dataType;
 - (void)deregisterInputProviderForDataType:(NSString *)dataType;
 - (id<IBAInputProvider>)inputProviderForDataType:(NSString *)dataType;
 
 
-#pragma mark -
-#pragma mark Matching input requestors with input providers
+#pragma mark - Matching input requestors with input providers
 - (id<IBAInputProvider>)inputProviderForRequestor:(id<IBAInputRequestor>)inputRequestor;
 - (id<IBAInputProvider>)inputProviderForActiveInputRequestor;
 
-#pragma mark -
-#pragma mark Input requestor activation
+#pragma mark - Input requestor activation
 - (BOOL)activateNextInputRequestor;
 - (BOOL)activatePreviousInputRequestor;
 - (BOOL)deactivateActiveInputRequestor;

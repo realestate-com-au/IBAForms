@@ -19,9 +19,9 @@
 
 
 @interface IBAPickListFormField : IBAInputRequestorFormField <IBAPickListOptionsProvider> {
-	IBATextFormFieldCell *pickListCell_;
-	IBAPickListSelectionMode selectionMode_;
-	NSArray *pickListOptions_;
+    IBATextFormFieldCell *pickListCell_;
+    IBAPickListSelectionMode selectionMode_;
+    NSArray *pickListOptions_;
 }
 
 @property (nonatomic, strong) IBATextFormFieldCell *pickListCell;

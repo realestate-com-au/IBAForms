@@ -43,106 +43,106 @@
 
 
 - (id)init {
-	if ((self = [super init])) {
-		self.labelTextColor = IBAFormFieldLabelTextColor;
-		self.labelBackgroundColor = IBAFormFieldLabelBackgroundColor;
-		self.labelFont = IBAFormFieldLabelFont;
-		self.labelFrame = CGRectMake(IBAFormFieldLabelX, IBAFormFieldLabelY, IBAFormFieldLabelWidth, IBAFormFieldLabelHeight);
-		self.labelTextAlignment = IBAFormFieldLabelTextAlignment;
-		self.labelAutoresizingMask = UIViewAutoresizingFlexibleRightMargin;
-    self.labelContentMode = UIViewContentModeTopLeft;
-    self.labelOpaque = YES;
-    
-		self.valueTextColor = IBAFormFieldValueTextColor;
-		self.valueBackgroundColor = IBAFormFieldValueBackgroundColor;
-		self.valueFont = IBAFormFieldValueFont;
-		self.valueFrame = CGRectMake(IBAFormFieldValueX, IBAFormFieldValueY, IBAFormFieldValueWidth, IBAFormFieldValueHeight);
-		self.valueTextAlignment = IBAFormFieldValueTextAlignment;
-		self.valueAutoresizingMask = UIViewAutoresizingFlexibleWidth;
-    self.valueVerticalAlignment = UIControlContentVerticalAlignmentTop;
-    self.valueContentMode = UIViewContentModeTopLeft;
-    self.valueOpaque = YES;
-    
-		self.activeBackgroundColor = IBAFormFieldActiveBackgroundColor;
-    self.backgroundColor = IBAFormFieldLabelBackgroundColor;
-	}
-	
-	return self;
+    if ((self = [super init])) {
+        self.labelTextColor = IBAFormFieldLabelTextColor;
+        self.labelBackgroundColor = IBAFormFieldLabelBackgroundColor;
+        self.labelFont = IBAFormFieldLabelFont;
+        self.labelFrame = CGRectMake(IBAFormFieldLabelX, IBAFormFieldLabelY, IBAFormFieldLabelWidth, IBAFormFieldLabelHeight);
+        self.labelTextAlignment = IBAFormFieldLabelTextAlignment;
+        self.labelAutoresizingMask = UIViewAutoresizingFlexibleRightMargin;
+        self.labelContentMode = UIViewContentModeTopLeft;
+        self.labelOpaque = YES;
+
+        self.valueTextColor = IBAFormFieldValueTextColor;
+        self.valueBackgroundColor = IBAFormFieldValueBackgroundColor;
+        self.valueFont = IBAFormFieldValueFont;
+        self.valueFrame = CGRectMake(IBAFormFieldValueX, IBAFormFieldValueY, IBAFormFieldValueWidth, IBAFormFieldValueHeight);
+        self.valueTextAlignment = IBAFormFieldValueTextAlignment;
+        self.valueAutoresizingMask = UIViewAutoresizingFlexibleWidth;
+        self.valueVerticalAlignment = UIControlContentVerticalAlignmentTop;
+        self.valueContentMode = UIViewContentModeTopLeft;
+        self.valueOpaque = YES;
+
+        self.activeBackgroundColor = IBAFormFieldActiveBackgroundColor;
+        self.backgroundColor = IBAFormFieldLabelBackgroundColor;
+    }
+
+    return self;
 }
 
 - (id)copyWithZone:(NSZone *)zone {
-  IBAFormFieldStyle *copy = [[IBAFormFieldStyle alloc] init];
-  copy.labelTextColor = self.labelTextColor;
-  copy.labelBackgroundColor = self.labelBackgroundColor;
-  copy.labelFont = self.labelFont;
-  copy.labelFrame = self.labelFrame;
-  copy.labelTextAlignment = self.labelTextAlignment;
-  copy.labelAutoresizingMask = self.labelAutoresizingMask;
-  copy.labelContentMode = self.labelContentMode;
-  copy.labelOpaque = self.labelOpaque;
-  
-  copy.valueTextColor = self.valueTextColor;
-  copy.backgroundColor = self.backgroundColor;
-  copy.valueFont = self.valueFont;
-  copy.valueFrame = self.valueFrame;
-  copy.valueTextAlignment = self.valueTextAlignment;
-  copy.valueAutoresizingMask = self.valueAutoresizingMask;
-  copy.valueVerticalAlignment = self.valueAutoresizingMask;
-  copy.valueContentMode = self.valueContentMode;
-  copy.valueOpaque = self.valueOpaque;
-  
-  copy.activeBackgroundColor = self.activeBackgroundColor;
-  copy.backgroundColor = self.backgroundColor;
-  
-  return copy;
+    IBAFormFieldStyle *copy = [[IBAFormFieldStyle alloc] init];
+    copy.labelTextColor = self.labelTextColor;
+    copy.labelBackgroundColor = self.labelBackgroundColor;
+    copy.labelFont = self.labelFont;
+    copy.labelFrame = self.labelFrame;
+    copy.labelTextAlignment = self.labelTextAlignment;
+    copy.labelAutoresizingMask = self.labelAutoresizingMask;
+    copy.labelContentMode = self.labelContentMode;
+    copy.labelOpaque = self.labelOpaque;
+
+    copy.valueTextColor = self.valueTextColor;
+    copy.backgroundColor = self.backgroundColor;
+    copy.valueFont = self.valueFont;
+    copy.valueFrame = self.valueFrame;
+    copy.valueTextAlignment = self.valueTextAlignment;
+    copy.valueAutoresizingMask = self.valueAutoresizingMask;
+    copy.valueVerticalAlignment = self.valueAutoresizingMask;
+    copy.valueContentMode = self.valueContentMode;
+    copy.valueOpaque = self.valueOpaque;
+
+    copy.activeBackgroundColor = self.activeBackgroundColor;
+    copy.backgroundColor = self.backgroundColor;
+
+    return copy;
 }
 
 - (void)setLabelX:(CGFloat)x {
-  CGRect frame = self.labelFrame;
-  frame.origin.x = x;
-  self.labelFrame = frame;
+    CGRect frame = self.labelFrame;
+    frame.origin.x = x;
+    self.labelFrame = frame;
 }
 
 - (void)setLabelY:(CGFloat)y {
-  CGRect frame = self.labelFrame;
-  frame.origin.y = y;
-  self.labelFrame = frame;
+    CGRect frame = self.labelFrame;
+    frame.origin.y = y;
+    self.labelFrame = frame;
 }
 
 - (void)setLabelWidth:(CGFloat)width {
-  CGRect frame = self.labelFrame;
-  frame.size.width = width;
-  self.labelFrame = frame;
+    CGRect frame = self.labelFrame;
+    frame.size.width = width;
+    self.labelFrame = frame;
 }
 
 - (void)setLabelHeight:(CGFloat)height {
-  CGRect frame = self.labelFrame;
-  frame.size.height = height;
-  self.labelFrame = frame;
+    CGRect frame = self.labelFrame;
+    frame.size.height = height;
+    self.labelFrame = frame;
 }
 
 - (void)setValueX:(CGFloat)x {
-  CGRect frame = self.valueFrame;
-  frame.origin.x = x;
-  self.valueFrame = frame;
+    CGRect frame = self.valueFrame;
+    frame.origin.x = x;
+    self.valueFrame = frame;
 }
 
 - (void)setValueY:(CGFloat)y {
-  CGRect frame = self.valueFrame;
-  frame.origin.y = y;
-  self.valueFrame = frame;
+    CGRect frame = self.valueFrame;
+    frame.origin.y = y;
+    self.valueFrame = frame;
 }
 
 - (void)setValueWidth:(CGFloat)width {
-  CGRect frame = self.valueFrame;
-  frame.size.width = width;
-  self.valueFrame = frame;
+    CGRect frame = self.valueFrame;
+    frame.size.width = width;
+    self.valueFrame = frame;
 }
 
 - (void)setValueHeight:(CGFloat)height {
-  CGRect frame = self.valueFrame;
-  frame.size.height = height;
-  self.valueFrame = frame;
+    CGRect frame = self.valueFrame;
+    frame.size.height = height;
+    self.valueFrame = frame;
 }
 
 

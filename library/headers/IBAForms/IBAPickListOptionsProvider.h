@@ -15,8 +15,8 @@
 #import <Foundation/Foundation.h>
 
 typedef enum {
-	IBAPickListSelectionModeSingle = 0,
-	IBAPickListSelectionModeMultiple,
+    IBAPickListSelectionModeSingle = 0,
+    IBAPickListSelectionModeMultiple,
 } IBAPickListSelectionMode;
 
 @protocol IBAPickListOptionsProvider

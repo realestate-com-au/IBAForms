@@ -18,11 +18,11 @@
 #import "IBAInputRequestorDataSource.h"
 
 @interface IBAFormViewController : UIViewController  <UITableViewDelegate, UIScrollViewDelegate, IBAInputRequestorDataSource> {
-	UITableView *tableView_;
-	CGRect tableViewOriginalFrame_;
-	IBAFormDataSource *formDataSource_;
-	CGRect keyboardFrame_;
-  BOOL scrollEnabledOnFormFieldActivation_;
+    UITableView *tableView_;
+    CGRect tableViewOriginalFrame_;
+    IBAFormDataSource *formDataSource_;
+    CGRect keyboardFrame_;
+    BOOL scrollEnabledOnFormFieldActivation_;
 }
 
 @property (nonatomic, strong) IBOutlet UITableView *tableView;

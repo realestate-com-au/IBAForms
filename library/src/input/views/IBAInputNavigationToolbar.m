@@ -20,7 +20,6 @@
 
 @interface IBAInputNavigationToolbar ()
 @property (nonatomic, strong) UIBarButtonItem *nextPreviousBarButtonItem;
-- (void)updateButtons;
 @end
 
 @implementation IBAInputNavigationToolbar
@@ -32,56 +31,51 @@
 @synthesize displayNextPreviousButton = displayNextPreviousButton_;
 
 
-
-
 - (id)initWithFrame:(CGRect)aRect {
-	if ((self = [super initWithFrame:(CGRect)aRect])) {
-		self.barStyle = UIBarStyleBlack;
-		
-		doneButton_ = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone 
-																   target:nil 
-																   action:nil];
-		
-		nextPreviousButton_ = [[UISegmentedControl alloc] initWithItems:[NSArray 
-					arrayWithObjects:IBAInputNavigationToolbarPreviousTitle, IBAInputNavigationToolbarNextTitle, nil]];
-		nextPreviousButton_.segmentedControlStyle = UISegmentedControlStyleBar;
-		nextPreviousButton_.tintColor = [UIColor blackColor];
-		nextPreviousButton_.momentary = YES;
-		
-		nextPreviousBarButtonItem_ = [[UIBarButtonItem alloc] initWithCustomView:self.nextPreviousButton];
-		
-		displayDoneButton_ = YES;
-		displayNextPreviousButton_ = YES;
-		[self updateButtons];
-	}
-	
+    if ((self = [super initWithFrame:(CGRect)aRect])) {
+        self.barStyle = UIBarStyleBlack;
+
+        doneButton_ = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:nil action:nil];
+
+        nextPreviousButton_ = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:IBAInputNavigationToolbarPreviousTitle, IBAInputNavigationToolbarNextTitle, nil]];
+        nextPreviousButton_.segmentedControlStyle = UISegmentedControlStyleBar;
+        nextPreviousButton_.tintColor = [UIColor blackColor];
+        nextPreviousButton_.momentary = YES;
+
+        nextPreviousBarButtonItem_ = [[UIBarButtonItem alloc] initWithCustomView:self.nextPreviousButton];
+
+        displayDoneButton_ = YES;
+        displayNextPreviousButton_ = YES;
+        [self updateButtons];
+    }
+
     return self;
 }
 
 
 - (void)setDisplayDoneButton:(BOOL)display {
-	displayDoneButton_ = display;
-	[self updateButtons];
+    displayDoneButton_ = display;
+    [self updateButtons];
 }
 
 - (void)setDisplayNextPreviousButton:(BOOL)display {
-	displayNextPreviousButton_ = display;
-	[self updateButtons];
+    displayNextPreviousButton_ = display;
+    [self updateButtons];
 }
 
 - (void)updateButtons {
-	NSMutableArray *barItems = [NSMutableArray array];
-	if (self.displayDoneButton) {
-		[barItems addObject:doneButton_];
-	}
-	
-	[barItems addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
+    NSMutableArray *barItems = [NSMutableArray array];
+    if (self.displayDoneButton) {
+        [barItems addObject:doneButton_];
+    }
 
-	if (self.displayNextPreviousButton) {
-		[barItems addObject:nextPreviousBarButtonItem_];
-	}
-	
-	[self setItems:barItems animated:YES];
+    [barItems addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
+
+    if (self.displayNextPreviousButton) {
+        [barItems addObject:nextPreviousBarButtonItem_];
+    }
+
+    [self setItems:barItems animated:YES];
 }
 
 @end

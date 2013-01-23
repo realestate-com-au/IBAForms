@@ -26,17 +26,16 @@
 @synthesize valueTransformer = valueTransformer_;
 @dynamic cell;
 
-#pragma mark -
-#pragma mark Initialisation and memory management
+#pragma mark - Initialisation and memory management
 
-+ (id)formFieldWithKeyPath:(NSString *)keyPath 
++ (id)formFieldWithKeyPath:(NSString *)keyPath
                      title:(NSString *)title
           valueTransformer:(NSValueTransformer *)valueTransformer
 {
     return [[self alloc] initWithKeyPath:keyPath title:title valueTransformer:valueTransformer];
 }
 
-+ (id)formFieldWithKeyPath:(NSString *)keyPath 
++ (id)formFieldWithKeyPath:(NSString *)keyPath
                      title:(NSString *)title
 {
     return [[self alloc] initWithKeyPath:keyPath title:title];
@@ -50,140 +49,137 @@
 
 
 - (id)initWithKeyPath:(NSString*)keyPath title:(NSString*)title valueTransformer:(NSValueTransformer *)valueTransformer {
-	if ((self = [super init])) {
-		self.keyPath = keyPath;
-		title_ = [title copy];
-		self.nullable = YES;
-		self.valueTransformer = valueTransformer;
-	}
+    if ((self = [super init])) {
+        self.keyPath = keyPath;
+        title_ = [title copy];
+        self.nullable = YES;
+        self.valueTransformer = valueTransformer;
+    }
 
-	return self;
+    return self;
 }
 
 - (id)initWithKeyPath:(NSString*)keyPath title:(NSString*)title {
-	return [self initWithKeyPath:keyPath title:title valueTransformer:nil];
+    return [self initWithKeyPath:keyPath title:title valueTransformer:nil];
 }
 
 - (id)initWithKeyPath:(NSString*)keyPath {
-	return [self initWithKeyPath:keyPath title:nil valueTransformer:nil];
+    return [self initWithKeyPath:keyPath title:nil valueTransformer:nil];
 }
 
 - (id)initWithTitle:(NSString*)title {
-	return [self initWithKeyPath:nil title:title valueTransformer:nil];
+    return [self initWithKeyPath:nil title:title valueTransformer:nil];
 }
 
 - (id)init {
-	return [self initWithKeyPath:nil title:nil];
+    return [self initWithKeyPath:nil title:nil];
 }
 
 
 - (void)setModelManager:(id<IBAFormModelManager>) modelManager {
-	if (modelManager != modelManager_) {
-		modelManager_ = modelManager;
+    if (modelManager != modelManager_) {
+        modelManager_ = modelManager;
 
-		// When the model manager changes we should update the content of the cell
-		[self updateCellContents];
-	}
+        // When the model manager changes we should update the content of the cell
+        [self updateCellContents];
+    }
 }
 
 - (void)setFormFieldStyle:(IBAFormFieldStyle *)formFieldStyle {
-	if (formFieldStyle != formFieldStyle_) {
-		formFieldStyle_ = formFieldStyle;
+    if (formFieldStyle != formFieldStyle_) {
+        formFieldStyle_ = formFieldStyle;
 
-		self.cell.formFieldStyle = formFieldStyle;
-	}
+        self.cell.formFieldStyle = formFieldStyle;
+    }
 }
 
 - (void)setTitle:(NSString *)title {
-	if (![title isEqualToString:title_]) {
-		title_ = [title copyWithZone:nil];
+    if (![title isEqualToString:title_]) {
+        title_ = [title copyWithZone:nil];
 
-		[self updateCellContents];
-	}
+        [self updateCellContents];
+    }
 }
 
-#pragma mark -
-#pragma mark Selection notification
+#pragma mark - Selection notification
 - (void)select {
-	// Subclasses should override this method
+    // Subclasses should override this method
 }
 
 - (BOOL)shouldAutoScrollFormWhenActive
 {
-  return YES;
+    return YES;
 }
 
 
-#pragma mark -
-#pragma mark Cell management
+#pragma mark - Cell management
 
 - (IBAFormFieldCell *)cell {
-	// To be implemented by subclasses
-	NSAssert(NO, @"Subclasses of IBAFormField should override cell");
-	return nil;
+    // To be implemented by subclasses
+    NSAssert(NO, @"Subclasses of IBAFormField should override cell");
+    return nil;
 }
 
 - (void)updateCellContents {
-	// To be implemented by subclasses
-	NSAssert(NO, @"Subclasses of IBAFormField should override updateCellContents");
+    // To be implemented by subclasses
+    NSAssert(NO, @"Subclasses of IBAFormField should override updateCellContents");
 }
 
 
-#pragma mark -
-#pragma mark Detail View Controller management
+#pragma mark - Detail View Controller management
 
 // Subclasses should override these methods
 - (BOOL)hasDetailViewController {
-	return NO;
+    return NO;
 }
 
 - (UIViewController *)detailViewController {
-	return nil;
+    return nil;
 }
 
-#pragma mark -
-#pragma mark Getting and setting the form field value
+#pragma mark - Getting and setting the form field value
+
 - (id)formFieldValue {
-	id value = [self.modelManager modelValueForKeyPath:self.keyPath];
+    id value = [self.modelManager modelValueForKeyPath:self.keyPath];
 
-	if (self.valueTransformer != nil) {
-		value = [self.valueTransformer reverseTransformedValue:value];
-	}
+    if (self.valueTransformer != nil) {
+        value = [self.valueTransformer reverseTransformedValue:value];
+    }
 
-	return value;
+    return value;
 }
 
 - (NSString *)formFieldStringValue {
-	return [self.formFieldValue description];
+    return [self.formFieldValue description];
 }
 
 - (BOOL)pushChanges {
-	return NO;
+    return NO;
 }
 
 - (BOOL)setFormFieldValue:(id)formVieldValue {
-	BOOL setValue = YES;
+    BOOL setValue = YES;
 
-	// Transform the value if we have a transformer
-	id value = formVieldValue;
-	if (self.valueTransformer != nil) {
-		value = [self.valueTransformer transformedValue:value];
-	}
+    // Transform the value if we have a transformer
+    id value = formVieldValue;
+    if (self.valueTransformer != nil) {
+        value = [self.valueTransformer transformedValue:value];
+    }
 
-	if (self.delegate && [self.delegate respondsToSelector:@selector(formField:willSetValue:)]) {
-		setValue = [self.delegate formField:self willSetValue:value];
-	}
+    if (self.delegate && [self.delegate respondsToSelector:@selector(formField:willSetValue:)]) {
+        setValue = [self.delegate formField:self willSetValue:value];
+    }
 
-	if (setValue) {
-		[self.modelManager setModelValue:value forKeyPath:self.keyPath];
-		[self updateCellContents];
+    if (setValue) {
+        [self.modelManager setModelValue:value forKeyPath:self.keyPath];
+        [self updateCellContents];
 
-		if (self.delegate && [self.delegate respondsToSelector:@selector(formField:didSetValue:)]) {
-			[self.delegate formField:self didSetValue:value];
-		}
-	}
-
-	return setValue;
+        if (self.delegate && [self.delegate respondsToSelector:@selector(formField:didSetValue:)]) {
+            [self.delegate formField:self didSetValue:value];
+        }
+    }
+    
+    return setValue;
 }
 
 

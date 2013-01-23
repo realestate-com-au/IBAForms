@@ -20,11 +20,11 @@
 @protocol IBAFormFieldDelegate;
 
 @interface IBAFormField : NSObject {
-	NSString *keyPath_;
-	NSString *title_;
-	IBAFormFieldStyle *formFieldStyle_;
-	BOOL nullable_;
-	NSValueTransformer *valueTransformer_;
+    NSString *keyPath_;
+    NSString *title_;
+    IBAFormFieldStyle *formFieldStyle_;
+    BOOL nullable_;
+    NSValueTransformer *valueTransformer_;
 }
 
 @property (nonatomic, copy) NSString *keyPath;
@@ -47,20 +47,17 @@
 
 - (void)updateCellContents;
 
-#pragma mark -
-#pragma mark Detail View Controller management
+#pragma mark - Detail View Controller management
 - (BOOL)hasDetailViewController;
 - (UIViewController *)detailViewController;
 
-#pragma mark -
-#pragma mark Getting and setting the form field value
+#pragma mark - Getting and setting the form field value
 - (id)formFieldValue;
 - (NSString *)formFieldStringValue;
 - (BOOL)setFormFieldValue:(id)formFieldValue;
 - (BOOL)pushChanges;
 
-#pragma mark -
-#pragma mark Selection notification
+#pragma mark - Selection notification
 - (void)select;
 
 - (BOOL)shouldAutoScrollFormWhenActive;

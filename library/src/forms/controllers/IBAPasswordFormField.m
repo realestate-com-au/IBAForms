@@ -19,10 +19,10 @@
 @implementation IBAPasswordFormField
 
 - (void)setFormFieldStyle:(IBAFormFieldStyle *)formFieldStyle {
-	[super setFormFieldStyle:formFieldStyle];
-	
-	IBATextFormFieldCell *formFieldCell = self.textFormFieldCell;
-	formFieldCell.textField.secureTextEntry = YES;	
+    [super setFormFieldStyle:formFieldStyle];
+
+    IBATextFormFieldCell *formFieldCell = self.textFormFieldCell;
+    formFieldCell.textField.secureTextEntry = YES;
 }
 
 @end

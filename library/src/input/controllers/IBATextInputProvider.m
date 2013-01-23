@@ -20,7 +20,7 @@
 @synthesize inputRequestor = inputRequestor_;
 
 - (UIView *)view {
-	return nil;
+    return nil;
 }
 
 @end

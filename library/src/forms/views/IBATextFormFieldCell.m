@@ -19,43 +19,41 @@
 
 @synthesize textField = textField_;
 
-
-
 - (id)initWithFormFieldStyle:(IBAFormFieldStyle *)style reuseIdentifier:(NSString *)reuseIdentifier {
-  if ((self = [super initWithFormFieldStyle:style reuseIdentifier:reuseIdentifier])) {
-		// Create the text field for data entry
-		self.textField = [[UITextField alloc] initWithFrame:style.valueFrame];
-		self.textField.autoresizingMask = style.valueAutoresizingMask;
-		self.textField.returnKeyType = UIReturnKeyNext;
+    if ((self = [super initWithFormFieldStyle:style reuseIdentifier:reuseIdentifier])) {
+        // Create the text field for data entry
+        self.textField = [[UITextField alloc] initWithFrame:style.valueFrame];
+        self.textField.autoresizingMask = style.valueAutoresizingMask;
+        self.textField.returnKeyType = UIReturnKeyNext;
 
-		[self.cellView addSubview:self.textField];
-    
-    [self applyFormFieldStyle];
-	}
-	
-  return self;
+        [self.cellView addSubview:self.textField];
+
+        [self applyFormFieldStyle];
+    }
+
+    return self;
 }
 
 - (void)activate {
-	[super activate];
+    [super activate];
 }
 
 
 - (void)applyFormFieldStyle {
-	[super applyFormFieldStyle];
-	
-	self.textField.font = self.formFieldStyle.valueFont;
-	self.textField.textColor = self.formFieldStyle.valueTextColor;
-	self.textField.backgroundColor = self.formFieldStyle.valueBackgroundColor;
-	self.textField.textAlignment = self.formFieldStyle.valueTextAlignment;
-  self.textField.contentVerticalAlignment = self.formFieldStyle.valueVerticalAlignment;
-  self.textField.contentMode = self.formFieldStyle.valueContentMode;
-  self.textField.opaque = self.formFieldStyle.valueOpaque;
+    [super applyFormFieldStyle];
+
+    self.textField.font = self.formFieldStyle.valueFont;
+    self.textField.textColor = self.formFieldStyle.valueTextColor;
+    self.textField.backgroundColor = self.formFieldStyle.valueBackgroundColor;
+    self.textField.textAlignment = self.formFieldStyle.valueTextAlignment;
+    self.textField.contentVerticalAlignment = self.formFieldStyle.valueVerticalAlignment;
+    self.textField.contentMode = self.formFieldStyle.valueContentMode;
+    self.textField.opaque = self.formFieldStyle.valueOpaque;
 }
 
--(void)applyActiveStyle;
-{
+- (void)applyActiveStyle {
     [super applyActiveStyle];
 }
+
 
 @end

@@ -22,64 +22,62 @@
 @synthesize valueTextField = valueTextField_;
 @synthesize valueLabel = valueLabel_;
 
-
 - (id)initWithFormFieldStyle:(IBAFormFieldStyle *)style customClearButtonImage:(UIImage *)image reuseIdentifier:(NSString *)reuseIdentifier {
-  if ((self = [super initWithFormFieldStyle:style reuseIdentifier:reuseIdentifier])) {
-    
-		// Create the text field for data entry (hidden by default)
-		valueTextField_ = [[IBATextField alloc] initWithFrame:style.valueFrame customClearButtonImage:image];
-		valueTextField_.autoresizingMask = style.valueAutoresizingMask;
-		valueTextField_.returnKeyType = UIReturnKeyNext;
-    valueTextField_.hidden = YES;
-    valueTextField_.keyboardType = UIKeyboardTypeDecimalPad;
-    valueTextField_.clipsToBounds = NO;
-    
-    // Create the lable for data display (shown by default)
-    valueLabel_ = [[UILabel alloc] initWithFrame:style.valueFrame];
-    valueLabel_.autoresizingMask = style.valueAutoresizingMask;
-    valueLabel_.hidden = NO;
-    
-		[self.cellView addSubview:valueTextField_];
-    [self.cellView addSubview:valueLabel_];
-    [self applyFormFieldStyle];
-	}
-	
-  return self;
+    if ((self = [super initWithFormFieldStyle:style reuseIdentifier:reuseIdentifier])) {
+
+        // Create the text field for data entry (hidden by default)
+        valueTextField_ = [[IBATextField alloc] initWithFrame:style.valueFrame customClearButtonImage:image];
+        valueTextField_.autoresizingMask = style.valueAutoresizingMask;
+        valueTextField_.returnKeyType = UIReturnKeyNext;
+        valueTextField_.hidden = YES;
+        valueTextField_.keyboardType = UIKeyboardTypeDecimalPad;
+        valueTextField_.clipsToBounds = NO;
+
+        // Create the lable for data display (shown by default)
+        valueLabel_ = [[UILabel alloc] initWithFrame:style.valueFrame];
+        valueLabel_.autoresizingMask = style.valueAutoresizingMask;
+        valueLabel_.hidden = NO;
+
+        [self.cellView addSubview:valueTextField_];
+        [self.cellView addSubview:valueLabel_];
+        [self applyFormFieldStyle];
+    }
+
+    return self;
 }
 
 - (void)activate {
-	[super activate];
-	 
-  valueTextField_.hidden = NO;
-  valueLabel_.hidden = YES;
+    [super activate];
+
+    valueTextField_.hidden = NO;
+    valueLabel_.hidden = YES;
 }
 
-- (void)deactivate
-{
-  [super deactivate];
-  
-  valueTextField_.hidden = YES;
-  valueLabel_.hidden = NO;
-}
+- (void)deactivate {
+    [super deactivate];
 
+    valueTextField_.hidden = YES;
+    valueLabel_.hidden = NO;
+}
 
 - (void)applyFormFieldStyle {
-	[super applyFormFieldStyle];
-	
-	valueTextField_.font = self.formFieldStyle.valueFont;
-  valueTextField_.textColor = self.formFieldStyle.valueTextColor;
-  valueTextField_.backgroundColor = self.formFieldStyle.valueBackgroundColor;
-  valueTextField_.textAlignment = self.formFieldStyle.valueTextAlignment;
-  valueTextField_.contentVerticalAlignment = self.formFieldStyle.valueVerticalAlignment;
-  valueTextField_.contentMode = self.formFieldStyle.valueContentMode;
-  valueTextField_.opaque = self.formFieldStyle.valueOpaque;
-  
-  valueLabel_.font = self.formFieldStyle.valueFont;
-  valueLabel_.textColor = self.formFieldStyle.valueTextColor;
-  valueLabel_.backgroundColor = self.formFieldStyle.valueBackgroundColor;
-  valueLabel_.textAlignment = self.formFieldStyle.valueTextAlignment;
-  valueLabel_.contentMode = self.formFieldStyle.valueContentMode;
-  valueLabel_.opaque = self.formFieldStyle.valueOpaque;
+    [super applyFormFieldStyle];
+
+    valueTextField_.font = self.formFieldStyle.valueFont;
+    valueTextField_.textColor = self.formFieldStyle.valueTextColor;
+    valueTextField_.backgroundColor = self.formFieldStyle.valueBackgroundColor;
+    valueTextField_.textAlignment = self.formFieldStyle.valueTextAlignment;
+    valueTextField_.contentVerticalAlignment = self.formFieldStyle.valueVerticalAlignment;
+    valueTextField_.contentMode = self.formFieldStyle.valueContentMode;
+    valueTextField_.opaque = self.formFieldStyle.valueOpaque;
+
+    valueLabel_.font = self.formFieldStyle.valueFont;
+    valueLabel_.textColor = self.formFieldStyle.valueTextColor;
+    valueLabel_.backgroundColor = self.formFieldStyle.valueBackgroundColor;
+    valueLabel_.textAlignment = self.formFieldStyle.valueTextAlignment;
+    valueLabel_.contentMode = self.formFieldStyle.valueContentMode;
+    valueLabel_.opaque = self.formFieldStyle.valueOpaque;
 }
+
 
 @end

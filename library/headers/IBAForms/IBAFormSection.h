@@ -16,12 +16,12 @@
 #import "IBAFormModelManager.h"
 
 @interface IBAFormSection : NSObject {
-	NSMutableArray *formFields_;
-	IBAFormFieldStyle *formFieldStyle_;
-	NSString *headerTitle_;
-	NSString *footerTitle_;	
-	UIView *headerView_;
-	UIView *footerView_;
+    NSMutableArray *formFields_;
+    IBAFormFieldStyle *formFieldStyle_;
+    NSString *headerTitle_;
+    NSString *footerTitle_;
+    UIView *headerView_;
+    UIView *footerView_;
 }
 
 @property (nonatomic, readonly) NSMutableArray *formFields;

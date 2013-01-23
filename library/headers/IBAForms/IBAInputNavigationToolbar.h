@@ -15,17 +15,17 @@
 #import <UIKit/UIKit.h>
 
 typedef enum {
-	IBAInputNavigationToolbarActionPrevious = 0,
-	IBAInputNavigationToolbarActionNext
+    IBAInputNavigationToolbarActionPrevious = 0,
+    IBAInputNavigationToolbarActionNext
 } IBAInputNavigationToolbarAction;
 
 
 @interface IBAInputNavigationToolbar : UIToolbar {
-	UIBarButtonItem *doneButton_;
-	UISegmentedControl *nextPreviousButton_;
-	UIBarButtonItem *nextPreviousBarButtonItem_;
-	BOOL displayDoneButton_;
-	BOOL displayNextPreviousButton_;
+    UIBarButtonItem *doneButton_;
+    UISegmentedControl *nextPreviousButton_;
+    UIBarButtonItem *nextPreviousBarButtonItem_;
+    BOOL displayDoneButton_;
+    BOOL displayNextPreviousButton_;
 }
 
 @property (nonatomic, strong) UIBarButtonItem *doneButton;

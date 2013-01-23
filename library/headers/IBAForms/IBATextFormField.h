@@ -17,7 +17,7 @@
 #import "IBAFormSection.h"
 
 @interface IBATextFormField : IBAInputRequestorFormField <UITextFieldDelegate> {
-	IBATextFormFieldCell *textFormFieldCell_;
+    IBATextFormFieldCell *textFormFieldCell_;
 }
 
 @property (nonatomic, strong) IBATextFormFieldCell *textFormFieldCell;
