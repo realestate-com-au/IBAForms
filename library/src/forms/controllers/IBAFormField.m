@@ -88,7 +88,6 @@
 
 - (void)setFormFieldStyle:(IBAFormFieldStyle *)formFieldStyle {
 	if (formFieldStyle != formFieldStyle_) {
-		IBAFormFieldStyle *oldStyle = formFieldStyle_;
 		formFieldStyle_ = formFieldStyle;
 
 		self.cell.formFieldStyle = formFieldStyle;
@@ -97,7 +96,6 @@
 
 - (void)setTitle:(NSString *)title {
 	if (![title isEqualToString:title_]) {
-		NSString *oldTitle = title_;
 		title_ = [title copyWithZone:nil];
 
 		[self updateCellContents];

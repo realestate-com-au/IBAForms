@@ -66,7 +66,6 @@
 		751240FC13A8F6CF007BF2B5 /* IBATextFormField.h in Headers */ = {isa = PBXBuildFile; fileRef = 751240D913A8F6CF007BF2B5 /* IBATextFormField.h */; };
 		751240FD13A8F6CF007BF2B5 /* IBATextFormFieldCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 751240DA13A8F6CF007BF2B5 /* IBATextFormFieldCell.h */; };
 		751240FE13A8F6CF007BF2B5 /* IBATextInputProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 751240DB13A8F6CF007BF2B5 /* IBATextInputProvider.h */; };
-		751240FF13A8F6CF007BF2B5 /* SynthesizeSingleton.h in Headers */ = {isa = PBXBuildFile; fileRef = 751240DC13A8F6CF007BF2B5 /* SynthesizeSingleton.h */; };
 		753A7EFC13B36BCF003931DA /* IBATitleFormField.h in Headers */ = {isa = PBXBuildFile; fileRef = 753A7EFA13B36BCF003931DA /* IBATitleFormField.h */; };
 		753A7EFD13B36BCF003931DA /* IBATitleFormField.m in Sources */ = {isa = PBXBuildFile; fileRef = 753A7EFB13B36BCF003931DA /* IBATitleFormField.m */; };
 		7555843714FF1DA500F39C5E /* IBATextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 7555843514FF1DA500F39C5E /* IBATextField.m */; };
@@ -145,7 +144,6 @@
 		751240D913A8F6CF007BF2B5 /* IBATextFormField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBATextFormField.h; sourceTree = "<group>"; };
 		751240DA13A8F6CF007BF2B5 /* IBATextFormFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBATextFormFieldCell.h; sourceTree = "<group>"; };
 		751240DB13A8F6CF007BF2B5 /* IBATextInputProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBATextInputProvider.h; sourceTree = "<group>"; };
-		751240DC13A8F6CF007BF2B5 /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthesizeSingleton.h; sourceTree = "<group>"; };
 		753A7EFA13B36BCF003931DA /* IBATitleFormField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBATitleFormField.h; sourceTree = "<group>"; };
 		753A7EFB13B36BCF003931DA /* IBATitleFormField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IBATitleFormField.m; sourceTree = "<group>"; };
 		7555843514FF1DA500F39C5E /* IBATextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IBATextField.m; sourceTree = "<group>"; };
@@ -352,7 +350,6 @@
 				751240DB13A8F6CF007BF2B5 /* IBATextInputProvider.h */,
 				A37CF9F8139C59D200656F39 /* IBAInputProviderCoordinator.h */,
 				753A7EFA13B36BCF003931DA /* IBATitleFormField.h */,
-				751240DC13A8F6CF007BF2B5 /* SynthesizeSingleton.h */,
 			);
 			path = IBAForms;
 			sourceTree = "<group>";
@@ -400,7 +397,6 @@
 				751240FD13A8F6CF007BF2B5 /* IBATextFormFieldCell.h in Headers */,
 				751240FE13A8F6CF007BF2B5 /* IBATextInputProvider.h in Headers */,
 				A37CF9F9139C59D200656F39 /* IBAInputProviderCoordinator.h in Headers */,
-				751240FF13A8F6CF007BF2B5 /* SynthesizeSingleton.h in Headers */,
 				753A7EFC13B36BCF003931DA /* IBATitleFormField.h in Headers */,
 				A766215F14E3618700D1B810 /* IBADecimalFormField.h in Headers */,
 				A766216414E3633A00D1B810 /* IBADecimalFormFieldCell.h in Headers */,

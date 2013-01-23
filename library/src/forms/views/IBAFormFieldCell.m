@@ -75,7 +75,6 @@
 
 - (void)setFormFieldStyle:(IBAFormFieldStyle *)style {
 	if (style != formFieldStyle_) {
-		IBAFormFieldStyle *oldStyle = formFieldStyle_;
 		formFieldStyle_ = style;
 		
 		self.styleApplied = NO;

@@ -48,5 +48,4 @@
 #import <IBAForms/IBATextFormFieldCell.h>
 #import <IBAForms/IBATextInputProvider.h>
 #import <IBAForms/IBATitleFormField.h>
-#import <IBAForms/SynthesizeSingleton.h>
 #import <IBAForms/IBADecimalFormField.h>

@@ -14,7 +14,6 @@
 
 #import <Foundation/Foundation.h>
 
-#define IBA_RELEASE_SAFELY(__POINTER) { [__POINTER release]; __POINTER = nil; }
 #define IBACGPointTranslate(point, dx, dy) CGPointMake(point.x + dx, point.y + dy)
 
 #define IBALogRect(RECT) NSLog(@"%s: (%0.0f, %0.0f) %0.0f x %0.0f",\

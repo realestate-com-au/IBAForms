@@ -172,7 +172,6 @@
 // this setter also sets the datasource of the tableView and reloads the table
 - (void)setFormDataSource:(IBAFormDataSource *)dataSource {
 	if (dataSource != formDataSource_) {
-		IBAFormDataSource *oldDataSource = formDataSource_;
 		formDataSource_ = dataSource;
 
 		self.tableView.dataSource = formDataSource_;
