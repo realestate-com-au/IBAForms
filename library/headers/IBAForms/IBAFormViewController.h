@@ -23,6 +23,9 @@
     IBAFormDataSource *formDataSource_;
     CGRect keyboardFrame_;
     BOOL scrollEnabledOnFormFieldActivation_;
+
+    @private
+    UIView *hiddenCellCache_;
 }
 
 @property (nonatomic, strong) IBOutlet UITableView *tableView;

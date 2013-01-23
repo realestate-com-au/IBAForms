@@ -25,6 +25,9 @@
     IBAFormFieldStyle *formFieldStyle_;
     BOOL styleApplied_;
     BOOL active_;
+	
+@private
+    UIView __unsafe_unretained *hiddenCellCache_;
 }
 
 @property (readwrite, strong) UIView *inputView;
@@ -33,6 +36,7 @@
 @property (nonatomic, strong) UILabel *label;
 @property (nonatomic, strong) IBAFormFieldStyle *formFieldStyle;
 @property (nonatomic, assign) BOOL styleApplied;
+@property (nonatomic, assign) UIView *hiddenCellCache;
 
 - (id)initWithFormFieldStyle:(IBAFormFieldStyle *)style reuseIdentifier:(NSString *)reuseIdentifier;
 - (void)activate;

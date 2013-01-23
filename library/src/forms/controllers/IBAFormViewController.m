@@ -16,6 +16,9 @@
 #import "IBAFormConstants.h"
 #import "IBAInputManager.h"
 
+@interface IBAFormViewController ()
+@property (nonatomic, retain) UIView *hiddenCellCache;
+@end
 
 @interface UIViewController (KeyboardDismissal)
 - (BOOL)canDismissKeyboard;
@@ -41,6 +44,7 @@
 @synthesize tableViewOriginalFrame = tableViewOriginalFrame_;
 @synthesize formDataSource = formDataSource_;
 @synthesize keyboardFrame = keyboardFrame_;
+@synthesize hiddenCellCache = hiddenCellCache_;
 @synthesize scrollEnabledOnFormFieldActivation = scrollEnabledOnFormFieldActivation_;
 
 #pragma mark - Initialisation and memory management
@@ -52,6 +56,7 @@
 
 - (void)releaseViews {
     tableView_ = nil;
+    hiddenCellCache_ = nil;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil formDataSource:(IBAFormDataSource *)formDataSource {
@@ -94,6 +99,11 @@
 
     self.tableView.dataSource = self.formDataSource;
     self.tableView.delegate = self;
+
+    hiddenCellCache_ = [[UIView alloc] initWithFrame:CGRectZero];
+    [hiddenCellCache_ setAutoresizingMask:UIViewAutoresizingNone];
+    [hiddenCellCache_ setHidden:YES];
+    [hiddenCellCache_ setClipsToBounds:YES];
 
     tableViewOriginalFrame_ = self.tableView.frame;
 }
@@ -138,7 +148,16 @@
     //[[[IBAInputManager sharedIBAInputManager] inputNavigationToolbar] setDisplayDoneButton:YES];
     [[[IBAInputManager sharedIBAInputManager] inputNavigationToolbar] setDisplayDoneButton:([self canDismissKeyboard] && [self.navigationController canDismissKeyboard])];
 
-
+  
+	// Make sure the hidden cell cache is attached to the view hierarchy
+	if ([self.hiddenCellCache window] == nil) {
+		if ([self.view isKindOfClass:[UITableView class]]) {
+			NSLog(@"Hidden cell cache will be added to a UITableView. This will generate log messages when cells that are in the cache are made the first reponder. To avoid these messages, ensure that the IBAFormViewController's view is not a UITableView.");
+		}
+		
+		[self.view addSubview:self.hiddenCellCache];
+	}
+	
     [self.tableView reloadData];
 }
 
@@ -201,6 +220,16 @@
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(IBAFormFieldCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+	// SW. So, what's all this business about setting the cell's hidden cell cache? Well, let me tell you a little story
+	// about UIResponders. If you call becomeFirstResponder on a UIResponder that is not in the view hierarchy, it doesn't
+	// become the first responder. 'So what', you might ask. Well, when cells in a UITableView scroll out of view, they
+	// are removed from the view hierarchy. If you select a cell, then scroll it up out of view, when you press the 'Previous'
+	// button in the toolbar, the forms framework tries to activate the previous cell and make it the first responder.
+	// The previous cell won't be in the view hierarchy, and the becomeFirstResponder call will fail. We tried all sorts
+	// of workarounds, but the one that seems to work is to put the cells into a hidden view when they are removed from the
+	// UITableView, so that they are still in the view hierarchy. We ended up making this hidden view a subview of the 
+	// UIViewController's view. 
+	[cell setHiddenCellCache:self.hiddenCellCache];
 
     [cell updateActiveStyle];
 
@@ -268,7 +297,6 @@
     UIViewAnimationCurve animationCurve = [[info objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue];
 
     [self didHideInputRequestorWithBeginFrame:keyboardBeginFrame endFrame:keyboardEndFrame animationDuration:animationDuration animationCurve:animationCurve];
-
     if (![[IBAInputManager sharedIBAInputManager] activeInputRequestor]) {
         [self adjustTableViewHeightForCoveringFrame:CGRectZero];
         [[self tableView] setScrollEnabled:YES];
