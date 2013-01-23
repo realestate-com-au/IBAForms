@@ -17,7 +17,7 @@
 #import "IBAInputNavigationToolbar.h"
 #import "IBAInputRequestorDataSource.h"
 
-@interface IBAFormViewController : UIViewController  <UITableViewDelegate, UIScrollViewDelegate, IBAInputRequestorDataSource> {
+@interface IBAFormViewController : UIViewController  <UITableViewDelegate, IBAInputRequestorDataSource> {
     UITableView *tableView_;
     CGRect tableViewOriginalFrame_;
     IBAFormDataSource *formDataSource_;
