@@ -16,11 +16,13 @@
 #import "IBATextField.h"
 
 @interface IBATextField ()
+@property (nonatomic, readwrite) UIButton *clearButton;
 - (void)clearContent;
 @end
 
 
 @implementation IBATextField
+@synthesize clearButton = clearButton_;
 
 - (id)initWithFrame:(CGRect)frame customClearButtonImage:(UIImage *)image
 {
@@ -31,8 +33,9 @@
       UIButton *clearButton = [UIButton buttonWithType:UIButtonTypeCustom];
       [clearButton setImage:image forState:UIControlStateNormal];
       [clearButton setAdjustsImageWhenHighlighted:YES];
-      
+
       [clearButton addTarget:self action:@selector(clearContent) forControlEvents:UIControlEventTouchUpInside];
+      self.clearButton = clearButton;
 
       [self setRightView:clearButton];
       [self setRightViewMode:UITextFieldViewModeAlways];
