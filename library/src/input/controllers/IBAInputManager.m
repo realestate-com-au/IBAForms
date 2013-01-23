@@ -245,6 +245,8 @@
         return [inputProviderCoordinator_ setInputView:inputProvider.view];
     }
 
+    [self updateInputNavigationToolbarVisibility];
+
     if (requestor.displayStyle == IBAInputRequestorDisplayStylePopover && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 
         //prevent the keyboard from appearing
@@ -271,8 +273,6 @@
         if (inputProvider.view != nil) {
             [[requestor responder] setInputView:inputProvider.view];
         }
-
-        [self updateInputNavigationToolbarVisibility];
     }
 
 }
