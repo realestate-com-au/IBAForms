@@ -23,6 +23,7 @@
 #import "IBAMultiplePickListInputProvider.h"
 #import "IBASinglePickListInputProvider.h"
 #import "IBAPoppedOverViewController.h"
+#import "IBATextField.h"
 
 @interface UIResponder (InputViews)
 - (void)setInputView:(UIView *)inputView;
@@ -265,6 +266,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(IBAInputManager);
 
   if (requestor.displayStyle == IBAInputRequestorDisplayStylePopover && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 
+    //prevent the keyboard from appearing
     [[requestor responder] setInputView:[[[UIView alloc] initWithFrame:CGRectZero] autorelease]];
 
     NSAssert(inputProvider.view != nil,@"InputProvider view cannot be nil if InputRequestor displayStyle == IBAInputRequestorDisplayStylePopover");
@@ -272,7 +274,18 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(IBAInputManager);
     self.popoverController = [[[UIPopoverController alloc] initWithContentViewController:[[[IBAPoppedOverViewController alloc] initWithInputProviderView:inputProvider.view] autorelease]] autorelease];
     self.popoverController.delegate = self;
     self.popoverController.popoverContentSize = inputProvider.view.frame.size;
-    [self.popoverController presentPopoverFromRect:requestor.cell.bounds inView:requestor.cell permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+
+    //if the responder is a text field, grab it's clear button and allow it to be pressed
+    if ([requestor.responder isKindOfClass:[IBATextField class]])
+    {
+      IBATextField *textField = (IBATextField *)requestor.responder;
+      self.popoverController.passthroughViews = [NSArray arrayWithObjects:textField.clearButton, nil];
+      [self.popoverController presentPopoverFromRect:textField.bounds inView:requestor.cell permittedArrowDirections:UIPopoverArrowDirectionRight animated:YES];
+    }
+    else
+    {
+      [self.popoverController presentPopoverFromRect:requestor.cell.bounds inView:requestor.cell permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    }
   } else {
     if (inputProvider.view != nil) {
       [[requestor responder] setInputView:inputProvider.view];
@@ -289,6 +302,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(IBAInputManager);
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController {
   if (self.popoverController == popoverController) { //being extra safe
     self.popoverController = nil;
+    [self deactivateActiveInputRequestor];
   }
 }
 
