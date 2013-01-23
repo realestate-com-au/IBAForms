@@ -192,6 +192,7 @@
 				0867D69AFE84028FC02AAC07 /* Frameworks */,
 				034768DFFF38A50411DB9C8B /* Products */,
 			);
+			indentWidth = 4;
 			name = IBAForms;
 			sourceTree = "<group>";
 		};
