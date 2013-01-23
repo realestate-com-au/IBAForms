@@ -29,7 +29,6 @@
 @synthesize formFieldStyle = formFieldStyle_;
 @synthesize styleApplied = styleApplied_;
 @synthesize active = active_;
-@synthesize hiddenCellCache = hiddenCellCache_;
 
 - (void)dealloc {
 	IBA_RELEASE_SAFELY(inputView_);
@@ -153,26 +152,5 @@
     }];
   }];
 }
-
-#pragma mark - 
-#pragma mark Dirty laundry
-
-// SW. So, what's all this dirty laundry business then? Well, let me tell you a little story
-// about UIResponders. If you call becomeFirstResponder on a UIResponder that is not in the view hierarchy, it doesn't
-// become the first responder. 'So what', you might ask. Well, when cells in a UITableView scroll out of view, they
-// are removed from the view hierarchy. If you select a cell, then scroll it up out of view, when you press the 'Previous'
-// button in the toolbar, the forms framework tries to activate the previous cell and make it the first responder.
-// The previous cell won't be in the view hierarchy, and the becomeFirstResponder call will fail. We tried all sorts
-// of workarounds, but the one that seems to work is to put the cells into a hidden view when they are removed from the
-// UITableView, so that they are still in the view hierarchy. We ended up making this hidden view a subview of the 
-// UIViewController's view. 
-
-- (void)didMoveToWindow {
-	if (self.window == nil) {
-		NSAssert((self.hiddenCellCache != nil), @"Hidden cell cache should not be nil");
-		[self.hiddenCellCache addSubview:self];
-	}
-}
-
 
 @end
