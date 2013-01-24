@@ -264,14 +264,11 @@
         self.popoverController.popoverContentSize = inputProvider.view.frame.size;
 
         //if the responder is a text field, grab it's clear button and allow it to be pressed
-        if ([requestor.responder isKindOfClass:[IBATextField class]])
-        {
+        if ([requestor.responder isKindOfClass:[IBATextField class]]) {
             IBATextField *textField = (IBATextField *)requestor.responder;
             self.popoverController.passthroughViews = [NSArray arrayWithObjects:textField.clearButton, nil];
             [self.popoverController presentPopoverFromRect:textField.bounds inView:requestor.cell permittedArrowDirections:UIPopoverArrowDirectionRight animated:YES];
-        }
-        else
-        {
+        } else {
             [self.popoverController presentPopoverFromRect:requestor.cell.bounds inView:requestor.cell permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
         }
     } else {
@@ -300,10 +297,9 @@
     [self updateInputNavigationToolbarVisibility];
 }
 
-- (void)updateInputNavigationToolbarVisibility
-{
+- (void)updateInputNavigationToolbarVisibility {
     UIResponder *responder = [[self activeInputRequestor] responder];
-    responder.inputAccessoryView = ([self isInputNavigationToolbarEnabled] ? self.inputNavigationToolbar : nil);
+    responder.inputAccessoryView = [self isInputNavigationToolbarEnabled] ? self.inputNavigationToolbar : nil;
 
     BOOL hasNextInputRequestor = [self.inputRequestorDataSource nextInputRequestor:self.activeInputRequestor] != nil;
     BOOL hasPrevInputRequestor = [self.inputRequestorDataSource previousInputRequestor:self.activeInputRequestor] != nil;
