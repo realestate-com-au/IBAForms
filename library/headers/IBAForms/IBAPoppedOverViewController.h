@@ -17,6 +17,5 @@
 @interface IBAPoppedOverViewController : UIViewController
 
 - (id)initWithInputProviderView:(UIView *)inputProviderView;
-- (id)initWithInputProviderView:(UIView *)inputProviderView accessoryView:(UIView *)accessoryView;
 
 @end

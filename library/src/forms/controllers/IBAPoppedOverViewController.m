@@ -17,44 +17,23 @@
 
 @interface IBAPoppedOverViewController ()
 @property (nonatomic, strong) UIView *inputProviderView;
-@property (nonatomic, strong) UIView *accessoryView;
 @end
 
 @implementation IBAPoppedOverViewController
+@synthesize inputProviderView = inputProviderView_;
 
-- (id)initWithInputProviderView:(UIView *)inputProviderView accessoryView:(UIView *)accessoryView
-{
+- (id)initWithInputProviderView:(UIView *)inputProviderView {
     if ((self = [super initWithNibName:nil bundle:nil])) {
-        self.inputProviderView = inputProviderView;
-        self.accessoryView = accessoryView;
+        [self setInputProviderView:inputProviderView];
     }
     return self;
 }
 
-- (id)initWithInputProviderView:(UIView *)inputProviderView {
-    return [self initWithInputProviderView:inputProviderView accessoryView:nil];
-}
-
 - (void)loadView
 {
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 240.)];
-    view.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-
-    if (self.accessoryView) {
-        //self.accessoryView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-
-        self.accessoryView.frame = CGRectMake(0, 0, CGRectGetWidth(view.frame), CGRectGetHeight(self.accessoryView.frame));
-        [view addSubview:self.accessoryView];
-    }
-
-    [self.inputProviderView sizeToFit];
-    self.inputProviderView.frame = CGRectMake(0, CGRectGetMaxY(self.accessoryView.frame), CGRectGetWidth(self.inputProviderView.frame), CGRectGetHeight(self.inputProviderView.frame));
-    [view addSubview:self.inputProviderView];
-
-    [view setFrame:CGRectMake(0, 0, 320, CGRectGetMaxY(self.inputProviderView.frame))];
-
-    [self setView:view];
+    [self setView:self.inputProviderView];
 }
+
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
