@@ -277,8 +277,13 @@
 
 #pragma mark - UIPopoverControllerDelegate
 
+- (BOOL)popoverControllerShouldDismissPopover:(UIPopoverController *)popoverController
+{
+    return YES;
+}
+
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController {
-    if (self.popoverController == popoverController) { //being extra safe
+    if (self.popoverController == popoverController) {
         self.popoverController = nil;
         [self deactivateActiveInputRequestor];
     }
