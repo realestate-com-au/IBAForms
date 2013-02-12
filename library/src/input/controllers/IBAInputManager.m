@@ -241,33 +241,33 @@
 
 - (void)displayInputProvider:(id<IBAInputProvider>)inputProvider forInputRequestor:(id<IBAInputRequestor>)requestor {
 
+    UIView *inputProviderView = inputProvider.view;
+
     if (nil != inputProviderCoordinator_) {
-        return [inputProviderCoordinator_ setInputView:inputProvider.view];
+        return [inputProviderCoordinator_ setInputView:inputProviderView];
     }
 
     if (requestor.displayStyle == IBAInputRequestorDisplayStylePopover) {
         //prevent the keyboard from appearing
         [[requestor responder] setInputView:[[UIView alloc] initWithFrame:CGRectZero]];
 
-        NSAssert(inputProvider.view != nil,@"InputProvider view cannot be nil if InputRequestor displayStyle == IBAInputRequestorDisplayStylePopover");
-
-        self.popoverController = [[UIPopoverController alloc] initWithContentViewController:[[IBAPoppedOverViewController alloc] initWithInputProviderView:inputProvider.view]];
+        self.popoverController = [[UIPopoverController alloc] initWithContentViewController:[[IBAPoppedOverViewController alloc] initWithInputProviderView:inputProviderView]];
         self.popoverController.delegate = self;
-        self.popoverController.popoverContentSize = inputProvider.view.frame.size;
+        self.popoverController.popoverContentSize = inputProviderView.frame.size;
         if (self.popoverBackgroundViewClass) {
             self.popoverController.popoverBackgroundViewClass = self.popoverBackgroundViewClass;
         }
         //if the responder is a text field, grab it's clear button and allow it to be pressed
         if ([requestor.responder isKindOfClass:[IBATextField class]]) {
             IBATextField *textField = (IBATextField *)requestor.responder;
-            self.popoverController.passthroughViews = [NSArray arrayWithObjects:textField.clearButton, nil];
+            self.popoverController.passthroughViews = [NSArray arrayWithObjects:textField.clearButton, requestor.cell, nil];
         }
 
         [self.popoverController presentPopoverFromRect:requestor.cell.bounds inView:requestor.cell permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
 
     } else {
-        if (inputProvider.view != nil) {
-            [[requestor responder] setInputView:inputProvider.view];
+        if (inputProviderView != nil) {
+            [[requestor responder] setInputView:inputProviderView];
         }
 
         [self updateInputNavigationToolbarVisibility];
@@ -277,9 +277,8 @@
 
 #pragma mark - UIPopoverControllerDelegate
 
-- (BOOL)popoverControllerShouldDismissPopover:(UIPopoverController *)popoverController
-{
-    return YES;
+- (BOOL)popoverControllerShouldDismissPopover:(UIPopoverController *)popoverController {
+    return [self.activeInputRequestor deactivateForced:NO];
 }
 
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController {
