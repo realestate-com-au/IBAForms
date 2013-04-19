@@ -88,9 +88,9 @@ customClearButtonImage:(UIImage *)image
 {
     NSNumber *labelValue = (displayTransformer_ ? [displayTransformer_ transformedValue:[self formFieldValue]] : [self formFieldValue]);
 
-    formFieldCell_.label.text = self.title;
-    formFieldCell_.valueTextField.text = [self formFieldStringValue];
-    formFieldCell_.valueLabel.text = [[self numberFormatter] stringFromNumber:labelValue];
+    self.formFieldCell.label.text = self.title;
+    self.formFieldCell.valueTextField.text = [self formFieldStringValue];
+    self.formFieldCell.valueLabel.text = [[self numberFormatter] stringFromNumber:labelValue];
 }
 
 #pragma mark - UITextFieldDelegate
@@ -110,9 +110,9 @@ customClearButtonImage:(UIImage *)image
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    if (textField == formFieldCell_.valueTextField && inputValidationRegularExpression_)
+    if (textField == self.formFieldCell.valueTextField && inputValidationRegularExpression_)
     {
-        NSString *resultText = [formFieldCell_.valueTextField.text stringByReplacingCharactersInRange:range withString:string];
+        NSString *resultText = [self.formFieldCell.valueTextField.text stringByReplacingCharactersInRange:range withString:string];
 
         if ([inputValidationRegularExpression_ numberOfMatchesInString:resultText options:0 range:NSMakeRange(0, [resultText length])] < 1)
         {
@@ -133,16 +133,16 @@ customClearButtonImage:(UIImage *)image
 
 - (void)activate
 {
-    formFieldCell_.valueTextField.enabled = YES;
+    self.formFieldCell.valueTextField.enabled = YES;
     [super activate];
 }
 
 - (BOOL)deactivateForced:(BOOL)forced
 {
-    BOOL deactivated = [self setFormFieldValue:formFieldCell_.valueTextField.text];
+    BOOL deactivated = [self setFormFieldValue:self.formFieldCell.valueTextField.text];
     if (deactivated || forced)
     {
-        formFieldCell_.valueTextField.enabled = NO;
+        self.formFieldCell.valueTextField.enabled = NO;
         deactivated = [super deactivateForced:forced];
     }
 
@@ -151,7 +151,7 @@ customClearButtonImage:(UIImage *)image
 
 - (UIResponder *)responder
 {
-    return formFieldCell_.valueTextField;
+    return self.formFieldCell.valueTextField;
 }
 
 - (BOOL)isiPad
