@@ -179,11 +179,27 @@
 
 #pragma mark - Property management
 
+- (void)tagHiddenCellCacheForRemoval {
+    for (UIView *view in hiddenCellCache_.subviews) {
+        view.tag = IBAHiddenCellCacheRemovalTag;
+    }
+}
+
+- (void)clearHiddenCellCache {
+    [self tagHiddenCellCacheForRemoval];
+    
+    for (UIView *view in hiddenCellCache_.subviews) {
+        [view removeFromSuperview];
+    }
+}
+
 // this setter also sets the datasource of the tableView and reloads the table
 - (void)setFormDataSource:(IBAFormDataSource *)dataSource {
     if (dataSource != formDataSource_) {
         formDataSource_ = dataSource;
-
+        
+        [self clearHiddenCellCache];
+        
         self.tableView.dataSource = formDataSource_;
         [self.tableView reloadData];
     }

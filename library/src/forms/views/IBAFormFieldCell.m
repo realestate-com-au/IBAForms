@@ -158,7 +158,8 @@
 - (void)didMoveToWindow {
     if (self.window == nil) {
         NSAssert((self.hiddenCellCache != nil), @"Hidden cell cache should not be nil");
-        [self.hiddenCellCache addSubview:self];
+        if (self.tag != IBAHiddenCellCacheRemovalTag)
+            [self.hiddenCellCache addSubview:self];
     }
 }
 

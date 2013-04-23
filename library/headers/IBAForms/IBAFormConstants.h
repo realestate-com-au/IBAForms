@@ -47,3 +47,6 @@
 #define IBAFormFieldValueTextColor [UIColor blackColor]
 #define IBAFormFieldValueTextAlignment UITextAlignmentLeft
 #define IBAFormFieldValueBackgroundColor [UIColor whiteColor]
+
+// HiddenCellCache management
+#define IBAHiddenCellCacheRemovalTag 0xBADDCAFE
