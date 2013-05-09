@@ -121,7 +121,7 @@
     return [self setActiveInputRequestor:inputRequestor forced:NO];
 }
 
-- (BOOL)setActiveInputRequestor:(id<IBAInputRequestor>)inputRequestor forced:(BOOL)forced {
+- (BOOL)setActiveInputRequestor:(id<IBAInputRequestor>)newInputRequestor forced:(BOOL)forced {
     id<IBAInputProvider>oldInputProvider = nil;
     if (activeInputRequestor_ != nil) {
         oldInputProvider = [self inputProviderForRequestor:activeInputRequestor_];
@@ -137,15 +137,20 @@
             [[activeInputRequestor_ responder] resignFirstResponder];
         }
 
+        if (activeInputRequestor_.displayStyle == IBAInputRequestorDisplayStyleKeyboard && newInputRequestor.displayStyle == IBAInputRequestorDisplayStylePopover)
+        {
+          newInputRequestor = nil;//If trying switch input from keyboard to popover, then dismiss the keyboard, without bringing up popover. Because dismissing the keyboard will possibly adjust the scroll content offset, making the new popover appear in the wrong position.
+        }
         oldInputProvider.inputRequestor = nil;
         activeInputRequestor_ = nil;
     }
 
-    if (inputRequestor != nil)  {
-        activeInputRequestor_ = inputRequestor;
+    if (newInputRequestor != nil)  {
+        activeInputRequestor_ = newInputRequestor;
 
         id<IBAInputProvider>newInputProvider = [self inputProviderForRequestor:activeInputRequestor_];
-        [self displayInputProvider:newInputProvider forInputRequestor:inputRequestor];
+
+        [self displayInputProvider:newInputProvider forInputRequestor:newInputRequestor];
 
         [activeInputRequestor_ activate];
         newInputProvider.inputRequestor = activeInputRequestor_;

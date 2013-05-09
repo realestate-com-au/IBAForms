@@ -306,7 +306,8 @@
     UIViewAnimationCurve animationCurve = [[info objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue];
 
     [self didHideInputRequestorWithBeginFrame:keyboardBeginFrame endFrame:keyboardEndFrame animationDuration:animationDuration animationCurve:animationCurve];
-    if (![[IBAInputManager sharedIBAInputManager] activeInputRequestor]) {
+    id<IBAInputRequestor> activeInputRequestor = [[IBAInputManager sharedIBAInputManager] activeInputRequestor];
+    if (activeInputRequestor == nil || activeInputRequestor.displayStyle == IBAInputRequestorDisplayStylePopover) {
         [self adjustTableViewHeightForCoveringFrame:CGRectZero];
         [[self tableView] setScrollEnabled:YES];
     }
