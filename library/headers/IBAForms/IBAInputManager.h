@@ -36,6 +36,7 @@
 @property (nonatomic, assign, getter = isInputNavigationToolbarEnabled) BOOL inputNavigationToolbarEnabled;
 @property (nonatomic, strong) id<IBAInputProviderCoordinator> inputProviderCoordinator;
 @property (nonatomic, assign) Class popoverBackgroundViewClass;
+@property (nonatomic, assign) UIPopoverArrowDirection popoverPermittedArrowDirections;
 
 + (IBAInputManager *)sharedIBAInputManager;
 

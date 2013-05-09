@@ -108,6 +108,7 @@
         [self registerInputProvider:[[IBAMultiplePickListInputProvider alloc] init]
                         forDataType:IBAInputDataTypePickListMultiple];
 
+        self.popoverPermittedArrowDirections = UIPopoverArrowDirectionAny;
     }
 
     return self;
@@ -263,7 +264,7 @@
             self.popoverController.passthroughViews = [NSArray arrayWithObjects:textField.clearButton, requestor.cell, nil];
         }
 
-        [self.popoverController presentPopoverFromRect:requestor.cell.bounds inView:requestor.cell permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+        [self.popoverController presentPopoverFromRect:requestor.cell.bounds inView:requestor.cell permittedArrowDirections:self.popoverPermittedArrowDirections animated:YES];
 
     } else {
         if (inputProviderView != nil) {
