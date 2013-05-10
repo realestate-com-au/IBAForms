@@ -147,13 +147,10 @@
 
     if (newInputRequestor != nil)  {
         activeInputRequestor_ = newInputRequestor;
-
         id<IBAInputProvider>newInputProvider = [self inputProviderForRequestor:activeInputRequestor_];
-
-        [self displayInputProvider:newInputProvider forInputRequestor:newInputRequestor];
-
-        [activeInputRequestor_ activate];
         newInputProvider.inputRequestor = activeInputRequestor_;
+        [self displayInputProvider:newInputProvider forInputRequestor:newInputRequestor];
+        [activeInputRequestor_ activate];
     }
 
     return YES;
