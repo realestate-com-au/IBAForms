@@ -19,7 +19,7 @@
     UIColor *labelBackgroundColor_;
     UIFont *labelFont_;
     CGRect labelFrame_;
-    UITextAlignment labelTextAlignment_;
+    NSTextAlignment labelTextAlignment_;
     UIViewAutoresizing labelAutoresizingMask_;
     UIViewContentMode labelContentMode_;
     BOOL labelOpaque_;
@@ -30,7 +30,7 @@
     CGRect valueFrame_;
     BOOL valueOpaque_;
 
-    UITextAlignment valueTextAlignment_;
+    NSTextAlignment valueTextAlignment_;
     UIViewAutoresizing valueAutoresizingMask_;
     UIControlContentVerticalAlignment valueVerticalAlignment_;
     UIViewContentMode valueContentMode_;
@@ -44,7 +44,7 @@
 @property (nonatomic, strong) UIColor *labelBackgroundColor;
 @property (nonatomic, strong) UIFont *labelFont;
 @property (nonatomic, assign) CGRect labelFrame;
-@property (nonatomic, assign) UITextAlignment labelTextAlignment;
+@property (nonatomic, assign) NSTextAlignment labelTextAlignment;
 @property (nonatomic, assign) UIViewAutoresizing labelAutoresizingMask;
 @property (nonatomic, assign) UIViewContentMode labelContentMode;
 @property (nonatomic, assign) BOOL labelOpaque;
@@ -53,7 +53,7 @@
 @property (nonatomic, strong) UIColor *valueBackgroundColor;
 @property (nonatomic, strong) UIFont *valueFont;
 @property (nonatomic, assign) CGRect valueFrame;
-@property (nonatomic, assign) UITextAlignment valueTextAlignment;
+@property (nonatomic, assign) NSTextAlignment valueTextAlignment;
 @property (nonatomic, assign) UIViewAutoresizing valueAutoresizingMask;
 @property (nonatomic, assign) UIControlContentVerticalAlignment valueVerticalAlignment;
 @property (nonatomic, assign) UIViewContentMode valueContentMode;
