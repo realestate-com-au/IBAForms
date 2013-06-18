@@ -148,9 +148,9 @@
     if (newInputRequestor != nil)  {
         activeInputRequestor_ = newInputRequestor;
         id<IBAInputProvider>newInputProvider = [self inputProviderForRequestor:activeInputRequestor_];
+        newInputProvider.inputRequestor = activeInputRequestor_;
         [self displayInputProvider:newInputProvider forInputRequestor:newInputRequestor];
         [activeInputRequestor_ activate];
-        newInputProvider.inputRequestor = activeInputRequestor_;
     }
 
     return YES;
@@ -246,7 +246,7 @@
 
     UIView *inputProviderView = inputProvider.view;
 
-    if (nil != inputProviderCoordinator_) {
+    if (nil != inputProviderCoordinator_ && requestor.displayStyle != IBAInputRequestorDisplayStylePopover) {
         return [inputProviderCoordinator_ setInputView:inputProviderView];
     }
 
