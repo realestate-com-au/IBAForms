@@ -69,14 +69,17 @@
 
 - (id)nextFormFieldValue
 {
-    if (self.formFieldValue == [self.cycleListOptions lastObject])
+    if ([self.formFieldValue isEqual:[self.cycleListOptions lastObject]])
     {
         return [self.cycleListOptions objectAtIndex:0];
     }
-    else
+
+    NSUInteger indexOfNextObject = [self.cycleListOptions indexOfObject:self.formFieldValue] + 1;
+    if (indexOfNextObject < self.cycleListOptions.count)
     {
-        return [self.cycleListOptions objectAtIndex:[self.cycleListOptions indexOfObject:self.formFieldValue] + 1];
+        return [self.cycleListOptions objectAtIndex:indexOfNextObject];
     }
+    return nil;
 }
 
 @end
