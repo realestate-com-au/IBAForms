@@ -31,7 +31,7 @@
 
 
 @interface IBAInputManager () <UIPopoverControllerDelegate>
-
+@property (nonatomic, strong, readwrite) UIPopoverController *popoverController;
 @end
 
 

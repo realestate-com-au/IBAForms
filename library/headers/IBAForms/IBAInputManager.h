@@ -37,7 +37,7 @@
 @property (nonatomic, strong) id<IBAInputProviderCoordinator> inputProviderCoordinator;
 @property (nonatomic, assign) Class popoverBackgroundViewClass;
 @property (nonatomic, assign) UIPopoverArrowDirection popoverPermittedArrowDirections;
-@property (nonatomic, strong) UIPopoverController *popoverController;
+@property (nonatomic, strong, readonly) UIPopoverController *popoverController;
 
 + (IBAInputManager *)sharedIBAInputManager;
 
