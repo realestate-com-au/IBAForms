@@ -254,9 +254,12 @@
         //prevent the keyboard from appearing
         [[requestor responder] setInputView:[[UIView alloc] initWithFrame:CGRectZero]];
 
-        self.popoverController = [[UIPopoverController alloc] initWithContentViewController:[[IBAPoppedOverViewController alloc] initWithInputProviderView:inputProviderView]];
+        UIViewController *inputProviderController = [[IBAPoppedOverViewController alloc] initWithInputProviderView:inputProviderView];
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:inputProviderController];
+        inputProviderController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissPopver)];
+        self.popoverController = [[UIPopoverController alloc] initWithContentViewController:navController];
         self.popoverController.delegate = self;
-        self.popoverController.popoverContentSize = inputProviderView.frame.size;
+        self.popoverController.popoverContentSize = CGSizeMake(inputProviderView.frame.size.width, inputProviderView.frame.size.height + 44.f);
         if (self.popoverBackgroundViewClass) {
             self.popoverController.popoverBackgroundViewClass = self.popoverBackgroundViewClass;
         }
@@ -275,7 +278,14 @@
 
         [self updateInputNavigationToolbarVisibility];
     }
+}
 
+- (void)dismissPopver
+{
+    if ([self popoverControllerShouldDismissPopover:self.popoverController]) {
+        [self.popoverController dismissPopoverAnimated:YES];
+        [self popoverControllerDidDismissPopover:self.popoverController];
+    }
 }
 
 #pragma mark - UIPopoverControllerDelegate
