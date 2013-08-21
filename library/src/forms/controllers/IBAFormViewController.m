@@ -72,7 +72,7 @@
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil formDataSource:(IBAFormDataSource *)formDataSource {
-    if ((self = [self initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
+    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         self.formDataSource = formDataSource;
 
         [self ibaFormViewControllerCommonInitialization];
