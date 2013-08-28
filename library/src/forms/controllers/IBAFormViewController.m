@@ -59,16 +59,33 @@
     hiddenCellCache_ = nil;
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil formDataSource:(IBAFormDataSource *)formDataSource {
-    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        self.formDataSource = formDataSource;
-        self.hidesBottomBarWhenPushed = YES;
-        self.scrollEnabledOnFormFieldActivation = YES;
-
-        [self registerForNotifications];
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if ((self = [super initWithCoder:aDecoder])) {
+        [self ibaFormViewControllerCommonInitialization];
     }
 
     return self;
+}
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    return [self initWithNibName:nibNameOrNil bundle:nibBundleOrNil formDataSource:nil];
+}
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil formDataSource:(IBAFormDataSource *)formDataSource {
+    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
+        self.formDataSource = formDataSource;
+
+        [self ibaFormViewControllerCommonInitialization];
+    }
+
+    return self;
+}
+
+- (void)ibaFormViewControllerCommonInitialization {
+    self.hidesBottomBarWhenPushed = YES;
+    self.scrollEnabledOnFormFieldActivation = YES;
+
+    [self registerForNotifications];
 }
 
 - (void)registerForNotifications {
@@ -85,12 +102,6 @@
 - (void)registerSelector:(SEL)selector withNotification:(NSString *)notificationKey {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:selector name:notificationKey object:nil];
 }
-
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    return [self initWithNibName:nibNameOrNil bundle:nibBundleOrNil formDataSource:nil];
-}
-
 
 #pragma mark - View lifecycle
 
