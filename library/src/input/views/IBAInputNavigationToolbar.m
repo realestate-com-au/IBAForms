@@ -41,11 +41,15 @@
         nextPreviousButton_.segmentedControlStyle = UISegmentedControlStyleBar;
         nextPreviousButton_.tintColor = [UIColor blackColor];
         nextPreviousButton_.momentary = YES;
+        UIFont *font = [UIFont boldSystemFontOfSize:12.0f];
+        NSDictionary *attributes = [NSDictionary dictionaryWithObject:font forKey:UITextAttributeFont];
+        [nextPreviousButton_ setTitleTextAttributes:attributes forState:UIControlStateNormal];
 
         nextPreviousBarButtonItem_ = [[UIBarButtonItem alloc] initWithCustomView:self.nextPreviousButton];
 
         displayDoneButton_ = YES;
         displayNextPreviousButton_ = YES;
+        
         [self updateButtons];
     }
 
