@@ -33,14 +33,23 @@
 
 - (id)initWithFrame:(CGRect)aRect {
     if ((self = [super initWithFrame:(CGRect)aRect])) {
-        self.barStyle = UIBarStyleBlack;
-
+        
         doneButton_ = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:nil action:nil];
 
         nextPreviousButton_ = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:IBAInputNavigationToolbarPreviousTitle, IBAInputNavigationToolbarNextTitle, nil]];
         nextPreviousButton_.segmentedControlStyle = UISegmentedControlStyleBar;
-        nextPreviousButton_.tintColor = [UIColor blackColor];
+        
         nextPreviousButton_.momentary = YES;
+
+        if ([self respondsToSelector:@selector(barTintColor)])   // iOS 7 style
+        {
+            self.barStyle = UIBarStyleDefault;
+        }
+        else
+        {
+            self.barStyle = UIBarStyleBlackTranslucent;
+            nextPreviousButton_.tintColor = [UIColor blackColor];
+        }
 
         nextPreviousBarButtonItem_ = [[UIBarButtonItem alloc] initWithCustomView:self.nextPreviousButton];
 
