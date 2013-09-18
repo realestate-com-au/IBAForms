@@ -32,7 +32,7 @@
         // RC: In order to be able to change the background colour, the background view needs
         // to be nil'ed out. If this isn't done, then under iOS 6, the background colour
         // will not change to the dark colour.
-        pickListTableView_.backgroundColor = [UIColor viewFlipsideBackgroundColor];
+        pickListTableView_.backgroundColor = [UIColor whiteColor];
         pickListTableView_.backgroundView = nil;
 
         pickListTableView_.autoresizingMask = UIViewAutoresizingFlexibleHeight;
