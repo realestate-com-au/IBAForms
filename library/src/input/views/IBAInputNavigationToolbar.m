@@ -44,13 +44,13 @@
         NSDictionary *attributes = [NSDictionary dictionaryWithObject:font forKey:UITextAttributeFont];
         [nextPreviousButton_ setTitleTextAttributes:attributes forState:UIControlStateNormal];
 
-        if ([self respondsToSelector:@selector(barTintColor)])   // iOS 7 style
+        if ([[[UIDevice currentDevice] systemVersion] compare:@"7.0" options:NSNumericSearch] != NSOrderedAscending)
         {
             self.barStyle = UIBarStyleDefault;
         }
         else
         {
-            self.barStyle = UIBarStyleBlackTranslucent;
+            self.barStyle = UIBarStyleBlack;
             nextPreviousButton_.tintColor = [UIColor blackColor];
         }
 
