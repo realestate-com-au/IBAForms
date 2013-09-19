@@ -12,6 +12,10 @@
 // permissions and limitations under the License.
 //
 
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
+#define REA_IOS7_SDK_AVAILABLE 1
+#endif
+
 #import <Foundation/Foundation.h>
 #import "IBAInputManager.h"
 #import "IBACommon.h"
@@ -255,6 +259,12 @@
         [[requestor responder] setInputView:[[UIView alloc] initWithFrame:CGRectZero]];
 
         UIViewController *inputProviderController = [[IBAPoppedOverViewController alloc] initWithInputProviderView:inputProviderView];
+#ifdef REA_IOS7_SDK_AVAILABLE
+        if ([inputProviderController respondsToSelector:@selector(edgesForExtendedLayout)])
+        {
+            inputProviderController.edgesForExtendedLayout = UIRectEdgeNone;
+        }
+#endif
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:inputProviderController];
         inputProviderController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissPopver)];
         self.popoverController = [[UIPopoverController alloc] initWithContentViewController:navController];
