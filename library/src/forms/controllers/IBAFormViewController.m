@@ -316,12 +316,12 @@
     NSTimeInterval animationDuration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     UIViewAnimationCurve animationCurve = [[info objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue];
 
-    [self didHideInputRequestorWithBeginFrame:keyboardBeginFrame endFrame:keyboardEndFrame animationDuration:animationDuration animationCurve:animationCurve];
     id<IBAInputRequestor> activeInputRequestor = [[IBAInputManager sharedIBAInputManager] activeInputRequestor];
     if (activeInputRequestor == nil || activeInputRequestor.displayStyle == IBAInputRequestorDisplayStylePopover) {
         [self adjustTableViewHeightForCoveringFrame:CGRectZero];
         [[self tableView] setScrollEnabled:YES];
     }
+    [self didHideInputRequestorWithBeginFrame:keyboardBeginFrame endFrame:keyboardEndFrame animationDuration:animationDuration animationCurve:animationCurve];
 }
 
 - (void)formFieldActivated:(NSNotification *)notification {
