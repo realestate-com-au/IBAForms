@@ -359,7 +359,8 @@
 
         CGFloat height = (CGRectEqualToRect(coveringFrame, CGRectZero)) ? 0 :
         coveringFrame.size.height - (normalisedWindowBounds.size.height - CGRectGetMaxY(normalisedTableViewFrame));
-        UIEdgeInsets contentInsets = UIEdgeInsetsMake(0, 0, height, 0);
+        UIEdgeInsets contentInsets = self.tableView.contentInset;
+        contentInsets.bottom = height;
         //NSLog(@"UIEdgeInsets contentInsets bottom %f", contentInsets.bottom);
         self.tableView.contentInset = contentInsets;
         self.tableView.scrollIndicatorInsets = contentInsets;
