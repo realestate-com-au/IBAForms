@@ -1,16 +1,20 @@
 //
 // Copyright 2010 Itty Bitty Apps Pty Ltd
-// 
-// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this 
-// file except in compliance with the License. You may obtain a copy of the License at 
-// 
-// http://www.apache.org/licenses/LICENSE-2.0 
-// 
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
+// file except in compliance with the License. You may obtain a copy of the License at
+//
+// http://www.apache.org/licenses/LICENSE-2.0
+//
 // Unless required by applicable law or agreed to in writing, software distributed under
-// the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF 
+// the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
 // ANY KIND, either express or implied. See the License for the specific language governing
 // permissions and limitations under the License.
 //
+
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
+#define REA_IOS7_SDK_AVAILABLE 1
+#endif
 
 #import <Foundation/Foundation.h>
 #import "IBAInputManager.h"
@@ -31,7 +35,7 @@
 
 
 @interface IBAInputManager () <UIPopoverControllerDelegate>
-@property (nonatomic, strong) UIPopoverController *popoverController;
+@property (nonatomic, strong, readwrite) UIPopoverController *popoverController;
 @end
 
 
@@ -43,10 +47,11 @@
     dispatch_once(&onceToken, ^{
         sharedManager = [[self alloc] init];
     });
-
+    
     return sharedManager;
 }
 
+static float const kiOS7ContentHeightOffset = 7.f;
 
 @synthesize inputRequestorDataSource = inputRequestorDataSource_;
 @synthesize inputNavigationToolbar = inputNavigationToolbar_;
@@ -64,53 +69,53 @@
 - (id)init {
     if ((self = [super init])) {
         inputProviders_ = [[NSMutableDictionary alloc] init];
-
+        
         inputNavigationToolbar_ = [[IBAInputNavigationToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
         inputNavigationToolbar_.doneButton.target = self;
         inputNavigationToolbar_.doneButton.action = @selector(deactivateActiveInputRequestor);
         [inputNavigationToolbar_.nextPreviousButton addTarget:self action:@selector(nextPreviousButtonSelected)
                                              forControlEvents:UIControlEventValueChanged];
-
+        
         inputNavigationToolbarEnabled_ = YES;
-
+        
         [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
-
+        
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(applicationWillChangeStatusBarOrientation:)
                                                      name:UIApplicationWillChangeStatusBarOrientationNotification object:nil];
-
+        
         // Setup some default input providers
-
+        
         // Text
         [self registerInputProvider:[[IBATextInputProvider alloc] init]
                         forDataType:IBAInputDataTypeText];
-
+        
         // Numbers
         [self registerInputProvider:[[IBATextInputProvider alloc] init]
                         forDataType:IBAInputDataTypeNumber];
-
+        
         // Date
         [self registerInputProvider:[[IBADateInputProvider alloc] init]
                         forDataType:IBAInputDataTypeDate];
         // Time
         [self registerInputProvider:[[IBADateInputProvider alloc] initWithDatePickerMode:UIDatePickerModeTime]
                         forDataType:IBAInputDataTypeTime];
-
+        
         // Date & Time
         [self registerInputProvider:[[IBADateInputProvider alloc] initWithDatePickerMode:UIDatePickerModeDateAndTime]
                         forDataType:IBAInputDataTypeDateTime];
-
+        
         // Single Picklist
         [self registerInputProvider:[[IBASinglePickListInputProvider alloc] init]
                         forDataType:IBAInputDataTypePickListSingle];
-
+        
         // Multiple Picklist
         [self registerInputProvider:[[IBAMultiplePickListInputProvider alloc] init]
                         forDataType:IBAInputDataTypePickListMultiple];
-
+        
         self.popoverPermittedArrowDirections = UIPopoverArrowDirectionAny;
     }
-
+    
     return self;
 }
 
@@ -125,26 +130,26 @@
     id<IBAInputProvider>oldInputProvider = nil;
     if (activeInputRequestor_ != nil) {
         oldInputProvider = [self inputProviderForRequestor:activeInputRequestor_];
-
+        
         if (![activeInputRequestor_ deactivateForced:forced]) {
             return NO;
         }
-
+        
         if (activeInputRequestor_.displayStyle == IBAInputRequestorDisplayStylePopover) {
             [self.popoverController dismissPopoverAnimated:YES];
             self.popoverController = nil;
         } else {
             [[activeInputRequestor_ responder] resignFirstResponder];
         }
-
+        
         if (activeInputRequestor_.displayStyle == IBAInputRequestorDisplayStyleKeyboard && newInputRequestor.displayStyle == IBAInputRequestorDisplayStylePopover)
         {
-          newInputRequestor = nil;//If trying switch input from keyboard to popover, then dismiss the keyboard, without bringing up popover. Because dismissing the keyboard will possibly adjust the scroll content offset, making the new popover appear in the wrong position.
+            newInputRequestor = nil;//If trying switch input from keyboard to popover, then dismiss the keyboard, without bringing up popover. Because dismissing the keyboard will possibly adjust the scroll content offset, making the new popover appear in the wrong position.
         }
         oldInputProvider.inputRequestor = nil;
         activeInputRequestor_ = nil;
     }
-
+    
     if (newInputRequestor != nil)  {
         activeInputRequestor_ = newInputRequestor;
         id<IBAInputProvider>newInputProvider = [self inputProviderForRequestor:activeInputRequestor_];
@@ -152,7 +157,7 @@
         [self displayInputProvider:newInputProvider forInputRequestor:newInputRequestor];
         [activeInputRequestor_ activate];
     }
-
+    
     return YES;
 }
 
@@ -224,14 +229,14 @@
         NSString *message = [NSString stringWithFormat:@"Data type for input requestor %@ has not been set", inputRequestor];
         NSAssert(NO, message);
     }
-
+    
     id<IBAInputProvider> provider = [self inputProviderForDataType:inputRequestor.dataType];
-
+    
     if (provider == nil) {
         NSString *message = [NSString stringWithFormat:@"No input provider bound to data type %@", inputRequestor.dataType];
         NSAssert(NO, message);
     }
-
+    
     return provider;
 }
 
@@ -243,20 +248,37 @@
 #pragma mark - Presenting the input provider
 
 - (void)displayInputProvider:(id<IBAInputProvider>)inputProvider forInputRequestor:(id<IBAInputRequestor>)requestor {
-
+    
     UIView *inputProviderView = inputProvider.view;
-
+    
     if (nil != inputProviderCoordinator_ && requestor.displayStyle != IBAInputRequestorDisplayStylePopover) {
         return [inputProviderCoordinator_ setInputView:inputProviderView];
     }
-
+    
     if (requestor.displayStyle == IBAInputRequestorDisplayStylePopover) {
         //prevent the keyboard from appearing
         [[requestor responder] setInputView:[[UIView alloc] initWithFrame:CGRectZero]];
-
-        self.popoverController = [[UIPopoverController alloc] initWithContentViewController:[[IBAPoppedOverViewController alloc] initWithInputProviderView:inputProviderView]];
+        
+        UIViewController *inputProviderController = [[IBAPoppedOverViewController alloc] initWithInputProviderView:inputProviderView];
+        float iOS7ContentHeightOffset = 0.f;
+#ifdef REA_IOS7_SDK_AVAILABLE
+        if ([inputProviderController respondsToSelector:@selector(edgesForExtendedLayout)])
+        {
+            inputProviderController.edgesForExtendedLayout = UIRectEdgeNone;
+        }
+        else
+        {
+            // in iOS 6, popover height comes out to be 7 px too high.
+            iOS7ContentHeightOffset = kiOS7ContentHeightOffset;
+        }
+#else
+        iOS7ContentHeightOffset = kiOS7ContentHeightOffset;
+#endif
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:inputProviderController];
+        inputProviderController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissPopver)];
+        self.popoverController = [[UIPopoverController alloc] initWithContentViewController:navController];
         self.popoverController.delegate = self;
-        self.popoverController.popoverContentSize = inputProviderView.frame.size;
+        self.popoverController.popoverContentSize = CGSizeMake(inputProviderView.frame.size.width, inputProviderView.frame.size.height + navController.navigationBar.frame.size.height - iOS7ContentHeightOffset);
         if (self.popoverBackgroundViewClass) {
             self.popoverController.popoverBackgroundViewClass = self.popoverBackgroundViewClass;
         }
@@ -265,17 +287,24 @@
             IBATextField *textField = (IBATextField *)requestor.responder;
             self.popoverController.passthroughViews = [NSArray arrayWithObjects:textField.clearButton, requestor.cell, nil];
         }
-
+        
         [self.popoverController presentPopoverFromRect:requestor.cell.bounds inView:requestor.cell permittedArrowDirections:self.popoverPermittedArrowDirections animated:YES];
-
+        
     } else {
         if (inputProviderView != nil) {
             [[requestor responder] setInputView:inputProviderView];
         }
-
+        
         [self updateInputNavigationToolbarVisibility];
     }
+}
 
+- (void)dismissPopver
+{
+    if ([self popoverControllerShouldDismissPopover:self.popoverController]) {
+        [self.popoverController dismissPopoverAnimated:YES];
+        [self popoverControllerDidDismissPopover:self.popoverController];
+    }
 }
 
 #pragma mark - UIPopoverControllerDelegate
@@ -296,17 +325,17 @@
 
 - (void)setInputNavigationToolbarEnabled:(BOOL)enabled {
     inputNavigationToolbarEnabled_ = enabled;
-
+    
     [self updateInputNavigationToolbarVisibility];
 }
 
 - (void)updateInputNavigationToolbarVisibility {
     UIResponder *responder = [[self activeInputRequestor] responder];
     responder.inputAccessoryView = [self isInputNavigationToolbarEnabled] ? self.inputNavigationToolbar : nil;
-
+    
     BOOL hasNextInputRequestor = [self.inputRequestorDataSource nextInputRequestor:self.activeInputRequestor] != nil;
     BOOL hasPrevInputRequestor = [self.inputRequestorDataSource previousInputRequestor:self.activeInputRequestor] != nil;
-
+    
     [self.inputNavigationToolbar.nextPreviousButton setEnabled:hasPrevInputRequestor forSegmentAtIndex:0];
     [self.inputNavigationToolbar.nextPreviousButton setEnabled:hasNextInputRequestor forSegmentAtIndex:1];
 }
