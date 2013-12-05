@@ -12,10 +12,6 @@
 // permissions and limitations under the License.
 //
 
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
-#define REA_IOS7_SDK_AVAILABLE 1
-#endif
-
 #import <Foundation/Foundation.h>
 #import "IBAInputManager.h"
 #import "IBACommon.h"
@@ -260,8 +256,7 @@ static float const kiOS7ContentHeightOffset = 7.f;
         [[requestor responder] setInputView:[[UIView alloc] initWithFrame:CGRectZero]];
         
         UIViewController *inputProviderController = [[IBAPoppedOverViewController alloc] initWithInputProviderView:inputProviderView];
-        float iOS7ContentHeightOffset = 0.f;
-#ifdef REA_IOS7_SDK_AVAILABLE
+        float preiOS7ContentHeightOffset = 0.f;
         if ([inputProviderController respondsToSelector:@selector(edgesForExtendedLayout)])
         {
             inputProviderController.edgesForExtendedLayout = UIRectEdgeNone;
@@ -269,16 +264,13 @@ static float const kiOS7ContentHeightOffset = 7.f;
         else
         {
             // in iOS 6, popover height comes out to be 7 px too high.
-            iOS7ContentHeightOffset = kiOS7ContentHeightOffset;
+            preiOS7ContentHeightOffset = kiOS7ContentHeightOffset;
         }
-#else
-        iOS7ContentHeightOffset = kiOS7ContentHeightOffset;
-#endif
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:inputProviderController];
         inputProviderController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissPopver)];
         self.popoverController = [[UIPopoverController alloc] initWithContentViewController:navController];
         self.popoverController.delegate = self;
-        self.popoverController.popoverContentSize = CGSizeMake(inputProviderView.frame.size.width, inputProviderView.frame.size.height + navController.navigationBar.frame.size.height - iOS7ContentHeightOffset);
+        self.popoverController.popoverContentSize = CGSizeMake(inputProviderView.frame.size.width, inputProviderView.frame.size.height + navController.navigationBar.frame.size.height - preiOS7ContentHeightOffset);
         if (self.popoverBackgroundViewClass) {
             self.popoverController.popoverBackgroundViewClass = self.popoverBackgroundViewClass;
         }
