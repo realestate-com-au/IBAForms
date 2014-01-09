@@ -53,7 +53,10 @@
     IBAFormField *formField = [self formFieldAtIndexPath:indexPath];
     [formField updateCellContents];
 
-    return [formField cell];
+    UITableViewCell *cell = [formField cell];
+    cell.userInteractionEnabled = formField.formFieldStyle.isEditable;
+    
+    return cell;
 }
 
 - (IBAFormField *)formFieldAtIndexPath:(NSIndexPath *)indexPath {
