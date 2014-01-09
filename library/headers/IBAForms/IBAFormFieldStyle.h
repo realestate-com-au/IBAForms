@@ -38,6 +38,8 @@
     UIColor *backgroundColor_;
     UIView *activeBackgroundView_;
     UIView *backgroundView_;
+    
+    BOOL enabled_;
 }
 
 @property (nonatomic, strong) UIColor *labelTextColor;
@@ -63,6 +65,8 @@
 @property (nonatomic, strong) UIColor *backgroundColor;
 @property (nonatomic, strong) UIView *activeBackgroundView;
 @property (nonatomic, strong) UIView *backgroundView;
+
+@property (nonatomic, assign, getter = isEditable) BOOL editable;
 
 - (void)setLabelX:(CGFloat)x;
 - (void)setLabelY:(CGFloat)y;

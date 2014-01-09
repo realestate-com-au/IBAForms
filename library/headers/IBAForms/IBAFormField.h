@@ -25,6 +25,7 @@
     IBAFormFieldStyle *formFieldStyle_;
     BOOL nullable_;
     NSValueTransformer *valueTransformer_;
+    BOOL editable_;
 }
 
 @property (nonatomic, copy) NSString *keyPath;

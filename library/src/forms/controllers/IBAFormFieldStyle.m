@@ -40,7 +40,7 @@
 @synthesize valueContentMode = valueContentMode_;
 @synthesize valueOpaque = valueOpaque_;
 
-
+@synthesize editable = editable_;
 
 - (id)init {
     if ((self = [super init])) {
@@ -65,6 +65,8 @@
 
         self.activeBackgroundColor = IBAFormFieldActiveBackgroundColor;
         self.backgroundColor = IBAFormFieldLabelBackgroundColor;
+        
+        self.editable = YES;
     }
 
     return self;
@@ -93,6 +95,8 @@
 
     copy.activeBackgroundColor = self.activeBackgroundColor;
     copy.backgroundColor = self.backgroundColor;
+    
+    copy.editable = self.isEditable;
 
     return copy;
 }
@@ -144,6 +148,5 @@
     frame.size.height = height;
     self.valueFrame = frame;
 }
-
 
 @end
