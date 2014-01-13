@@ -29,6 +29,7 @@
 @synthesize nextPreviousBarButtonItem = nextPreviousBarButtonItem_;
 @synthesize displayDoneButton = displayDoneButton_;
 @synthesize displayNextPreviousButton = displayNextPreviousButton_;
+@synthesize doneButtonPosition = doneButtonPosition_;
 
 
 - (id)initWithFrame:(CGRect)aRect {
@@ -58,6 +59,7 @@
 
         displayDoneButton_ = YES;
         displayNextPreviousButton_ = YES;
+        doneButtonPosition_ = IBAInputNavigationToolbarDoneButtonPositionLeft;
         
         [self updateButtons];
     }
@@ -78,16 +80,26 @@
 
 - (void)updateButtons {
     NSMutableArray *barItems = [NSMutableArray array];
-    if (self.displayDoneButton) {
-        [barItems addObject:doneButton_];
+    UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    
+    if (doneButtonPosition_ == IBAInputNavigationToolbarDoneButtonPositionLeft) {
+        if (self.displayDoneButton) {
+            [barItems addObject:doneButton_];
+        }
+        [barItems addObject:spacer];
+        if (self.displayNextPreviousButton) {
+            [barItems addObject:nextPreviousBarButtonItem_];
+        }
+    } else {
+        if (self.displayNextPreviousButton) {
+            [barItems addObject:nextPreviousBarButtonItem_];
+        }
+        [barItems addObject:spacer];
+        if (self.displayDoneButton) {
+            [barItems addObject:doneButton_];
+        }
     }
-
-    [barItems addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
-
-    if (self.displayNextPreviousButton) {
-        [barItems addObject:nextPreviousBarButtonItem_];
-    }
-
+    
     [self setItems:barItems animated:YES];
 }
 

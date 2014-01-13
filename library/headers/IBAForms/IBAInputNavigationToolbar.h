@@ -19,6 +19,11 @@ typedef enum {
     IBAInputNavigationToolbarActionNext
 } IBAInputNavigationToolbarAction;
 
+typedef enum {
+    IBAInputNavigationToolbarDoneButtonPositionLeft = 0,
+    IBAInputNavigationToolbarDoneButtonPositionRight
+}
+IBAInputNavigationToolbarDoneButtonPosition;
 
 @interface IBAInputNavigationToolbar : UIToolbar {
     UIBarButtonItem *doneButton_;
@@ -32,5 +37,5 @@ typedef enum {
 @property (nonatomic, strong) UISegmentedControl *nextPreviousButton;
 @property (nonatomic, assign) BOOL displayDoneButton;
 @property (nonatomic, assign) BOOL displayNextPreviousButton;
-
+@property (nonatomic, assign) IBAInputNavigationToolbarDoneButtonPosition doneButtonPosition; //default to left
 @end
