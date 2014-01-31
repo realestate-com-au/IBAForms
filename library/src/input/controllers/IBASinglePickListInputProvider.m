@@ -138,7 +138,7 @@
         NSInteger selectedRow = [self.pickListOptions indexOfObject:selectedPickListOption];
         [self.pickerView selectRow:selectedRow inComponent:0 animated:YES];
     } else {
-        [self setSelectedOptionWithIndex:0];
+        [self.pickerView selectRow:0 inComponent:0 animated:YES];
     } 
 }
 
