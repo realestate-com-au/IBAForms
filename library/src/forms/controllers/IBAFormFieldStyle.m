@@ -89,7 +89,7 @@
     copy.valueFrame = self.valueFrame;
     copy.valueTextAlignment = self.valueTextAlignment;
     copy.valueAutoresizingMask = self.valueAutoresizingMask;
-    copy.valueVerticalAlignment = self.valueAutoresizingMask;
+    copy.valueVerticalAlignment = self.valueVerticalAlignment;
     copy.valueContentMode = self.valueContentMode;
     copy.valueOpaque = self.valueOpaque;
 
