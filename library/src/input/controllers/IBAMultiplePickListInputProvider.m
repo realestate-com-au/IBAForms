@@ -98,22 +98,30 @@
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSSet *selectedOptions = (NSSet *)self.inputRequestor.inputRequestorValue;
-    NSMutableSet *newSelectedOptions = (([[self pickListOptionsProvider] selectionMode] == IBAPickListSelectionModeSingle) ?
-                                        [NSMutableSet set] : [NSMutableSet setWithSet:selectedOptions]);
 
-    id<IBAPickListOption> pickListOption = [[self pickListOptions] objectAtIndex:indexPath.row];
+    NSArray *pickListOptions = [self pickListOptions];
+    if (indexPath.row >= 0 && indexPath.row < (NSInteger) [pickListOptions count])
+    {
+        id<IBAPickListOption> pickListOption = [pickListOptions objectAtIndex:indexPath.row];
+        if (pickListOption)
+        {
+            NSSet *selectedOptions = (NSSet *)self.inputRequestor.inputRequestorValue;
+            NSMutableSet *newSelectedOptions = (([[self pickListOptionsProvider] selectionMode] == IBAPickListSelectionModeSingle) ?
+                                                [NSMutableSet set] : [NSMutableSet setWithSet:selectedOptions]);
 
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
-        [newSelectedOptions removeObject:pickListOption];
-    } else {
-        [newSelectedOptions addObject:pickListOption];
+
+            UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+            if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
+                [newSelectedOptions removeObject:pickListOption];
+            } else {
+                [newSelectedOptions addObject:pickListOption];
+            }
+
+            self.inputRequestor.inputRequestorValue = newSelectedOptions;
+
+            [[self pickListTableView] reloadData];
+        }
     }
-
-    self.inputRequestor.inputRequestorValue = newSelectedOptions;
-
-    [[self pickListTableView] reloadData];
 }
 
 
