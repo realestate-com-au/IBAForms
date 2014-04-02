@@ -52,6 +52,11 @@
 /*
  * Called before the input provider (eg, keyboard) is hidden.
  */
+- (void)willHideInputRequestorWithBeginFrame:(CGRect)beginFrame endFrame:(CGRect)endFrame animationDuration:(NSTimeInterval)animationDuration animationCurve:(UIViewAnimationCurve)animationCurve;
+
+/*
+ * Called after the input provider (eg, keyboard) is hidden.
+ */
 - (void)didHideInputRequestorWithBeginFrame:(CGRect)beginFrame endFrame:(CGRect)endFrame animationDuration:(NSTimeInterval)animationDuration animationCurve:(UIViewAnimationCurve)animationCurve;
 
 /*

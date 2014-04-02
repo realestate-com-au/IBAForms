@@ -90,6 +90,7 @@
 
 - (void)registerForNotifications {
     [self registerSelector:@selector(inputManagerWillShow:) withNotification:UIKeyboardWillShowNotification];
+    [self registerSelector:@selector(inputManagerWillHide:) withNotification:UIKeyboardWillHideNotification];
     [self registerSelector:@selector(inputManagerDidHide:) withNotification:UIKeyboardDidHideNotification];
 
     [self registerSelector:@selector(formFieldActivated:) withNotification:IBAInputRequestorFormFieldActivated];
@@ -305,6 +306,21 @@
     [[self tableView] setScrollEnabled:[self scrollEnabledOnFormFieldActivation]];
 }
 
+- (void)inputManagerWillHide:(NSNotification *)notification {
+    NSDictionary* info = [notification userInfo];
+    
+    CGRect keyboardBeginFrame = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+    CGRect keyboardEndFrame = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    
+    // TODO: fix frames as described in Apple docs using convertRect:fromView?
+    
+    NSTimeInterval animationDuration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    UIViewAnimationCurve animationCurve = [[info objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue];
+    
+    [self willHideInputRequestorWithBeginFrame:keyboardBeginFrame endFrame:keyboardEndFrame animationDuration:animationDuration animationCurve:animationCurve];
+
+}
+
 - (void)inputManagerDidHide:(NSNotification *)notification {
     NSDictionary* info = [notification userInfo];
 
@@ -421,6 +437,10 @@
     // Defaults to YES
 
     return YES;
+}
+
+- (void)willHideInputRequestorWithBeginFrame:(CGRect)beginFrame endFrame:(CGRect)endFrame animationDuration:(NSTimeInterval)animationDuration animationCurve:(UIViewAnimationCurve)animationCurve {
+    // NO-OP; subclasses to override
 }
 
 - (void)didHideInputRequestorWithBeginFrame:(CGRect)beginFrame endFrame:(CGRect)endFrame animationDuration:(NSTimeInterval)animationDuration animationCurve:(UIViewAnimationCurve)animationCurve {
