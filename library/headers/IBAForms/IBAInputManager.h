@@ -38,6 +38,7 @@
 @property (nonatomic, assign) Class popoverBackgroundViewClass;
 @property (nonatomic, assign) UIPopoverArrowDirection popoverPermittedArrowDirections;
 @property (nonatomic, strong, readonly) UIPopoverController *popoverController;
+@property (nonatomic, assign) BOOL isSwitchingInputRequestor;
 
 + (IBAInputManager *)sharedIBAInputManager;
 

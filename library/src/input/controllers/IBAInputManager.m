@@ -123,11 +123,16 @@ static float const kiOS7ContentHeightOffset = 7.f;
 }
 
 - (BOOL)setActiveInputRequestor:(id<IBAInputRequestor>)newInputRequestor forced:(BOOL)forced {
+    if (activeInputRequestor_ != nil && newInputRequestor != nil) {
+        self.isSwitchingInputRequestor = YES;
+    }
+    
     id<IBAInputProvider>oldInputProvider = nil;
     if (activeInputRequestor_ != nil) {
         oldInputProvider = [self inputProviderForRequestor:activeInputRequestor_];
         
         if (![activeInputRequestor_ deactivateForced:forced]) {
+            self.isSwitchingInputRequestor = NO;
             return NO;
         }
         
@@ -153,6 +158,8 @@ static float const kiOS7ContentHeightOffset = 7.f;
         [self displayInputProvider:newInputProvider forInputRequestor:newInputRequestor];
         [activeInputRequestor_ activate];
     }
+    
+    self.isSwitchingInputRequestor = NO;
     
     return YES;
 }

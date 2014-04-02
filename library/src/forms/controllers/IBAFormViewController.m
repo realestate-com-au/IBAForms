@@ -288,6 +288,8 @@
 #pragma mark - Responses to IBAInputManager notifications
 
 - (void)inputManagerWillShow:(NSNotification *)notification {
+    if ([IBAInputManager sharedIBAInputManager].isSwitchingInputRequestor) return;
+    
     NSDictionary* info = [notification userInfo];
 
     CGRect keyboardBeginFrame = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
@@ -307,6 +309,8 @@
 }
 
 - (void)inputManagerWillHide:(NSNotification *)notification {
+    if ([IBAInputManager sharedIBAInputManager].isSwitchingInputRequestor) return;
+    
     NSDictionary* info = [notification userInfo];
     
     CGRect keyboardBeginFrame = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
@@ -322,6 +326,8 @@
 }
 
 - (void)inputManagerDidHide:(NSNotification *)notification {
+    if ([IBAInputManager sharedIBAInputManager].isSwitchingInputRequestor) return;
+    
     NSDictionary* info = [notification userInfo];
 
     CGRect keyboardBeginFrame = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
