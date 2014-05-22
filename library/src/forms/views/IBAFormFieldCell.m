@@ -69,6 +69,13 @@
 
 }
 
+- (void)removeFromSuperview
+{
+    [self resignFirstResponder];
+
+    [super removeFromSuperview];
+}
+
 
 - (void)deactivate {
     [self applyFormFieldStyle];
