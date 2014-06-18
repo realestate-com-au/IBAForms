@@ -209,13 +209,19 @@
 #pragma mark - Input requestor activation
 
 - (BOOL)activateNextInputRequestor {
-    NSAssert(self.inputRequestorDataSource != nil, @"inputRequestorDataSource has not been set");
-    return [self activateInputRequestor:[self.inputRequestorDataSource nextInputRequestor:self.activeInputRequestor]];
+    AssertNotNilWithMessage(self.inputRequestorDataSource, @"inputRequestorDataSource has not been set");
+    if (self.inputRequestorDataSource) {
+        return [self activateInputRequestor:[self.inputRequestorDataSource nextInputRequestor:self.activeInputRequestor]];
+    }
+    return NO;
 }
 
 - (BOOL)activatePreviousInputRequestor {
-    NSAssert(self.inputRequestorDataSource != nil, @"inputRequestorDataSource has not been set");
-    return [self activateInputRequestor:[self.inputRequestorDataSource previousInputRequestor:self.activeInputRequestor]];
+    AssertNotNilWithMessage(self.inputRequestorDataSource, @"inputRequestorDataSource has not been set");
+    if (self.inputRequestorDataSource) {
+        return [self activateInputRequestor:[self.inputRequestorDataSource previousInputRequestor:self.activeInputRequestor]];
+    }
+    return NO;
 }
 
 - (BOOL)activateInputRequestor:(id<IBAInputRequestor>)inputRequestor {

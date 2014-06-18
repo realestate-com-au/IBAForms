@@ -20,3 +20,16 @@
 #RECT, RECT.origin.x, RECT.origin.y,\
 RECT.size.width, RECT.size.height)
 
+
+// --------------------------------------------------------------------------------------
+#ifdef DEBUG
+#define DEBUG_IBAFORMS 1
+#else
+#define DEBUG_IBAFORMS 0
+#endif
+
+#if DEBUG_IBAFORMS
+#define AssertNotNilWithMessage(_var_, _msg_) NSAssert2((_var_ != nil), (@"%s must be supplied: %s"), (#_var_), (#_msg_))
+#else
+#define AssertNotNilWithMessage(_var_, _msg_) ((void)0)
+#endif
