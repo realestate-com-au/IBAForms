@@ -183,6 +183,13 @@
     }
 }
 
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    [self clearHiddenCellCache];
+}
+
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
     if ([[IBAInputManager sharedIBAInputManager] activeInputRequestor] != nil) {
         [self makeActiveFormFieldVisibleWithAnimation:YES];
