@@ -134,12 +134,7 @@
             return NO;
         }
         
-        if (activeInputRequestor_.displayStyle == IBAInputRequestorDisplayStylePopover) {
-            [self.popoverController dismissPopoverAnimated:YES];
-            self.popoverController = nil;
-        } else {
-            [[activeInputRequestor_ responder] resignFirstResponder];
-        }
+        [[activeInputRequestor_ responder] resignFirstResponder];
         
         if (activeInputRequestor_.displayStyle == IBAInputRequestorDisplayStyleKeyboard && newInputRequestor.displayStyle == IBAInputRequestorDisplayStylePopover)
         {
