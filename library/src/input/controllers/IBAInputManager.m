@@ -264,7 +264,7 @@
         UIViewController *inputProviderController = [[IBAPoppedOverViewController alloc] initWithInputProviderView:inputProviderView];
         inputProviderController.edgesForExtendedLayout = UIRectEdgeNone;
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:inputProviderController];
-        inputProviderController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissPopver)];
+        inputProviderController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissPopover)];
         self.popoverController = [[UIPopoverController alloc] initWithContentViewController:navController];
         self.popoverController.delegate = self;
         self.popoverController.popoverContentSize = CGSizeMake(inputProviderView.frame.size.width, inputProviderView.frame.size.height + navController.navigationBar.frame.size.height);
@@ -288,7 +288,7 @@
     }
 }
 
-- (void)dismissPopver
+- (void)dismissPopover
 {
     if ([self popoverControllerShouldDismissPopover:self.popoverController]) {
         [self.popoverController dismissPopoverAnimated:YES];
