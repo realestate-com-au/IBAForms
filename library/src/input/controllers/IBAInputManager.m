@@ -334,7 +334,7 @@
 - (void)applicationWillChangeStatusBarOrientation:(NSDictionary *)change
 {
     if (self.activeInputRequestor.displayStyle == IBAInputRequestorDisplayStylePopover) {
-        [self deactivateActiveInputRequestor];
+        [self dismissPopover];
     }
 }
 
