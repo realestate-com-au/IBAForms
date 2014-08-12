@@ -16,6 +16,6 @@
 #import "IBAInputRequestor.h"
 
 @protocol IBAInputProvider <NSObject>
-@property (nonatomic, assign) id<IBAInputRequestor> inputRequestor;
+@property (nonatomic, weak) id<IBAInputRequestor> inputRequestor;
 @property (nonatomic, readonly) UIView *view;
 @end

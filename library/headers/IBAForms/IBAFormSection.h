@@ -25,7 +25,7 @@
 }
 
 @property (nonatomic, readonly) NSMutableArray *formFields;
-@property (nonatomic, assign) id<IBAFormModelManager> modelManager;
+@property (nonatomic, weak) id<IBAFormModelManager> modelManager;
 @property (nonatomic, strong) IBAFormFieldStyle *formFieldStyle;
 @property (nonatomic, copy) NSString *headerTitle;
 @property (nonatomic, copy) NSString *footerTitle;

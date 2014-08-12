@@ -31,8 +31,8 @@
 @property (nonatomic, copy) NSString *keyPath;
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, readonly) IBAFormFieldCell *cell;
-@property (nonatomic, assign) id<IBAFormModelManager> modelManager;
-@property (nonatomic, assign) id<IBAFormFieldDelegate> delegate;
+@property (nonatomic, weak) id<IBAFormModelManager> modelManager;
+@property (nonatomic, weak) id<IBAFormFieldDelegate> delegate;
 @property (nonatomic, strong) IBAFormFieldStyle *formFieldStyle;
 @property (nonatomic, assign, getter=isNullable) BOOL nullable;
 @property (nonatomic, strong) NSValueTransformer *valueTransformer;
