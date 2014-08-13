@@ -47,6 +47,8 @@
     return sharedManager;
 }
 
+static float const kiOS7ContentHeightOffset = 7.f;
+
 @synthesize inputRequestorDataSource = inputRequestorDataSource_;
 @synthesize inputNavigationToolbar = inputNavigationToolbar_;
 @synthesize inputNavigationToolbarEnabled = inputNavigationToolbarEnabled_;
@@ -262,12 +264,21 @@
         [[requestor responder] setInputView:[[UIView alloc] initWithFrame:CGRectZero]];
         
         UIViewController *inputProviderController = [[IBAPoppedOverViewController alloc] initWithInputProviderView:inputProviderView];
-        inputProviderController.edgesForExtendedLayout = UIRectEdgeNone;
+        float preiOS7ContentHeightOffset = 0.f;
+        if ([inputProviderController respondsToSelector:@selector(edgesForExtendedLayout)])
+        {
+            inputProviderController.edgesForExtendedLayout = UIRectEdgeNone;
+        }
+        else
+        {
+            // in iOS 6, popover height comes out to be 7 px too high.
+            preiOS7ContentHeightOffset = kiOS7ContentHeightOffset;
+        }
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:inputProviderController];
         inputProviderController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissPopover)];
         self.popoverController = [[UIPopoverController alloc] initWithContentViewController:navController];
         self.popoverController.delegate = self;
-        self.popoverController.popoverContentSize = CGSizeMake(inputProviderView.frame.size.width, inputProviderView.frame.size.height + navController.navigationBar.frame.size.height);
+        self.popoverController.popoverContentSize = CGSizeMake(inputProviderView.frame.size.width, inputProviderView.frame.size.height + navController.navigationBar.frame.size.height - preiOS7ContentHeightOffset);
         if (self.popoverBackgroundViewClass) {
             self.popoverController.popoverBackgroundViewClass = self.popoverBackgroundViewClass;
         }
