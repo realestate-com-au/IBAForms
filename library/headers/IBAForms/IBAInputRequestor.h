@@ -23,7 +23,7 @@ typedef enum {
 @protocol IBAInputRequestor <NSObject>
 
 @property (nonatomic, readonly) NSString *dataType;
-@property (nonatomic, assign) id inputRequestorValue;
+@property (nonatomic, weak) id inputRequestorValue;
 @property (nonatomic, readonly) id defaultInputRequestorValue;
 @property (nonatomic, readonly) UIResponder *responder;
 @property (nonatomic, assign) IBAInputRequestorDisplayStyle displayStyle;
