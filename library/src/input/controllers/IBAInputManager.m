@@ -258,6 +258,13 @@
     }
     
     if (requestor.displayStyle == IBAInputRequestorDisplayStylePopover) {
+        if (self.popoverController.popoverVisible)
+        {
+            // This scenerio should be rare - but it can be caused by some race conditions
+            [self dismissPopover];
+            return;
+        }
+        
         //prevent the keyboard from appearing
         [[requestor responder] setInputView:[[UIView alloc] initWithFrame:CGRectZero]];
         
@@ -265,20 +272,24 @@
         inputProviderController.edgesForExtendedLayout = UIRectEdgeNone;
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:inputProviderController];
         inputProviderController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissPopover)];
+        
         self.popoverController = [[UIPopoverController alloc] initWithContentViewController:navController];
         self.popoverController.delegate = self;
         self.popoverController.popoverContentSize = CGSizeMake(inputProviderView.frame.size.width, inputProviderView.frame.size.height + navController.navigationBar.frame.size.height);
         if (self.popoverBackgroundViewClass) {
             self.popoverController.popoverBackgroundViewClass = self.popoverBackgroundViewClass;
         }
+        
         //if the responder is a text field, grab it's clear button and allow it to be pressed
         if ([requestor.responder isKindOfClass:[IBATextField class]]) {
             IBATextField *textField = (IBATextField *)requestor.responder;
             self.popoverController.passthroughViews = [NSArray arrayWithObjects:textField.clearButton, requestor.cell, nil];
         }
         
-        [self.popoverController presentPopoverFromRect:requestor.cell.bounds inView:requestor.cell permittedArrowDirections:self.popoverPermittedArrowDirections animated:YES];
-        
+        [self.popoverController presentPopoverFromRect:requestor.cell.bounds
+                                                inView:requestor.cell
+                              permittedArrowDirections:self.popoverPermittedArrowDirections
+                                              animated:NO];
     } else {
         if (inputProviderView != nil) {
             [[requestor responder] setInputView:inputProviderView];
@@ -291,7 +302,7 @@
 - (void)dismissPopover
 {
     if ([self popoverControllerShouldDismissPopover:self.popoverController]) {
-        [self.popoverController dismissPopoverAnimated:YES];
+        [self.popoverController dismissPopoverAnimated:NO];
         [self popoverControllerDidDismissPopover:self.popoverController];
     }
 }
@@ -304,6 +315,7 @@
 
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController {
     if (self.popoverController == popoverController) {
+        self.popoverController.delegate = nil;
         self.popoverController = nil;
         [self deactivateActiveInputRequestor];
     }
