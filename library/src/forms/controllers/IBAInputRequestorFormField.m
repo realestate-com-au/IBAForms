@@ -35,8 +35,22 @@
     return nil;
 }
 
+- (BOOL)isAtLeastiOS92 {
+    NSOperatingSystemVersion ios9_2 = (NSOperatingSystemVersion){9, 2, 0};
+    return [[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:ios9_2];
+}
+
 - (void)activate {
-    [[self responder] becomeFirstResponder];
+    if ([self isAtLeastiOS92]) {
+        // FIXME: this is a walk-around to fix a crash for iOS 9.2 when change the selection of Cell.
+        // We tried different combination of settings (disable keyboard animation, delay) and found out this one didn't crash the app.
+        // We need to enable the animation back somewhere for iOS 9.2
+        [UIView setAnimationsEnabled:NO];
+        [self.responder performSelector:@selector(becomeFirstResponder) withObject:nil afterDelay:0.05];
+    }
+    else {
+        [self.responder becomeFirstResponder];
+    }
 
     NSDictionary *userInfo = [NSMutableDictionary dictionaryWithObjectsAndKeys:self,IBAFormFieldKey,nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:IBAInputRequestorFormFieldActivated object:self userInfo:userInfo];
